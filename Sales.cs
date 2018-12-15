@@ -19,6 +19,7 @@ namespace QuickBooksReporting
         // Methods
         public void ParseCSV(string filename)
         {
+            Name = filename;
             foreach (string line in File.ReadLines(filename, Encoding.UTF8))
             {
                 string[] fields = line.Split(',');
