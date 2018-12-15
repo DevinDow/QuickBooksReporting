@@ -38,6 +38,7 @@ namespace QuickBooksReporting
                 stsInfo.Text = string.Format("Reading {0}", ofd.FileName);
                 Sales.ParseCSV(ofd.FileName);
                 stsInfo.Text = string.Format("{0} parsed in {1} seconds", ofd.FileName, DateTime.Now - start);
+                Application.DoEvents(); // update the Status Bar before continuing
 
                 lblInvoices.Text = string.Format("{0:n0} Invoices", Sales.Invoices.Count);
                 lstInvoices.Items.AddRange(Sales.Invoices.ToArray());
