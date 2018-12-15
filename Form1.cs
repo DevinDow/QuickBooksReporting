@@ -26,7 +26,8 @@ namespace QuickBooksReporting
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 List<LineItem> invoices = new List<LineItem>();
-                List<LineItem> nonInvoices = new List<LineItem>();
+                List<LineItem> credits = new List<LineItem>();
+                List<string> skipped = new List<string>();
                 foreach (string line in File.ReadLines(ofd.FileName, Encoding.UTF8))
                 {
                     string[] fields = line.Split(',');
@@ -35,12 +36,24 @@ namespace QuickBooksReporting
                     {
                         invoices.Add(lineItem);
                     }
+                    else if (lineItem.type == "Credit Memo")
+                    {
+                        credits.Add(lineItem);
+                    }
                     else
                     {
-                        nonInvoices.Add(lineItem);
+                        skipped.Add(line);
                     }
                 }
-                MessageBox.Show(string.Format("Read {0} Invoices and {1} non-Invoices", invoices.Count, nonInvoices.Count));
+
+                lblInvoices.Text = string.Format("{0:n0} Invoices", invoices.Count);
+                lstInvoices.Items.AddRange(invoices.ToArray());
+
+                lblCredits.Text = string.Format("{0:n0} Credits", credits.Count);
+                lstCredits.Items.AddRange(credits.ToArray());
+
+                lblSkipped.Text = string.Format("{0:n0} Skipped", skipped.Count);
+                lstSkipped.Items.AddRange(skipped.ToArray());
             }
         }
     }
