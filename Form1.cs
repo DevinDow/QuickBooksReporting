@@ -71,18 +71,18 @@ namespace QuickBooksReporting
             {
                 Cursor.Current = Cursors.WaitCursor;
                 Names.Normalize(Sales, ofd.FileName);
+
+                // fill mapped Names
+                lstMappedNames.Items.Clear();
+                foreach (KeyValuePair<string, string> entry in Names.Mapping)
+                {
+                    lstMappedNames.Items.Add(string.Format("\"{0}\" => \"{1}\"", entry.Key, entry.Value));
+                }
+
+                fillUnmappedNames();
+
+                fillLineItems();
             }
-
-            // fill mapped Names
-            lstMappedNames.Items.Clear();
-            foreach (KeyValuePair<string, string> entry in Names.Mapping)
-            {
-                lstMappedNames.Items.Add(string.Format("\"{0}\" => \"{1}\"", entry.Key, entry.Value));
-            }
-
-            fillUnmappedNames();
-
-            fillLineItems();
         }
 
         private void fillLineItems()
