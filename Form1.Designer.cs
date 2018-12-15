@@ -30,6 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuImportSalesCSV = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNormalizeNames = new System.Windows.Forms.ToolStripMenuItem();
             this.lstSkipped = new System.Windows.Forms.ListBox();
             this.lblSkipped = new System.Windows.Forms.Label();
             this.lblCredits = new System.Windows.Forms.Label();
@@ -43,6 +44,8 @@
             this.lstItems = new System.Windows.Forms.ListBox();
             this.status = new System.Windows.Forms.StatusStrip();
             this.stsInfo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lstMappedNames = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.status.SuspendLayout();
             this.SuspendLayout();
@@ -50,10 +53,11 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuImportSalesCSV});
+            this.mnuImportSalesCSV,
+            this.mnuNormalizeNames});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1026, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1231, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -63,6 +67,13 @@
             this.mnuImportSalesCSV.Size = new System.Drawing.Size(108, 20);
             this.mnuImportSalesCSV.Text = "Import &Sales CSV";
             this.mnuImportSalesCSV.Click += new System.EventHandler(this.mnuImportSalesCSV_Click);
+            // 
+            // mnuNormalizeNames
+            // 
+            this.mnuNormalizeNames.Name = "mnuNormalizeNames";
+            this.mnuNormalizeNames.Size = new System.Drawing.Size(113, 20);
+            this.mnuNormalizeNames.Text = "Normalize &Names";
+            this.mnuNormalizeNames.Click += new System.EventHandler(this.mnuNormalizeNames_Click);
             // 
             // lstSkipped
             // 
@@ -142,7 +153,7 @@
             this.lstNames.IntegralHeight = false;
             this.lstNames.Location = new System.Drawing.Point(676, 48);
             this.lstNames.Name = "lstNames";
-            this.lstNames.Size = new System.Drawing.Size(338, 125);
+            this.lstNames.Size = new System.Drawing.Size(190, 125);
             this.lstNames.TabIndex = 7;
             // 
             // lblItems
@@ -160,7 +171,7 @@
             this.lstItems.IntegralHeight = false;
             this.lstItems.Location = new System.Drawing.Point(676, 200);
             this.lstItems.Name = "lstItems";
-            this.lstItems.Size = new System.Drawing.Size(338, 125);
+            this.lstItems.Size = new System.Drawing.Size(338, 298);
             this.lstItems.TabIndex = 9;
             // 
             // status
@@ -169,7 +180,7 @@
             this.stsInfo});
             this.status.Location = new System.Drawing.Point(0, 508);
             this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(1026, 22);
+            this.status.Size = new System.Drawing.Size(1231, 22);
             this.status.TabIndex = 11;
             // 
             // stsInfo
@@ -177,11 +188,31 @@
             this.stsInfo.Name = "stsInfo";
             this.stsInfo.Size = new System.Drawing.Size(0, 17);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(869, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Mapped Names";
+            // 
+            // lstMappedNames
+            // 
+            this.lstMappedNames.FormattingEnabled = true;
+            this.lstMappedNames.IntegralHeight = false;
+            this.lstMappedNames.Location = new System.Drawing.Point(872, 48);
+            this.lstMappedNames.Name = "lstMappedNames";
+            this.lstMappedNames.Size = new System.Drawing.Size(347, 125);
+            this.lstMappedNames.TabIndex = 12;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1026, 530);
+            this.ClientSize = new System.Drawing.Size(1231, 530);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lstMappedNames);
             this.Controls.Add(this.status);
             this.Controls.Add(this.lblItems);
             this.Controls.Add(this.lstItems);
@@ -223,6 +254,9 @@
         private System.Windows.Forms.ListBox lstItems;
         private System.Windows.Forms.StatusStrip status;
         private System.Windows.Forms.ToolStripStatusLabel stsInfo;
+        private System.Windows.Forms.ToolStripMenuItem mnuNormalizeNames;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox lstMappedNames;
     }
 }
 

@@ -16,6 +16,8 @@ namespace QuickBooksReporting
         public int quantity;
         public decimal price;
 
+        public string normalizedName;
+
 
         // Constructor
         public LineItem(string[] fields)
@@ -32,7 +34,7 @@ namespace QuickBooksReporting
         // Overrides
         public override string ToString()
         {
-            return String.Format("{0} to \"{2}\" on {1}: {4} of \"{3}\" @ ${5}", type, date.ToShortDateString(), name, item, quantity, price);
+            return String.Format("{0} to \"{2}\" on {1}: {4} of \"{3}\" @ ${5}", type, date.ToShortDateString(), normalizedName ?? name, item, quantity, price);
         }
     }
 }

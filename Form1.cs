@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,13 +43,7 @@ namespace QuickBooksReporting
                 Application.DoEvents(); // update the Status Bar before continuing
                 Cursor.Current = Cursors.WaitCursor;
 
-                // fill Invoices
-                lblInvoices.Text = string.Format("{0:n0} Invoices", Sales.Invoices.Count);
-                lstInvoices.Items.AddRange(Sales.Invoices.ToArray());
-
-                // fill Credits
-                lblCredits.Text = string.Format("{0:n0} Credits", Sales.Credits.Count);
-                lstCredits.Items.AddRange(Sales.Credits.ToArray());
+                fillLineItems();
 
                 // fill Skipped
                 lblSkipped.Text = string.Format("{0:n0} Skipped", Sales.Skipped.Count);
@@ -66,6 +61,39 @@ namespace QuickBooksReporting
 
                 Cursor.Current = Cursors.Default;
             }
+        }
+
+        private void mnuNormalizeNames_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
+            ofd.RestoreDirectory = false;
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Names.Normalize(Sales, ofd.FileName);
+            }
+
+            // fill mapped Names
+            foreach (KeyValuePair<string, string> entry in Names.Mapping)
+            {
+                lstMappedNames.Items.Add(string.Format("\"{0}\" => \"{1}\"", entry.Key, entry.Value));
+            }
+
+            fillLineItems();
+        }
+
+        private void fillLineItems()
+        {
+            // fill Invoices
+            lstInvoices.Items.Clear();
+            lblInvoices.Text = string.Format("{0:n0} Invoices", Sales.Invoices.Count);
+            lstInvoices.Items.AddRange(Sales.Invoices.ToArray());
+
+            // fill Credits
+            lstCredits.Items.Clear();
+            lblCredits.Text = string.Format("{0:n0} Credits", Sales.Credits.Count);
+            lstCredits.Items.AddRange(Sales.Credits.ToArray());
         }
     }
 }
