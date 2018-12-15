@@ -150,9 +150,9 @@
             this.lblItems.AutoSize = true;
             this.lblItems.Location = new System.Drawing.Point(673, 184);
             this.lblItems.Name = "lblItems";
-            this.lblItems.Size = new System.Drawing.Size(77, 13);
+            this.lblItems.Size = new System.Drawing.Size(69, 13);
             this.lblItems.TabIndex = 10;
-            this.lblItems.Text = "Unique Names";
+            this.lblItems.Text = "Unique Items";
             // 
             // lstItems
             // 
