@@ -37,7 +37,14 @@
             this.lblInvoices = new System.Windows.Forms.Label();
             this.lstInvoices = new System.Windows.Forms.ListBox();
             this.lblNonInvoices = new System.Windows.Forms.Label();
+            this.lblNames = new System.Windows.Forms.Label();
+            this.lstNames = new System.Windows.Forms.ListBox();
+            this.lblItems = new System.Windows.Forms.Label();
+            this.lstItems = new System.Windows.Forms.ListBox();
+            this.status = new System.Windows.Forms.StatusStrip();
+            this.stsInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
+            this.status.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -46,7 +53,7 @@
             this.mnuImportSalesCSV});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(686, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1026, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -87,6 +94,7 @@
             // lstCredits
             // 
             this.lstCredits.FormattingEnabled = true;
+            this.lstCredits.IntegralHeight = false;
             this.lstCredits.Location = new System.Drawing.Point(12, 292);
             this.lstCredits.Name = "lstCredits";
             this.lstCredits.Size = new System.Drawing.Size(658, 108);
@@ -104,9 +112,10 @@
             // lstInvoices
             // 
             this.lstInvoices.FormattingEnabled = true;
+            this.lstInvoices.IntegralHeight = false;
             this.lstInvoices.Location = new System.Drawing.Point(12, 48);
             this.lstInvoices.Name = "lstInvoices";
-            this.lstInvoices.Size = new System.Drawing.Size(658, 212);
+            this.lstInvoices.Size = new System.Drawing.Size(658, 225);
             this.lstInvoices.TabIndex = 5;
             // 
             // lblNonInvoices
@@ -118,11 +127,66 @@
             this.lblNonInvoices.TabIndex = 2;
             this.lblNonInvoices.Text = "non-Invoices";
             // 
+            // lblNames
+            // 
+            this.lblNames.AutoSize = true;
+            this.lblNames.Location = new System.Drawing.Point(673, 32);
+            this.lblNames.Name = "lblNames";
+            this.lblNames.Size = new System.Drawing.Size(77, 13);
+            this.lblNames.TabIndex = 8;
+            this.lblNames.Text = "Unique Names";
+            // 
+            // lstNames
+            // 
+            this.lstNames.FormattingEnabled = true;
+            this.lstNames.IntegralHeight = false;
+            this.lstNames.Location = new System.Drawing.Point(676, 48);
+            this.lstNames.Name = "lstNames";
+            this.lstNames.Size = new System.Drawing.Size(338, 125);
+            this.lstNames.TabIndex = 7;
+            // 
+            // lblItems
+            // 
+            this.lblItems.AutoSize = true;
+            this.lblItems.Location = new System.Drawing.Point(673, 184);
+            this.lblItems.Name = "lblItems";
+            this.lblItems.Size = new System.Drawing.Size(77, 13);
+            this.lblItems.TabIndex = 10;
+            this.lblItems.Text = "Unique Names";
+            // 
+            // lstItems
+            // 
+            this.lstItems.FormattingEnabled = true;
+            this.lstItems.IntegralHeight = false;
+            this.lstItems.Location = new System.Drawing.Point(676, 200);
+            this.lstItems.Name = "lstItems";
+            this.lstItems.Size = new System.Drawing.Size(338, 125);
+            this.lstItems.TabIndex = 9;
+            // 
+            // status
+            // 
+            this.status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stsInfo});
+            this.status.Location = new System.Drawing.Point(0, 508);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(1026, 22);
+            this.status.TabIndex = 11;
+            // 
+            // stsInfo
+            // 
+            this.stsInfo.Name = "stsInfo";
+            this.stsInfo.Size = new System.Drawing.Size(0, 17);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 510);
+            this.ClientSize = new System.Drawing.Size(1026, 530);
+            this.Controls.Add(this.status);
+            this.Controls.Add(this.lblItems);
+            this.Controls.Add(this.lstItems);
+            this.Controls.Add(this.lblNames);
+            this.Controls.Add(this.lstNames);
             this.Controls.Add(this.lblInvoices);
             this.Controls.Add(this.lstInvoices);
             this.Controls.Add(this.lblCredits);
@@ -135,6 +199,8 @@
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.status.ResumeLayout(false);
+            this.status.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,6 +217,12 @@
         private System.Windows.Forms.Label lblInvoices;
         private System.Windows.Forms.ListBox lstInvoices;
         private System.Windows.Forms.Label lblSkipped;
+        private System.Windows.Forms.Label lblNames;
+        private System.Windows.Forms.ListBox lstNames;
+        private System.Windows.Forms.Label lblItems;
+        private System.Windows.Forms.ListBox lstItems;
+        private System.Windows.Forms.StatusStrip status;
+        private System.Windows.Forms.ToolStripStatusLabel stsInfo;
     }
 }
 

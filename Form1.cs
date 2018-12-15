@@ -13,11 +13,18 @@ namespace QuickBooksReporting
 {
     public partial class Form1 : Form
     {
+        // Private Fields
+        private Sales Sales= new Sales();
+
+
+        // Constructor
         public Form1()
         {
             InitializeComponent();
         }
 
+
+        // Methods
         private void mnuImportSalesCSV_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -25,35 +32,23 @@ namespace QuickBooksReporting
             ofd.RestoreDirectory = false;
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                List<LineItem> invoices = new List<LineItem>();
-                List<LineItem> credits = new List<LineItem>();
-                List<string> skipped = new List<string>();
-                foreach (string line in File.ReadLines(ofd.FileName, Encoding.UTF8))
-                {
-                    string[] fields = line.Split(',');
-                    LineItem lineItem = new LineItem(fields);
-                    if (lineItem.type == "Invoice")
-                    {
-                        invoices.Add(lineItem);
-                    }
-                    else if (lineItem.type == "Credit Memo")
-                    {
-                        credits.Add(lineItem);
-                    }
-                    else
-                    {
-                        skipped.Add(line);
-                    }
-                }
+                Cursor.Current = Cursors.WaitCursor;
 
-                lblInvoices.Text = string.Format("{0:n0} Invoices", invoices.Count);
-                lstInvoices.Items.AddRange(invoices.ToArray());
+                DateTime start = DateTime.Now;
+                stsInfo.Text = string.Format("Reading {0}", ofd.FileName);
+                Sales.ParseCSV(ofd.FileName);
+                stsInfo.Text = string.Format("{0} parsed in {1} seconds", ofd.FileName, DateTime.Now - start);
 
-                lblCredits.Text = string.Format("{0:n0} Credits", credits.Count);
-                lstCredits.Items.AddRange(credits.ToArray());
+                lblInvoices.Text = string.Format("{0:n0} Invoices", Sales.Invoices.Count);
+                lstInvoices.Items.AddRange(Sales.Invoices.ToArray());
 
-                lblSkipped.Text = string.Format("{0:n0} Skipped", skipped.Count);
-                lstSkipped.Items.AddRange(skipped.ToArray());
+                lblCredits.Text = string.Format("{0:n0} Credits", Sales.Credits.Count);
+                lstCredits.Items.AddRange(Sales.Credits.ToArray());
+
+                lblSkipped.Text = string.Format("{0:n0} Skipped", Sales.Skipped.Count);
+                lstSkipped.Items.AddRange(Sales.Skipped.ToArray());
+
+                Cursor.Current = Cursors.Default;
             }
         }
     }
