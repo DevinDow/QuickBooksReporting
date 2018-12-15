@@ -45,14 +45,11 @@ namespace QuickBooksReporting
 
                 fillLineItems();
 
-                // fill Skipped
+                // fill Skipped lines
                 lblSkipped.Text = string.Format("{0:n0} Skipped", Sales.Skipped.Count);
                 lstSkipped.Items.AddRange(Sales.Skipped.ToArray());
 
-                // fill unique Names
-                string[] uniqueNames = Sales.Names.Keys.ToArray();
-                Array.Sort(uniqueNames);
-                lstNames.Items.AddRange(uniqueNames);
+                fillUnmappedNames();
 
                 // fill unique Items
                 string[] uniqueItems = Sales.Items.Keys.ToArray();
@@ -62,6 +59,8 @@ namespace QuickBooksReporting
                 Cursor.Current = Cursors.Default;
             }
         }
+
+
 
         private void mnuNormalizeNames_Click(object sender, EventArgs e)
         {
@@ -75,10 +74,13 @@ namespace QuickBooksReporting
             }
 
             // fill mapped Names
+            lstMappedNames.Items.Clear();
             foreach (KeyValuePair<string, string> entry in Names.Mapping)
             {
                 lstMappedNames.Items.Add(string.Format("\"{0}\" => \"{1}\"", entry.Key, entry.Value));
             }
+
+            fillUnmappedNames();
 
             fillLineItems();
         }
@@ -94,6 +96,14 @@ namespace QuickBooksReporting
             lstCredits.Items.Clear();
             lblCredits.Text = string.Format("{0:n0} Credits", Sales.Credits.Count);
             lstCredits.Items.AddRange(Sales.Credits.ToArray());
+        }
+
+        private void fillUnmappedNames()
+        {
+            string[] unmappedNames = Sales.UnmappedNames.Keys.ToArray();
+            Array.Sort(unmappedNames);
+            lstUnmappedNames.Items.Clear();
+            lstUnmappedNames.Items.AddRange(unmappedNames);
         }
     }
 }

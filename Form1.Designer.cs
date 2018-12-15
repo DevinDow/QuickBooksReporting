@@ -39,7 +39,7 @@
             this.lstInvoices = new System.Windows.Forms.ListBox();
             this.lblNonInvoices = new System.Windows.Forms.Label();
             this.lblNames = new System.Windows.Forms.Label();
-            this.lstNames = new System.Windows.Forms.ListBox();
+            this.lstUnmappedNames = new System.Windows.Forms.ListBox();
             this.lblItems = new System.Windows.Forms.Label();
             this.lstItems = new System.Windows.Forms.ListBox();
             this.status = new System.Windows.Forms.StatusStrip();
@@ -57,7 +57,7 @@
             this.mnuNormalizeNames});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1231, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1229, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -143,18 +143,18 @@
             this.lblNames.AutoSize = true;
             this.lblNames.Location = new System.Drawing.Point(673, 32);
             this.lblNames.Name = "lblNames";
-            this.lblNames.Size = new System.Drawing.Size(77, 13);
+            this.lblNames.Size = new System.Drawing.Size(95, 13);
             this.lblNames.TabIndex = 8;
-            this.lblNames.Text = "Unique Names";
+            this.lblNames.Text = "Unmapped Names";
             // 
-            // lstNames
+            // lstUnmappedNames
             // 
-            this.lstNames.FormattingEnabled = true;
-            this.lstNames.IntegralHeight = false;
-            this.lstNames.Location = new System.Drawing.Point(676, 48);
-            this.lstNames.Name = "lstNames";
-            this.lstNames.Size = new System.Drawing.Size(190, 125);
-            this.lstNames.TabIndex = 7;
+            this.lstUnmappedNames.FormattingEnabled = true;
+            this.lstUnmappedNames.IntegralHeight = false;
+            this.lstUnmappedNames.Location = new System.Drawing.Point(676, 48);
+            this.lstUnmappedNames.Name = "lstUnmappedNames";
+            this.lstUnmappedNames.Size = new System.Drawing.Size(190, 125);
+            this.lstUnmappedNames.TabIndex = 7;
             // 
             // lblItems
             // 
@@ -180,7 +180,7 @@
             this.stsInfo});
             this.status.Location = new System.Drawing.Point(0, 508);
             this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(1231, 22);
+            this.status.Size = new System.Drawing.Size(1229, 22);
             this.status.TabIndex = 11;
             // 
             // stsInfo
@@ -203,21 +203,21 @@
             this.lstMappedNames.IntegralHeight = false;
             this.lstMappedNames.Location = new System.Drawing.Point(872, 48);
             this.lstMappedNames.Name = "lstMappedNames";
-            this.lstMappedNames.Size = new System.Drawing.Size(347, 125);
+            this.lstMappedNames.Size = new System.Drawing.Size(346, 125);
             this.lstMappedNames.TabIndex = 12;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1231, 530);
+            this.ClientSize = new System.Drawing.Size(1229, 530);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lstMappedNames);
             this.Controls.Add(this.status);
             this.Controls.Add(this.lblItems);
             this.Controls.Add(this.lstItems);
             this.Controls.Add(this.lblNames);
-            this.Controls.Add(this.lstNames);
+            this.Controls.Add(this.lstUnmappedNames);
             this.Controls.Add(this.lblInvoices);
             this.Controls.Add(this.lstInvoices);
             this.Controls.Add(this.lblCredits);
@@ -249,7 +249,6 @@
         private System.Windows.Forms.ListBox lstInvoices;
         private System.Windows.Forms.Label lblSkipped;
         private System.Windows.Forms.Label lblNames;
-        private System.Windows.Forms.ListBox lstNames;
         private System.Windows.Forms.Label lblItems;
         private System.Windows.Forms.ListBox lstItems;
         private System.Windows.Forms.StatusStrip status;
@@ -257,6 +256,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuNormalizeNames;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lstMappedNames;
+        private System.Windows.Forms.ListBox lstUnmappedNames;
     }
 }
 

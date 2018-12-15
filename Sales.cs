@@ -16,7 +16,8 @@ namespace QuickBooksReporting
         public List<LineItem> Credits = new List<LineItem>();
         public List<string> Skipped = new List<string>();
 
-        public Dictionary<string, List<LineItem>> Names = new Dictionary<string, List<LineItem>>();
+        public Dictionary<string, List<LineItem>> UnmappedNames = new Dictionary<string, List<LineItem>>();
+        public Dictionary<string, List<LineItem>> MappedNames = new Dictionary<string, List<LineItem>>();
         public Dictionary<string, List<LineItem>> Items = new Dictionary<string, List<LineItem>>();
 
 
@@ -47,11 +48,11 @@ namespace QuickBooksReporting
 
         private void TrackUnique(LineItem lineItem)
         {
-            if (!Names.ContainsKey(lineItem.name))
+            if (!UnmappedNames.ContainsKey(lineItem.name))
             {
-                Names.Add(lineItem.name, new List<LineItem>());
+                UnmappedNames.Add(lineItem.name, new List<LineItem>());
             }
-            Names[lineItem.name].Add(lineItem);
+            UnmappedNames[lineItem.name].Add(lineItem);
 
             if (!Items.ContainsKey(lineItem.item))
             {

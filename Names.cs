@@ -30,12 +30,25 @@ namespace QuickBooksReporting
                 Mapping[from] = to;
 
                 // update matching LineItems
-                if (sales.Names.ContainsKey(from))
+                if (sales.UnmappedNames.ContainsKey(from))
                 {
-                    foreach (LineItem lineItem in sales.Names[from])
+                    // create new MappedNames key
+                    if (!sales.MappedNames.ContainsKey(to))
                     {
-                        lineItem.normalizedName = to;
+                        sales.MappedNames.Add(to, new List<LineItem>());
                     }
+
+                    foreach (LineItem lineItem in sales.UnmappedNames[from])
+                    {
+                        // update LineItem
+                        lineItem.normalizedName = to;
+
+                        // move to new Key
+                        sales.MappedNames[to].Add(lineItem);
+                    }
+
+                    // remove key from UnmappedNames
+                    sales.UnmappedNames.Remove(from);
                 }
             }
 
