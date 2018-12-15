@@ -28,7 +28,15 @@ namespace QuickBooksReporting
                 foreach (string line in File.ReadLines(ofd.FileName, Encoding.UTF8))
                 {
                     string[] fields = line.Split(',');
-
+                    LineItem lineItem = new LineItem(fields);
+                    if (lineItem.type == "Invoice")
+                    {
+                        MessageBox.Show(lineItem.ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show("non-Invoice: " + lineItem.ToString());
+                    }
                 }
             }
         }
