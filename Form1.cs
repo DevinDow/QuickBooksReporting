@@ -25,19 +25,22 @@ namespace QuickBooksReporting
             ofd.RestoreDirectory = false;
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                List<LineItem> invoices = new List<LineItem>();
+                List<LineItem> nonInvoices = new List<LineItem>();
                 foreach (string line in File.ReadLines(ofd.FileName, Encoding.UTF8))
                 {
                     string[] fields = line.Split(',');
                     LineItem lineItem = new LineItem(fields);
                     if (lineItem.type == "Invoice")
                     {
-                        MessageBox.Show(lineItem.ToString());
+                        invoices.Add(lineItem);
                     }
                     else
                     {
-                        MessageBox.Show("non-Invoice: " + lineItem.ToString());
+                        nonInvoices.Add(lineItem);
                     }
                 }
+                MessageBox.Show(string.Format("Read {0} Invoices and {1} non-Invoices", invoices.Count, nonInvoices.Count));
             }
         }
     }
