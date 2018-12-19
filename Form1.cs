@@ -15,6 +15,10 @@ namespace QuickBooksReporting
     public partial class Form1 : Form
     {
         // Private Fields
+
+        /// <summary>
+        /// Sales object representing one CSV of Sales LineItems
+        /// </summary>
         private Sales Sales= new Sales();
 
 
@@ -26,6 +30,12 @@ namespace QuickBooksReporting
 
 
         // Methods
+
+        /// <summary>
+        /// import a CSV of Sales LineItems
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnuImportSalesCSV_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -61,7 +71,13 @@ namespace QuickBooksReporting
         }
 
 
-
+        /// <summary>
+        /// use a CSV file to map Names
+        /// fills lstMappedNames
+        /// calls fillUnmappedNames() & fillLineItems()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnuNormalizeNames_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -85,6 +101,9 @@ namespace QuickBooksReporting
             }
         }
 
+        /// <summary>
+        /// clears & refills lstInvoices & lstCredits
+        /// </summary>
         private void fillLineItems()
         {
             // fill Invoices
@@ -98,6 +117,9 @@ namespace QuickBooksReporting
             lstCredits.Items.AddRange(Sales.Credits.ToArray());
         }
 
+        /// <summary>
+        /// clears & refills lstUnmappedNames
+        /// </summary>
         private void fillUnmappedNames()
         {
             string[] unmappedNames = Sales.UnmappedNames.Keys.ToArray();

@@ -12,16 +12,24 @@ namespace QuickBooksReporting
         // Public Fields
         public string Filename;
 
+        // lists of LineItems parsed from CSV
         public List<LineItem> Invoices = new List<LineItem>();
         public List<LineItem> Credits = new List<LineItem>();
         public List<string> Skipped = new List<string>();
 
+        // maps of Names/Items to lists of LineItems with those Names/Items
         public Dictionary<string, List<LineItem>> UnmappedNames = new Dictionary<string, List<LineItem>>();
         public Dictionary<string, List<LineItem>> MappedNames = new Dictionary<string, List<LineItem>>();
         public Dictionary<string, List<LineItem>> Items = new Dictionary<string, List<LineItem>>();
 
 
         // Methods
+
+        /// <summary>
+        /// parse the CSV
+        /// collect Invoices, Credits, & skipped
+        /// </summary>
+        /// <param name="filename"></param>
         public void ParseCSV(string filename)
         {
             Filename = filename;
@@ -46,6 +54,10 @@ namespace QuickBooksReporting
             }
         }
 
+        /// <summary>
+        /// collect LineItems by unique Name/Item
+        /// </summary>
+        /// <param name="lineItem"></param>
         private void TrackUnique(LineItem lineItem)
         {
             if (!UnmappedNames.ContainsKey(lineItem.name))

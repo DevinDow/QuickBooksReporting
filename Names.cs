@@ -15,6 +15,13 @@ namespace QuickBooksReporting
 
 
         // Methods
+
+        /// <summary>
+        /// import CSV of Company Name Mapping
+        /// </summary>
+        /// <param name="sales"></param>
+        /// <param name="filename">CSV of Name mapping</param>
+        /// <returns></returns>
         public static bool Normalize(Sales sales, string filename)
         {
             foreach (string line in File.ReadLines(filename, Encoding.UTF8))

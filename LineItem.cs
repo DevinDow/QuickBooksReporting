@@ -9,6 +9,8 @@ namespace QuickBooksReporting
     class LineItem
     {
         // Public Fields
+
+        // Data in original Sales CSV
         public string type;
         public DateTime date;
         public string name;
@@ -16,6 +18,7 @@ namespace QuickBooksReporting
         public int quantity;
         public decimal price;
 
+        // Data added from CSV of Company Name Mapping
         public string normalizedName;
 
 

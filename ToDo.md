@@ -1,18 +1,11 @@
-# QuickBooks
+# ToDo
 
-## Notes
+- Normalize Items
+- generate Reports
+- read multiple years' CSV files
 
-- QuickBooks exports a .CSV for Year or YTD
-- Rules table provides data to transform by.
-  - How is Rules table entered?  Excel to .CSV?  Interactive?
-- Generate Weekly & Quarterly Reports
-- Use static data from previous years plus new data exported YTD
+## Design Decisions
 
-## ToDo
-
-- Normalize Data
-  - Customer
-  - Item
-  - flag unmatched entries
-    - listbox?
-    - interactive?
+### Mapping Company Names
+- currently fills lstMappedNames then calls fillUnmappedNames() & fillLineItems()
+- Theoretically a second Mapping CSV could be loaded on top of the first.  Do we need a way to clear the current mappings?
