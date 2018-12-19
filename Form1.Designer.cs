@@ -61,7 +61,7 @@
             this.mnuNormalizeItems});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1229, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1458, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -186,7 +186,7 @@
             this.stsInfo});
             this.status.Location = new System.Drawing.Point(0, 508);
             this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(1229, 22);
+            this.status.Size = new System.Drawing.Size(1458, 22);
             this.status.TabIndex = 11;
             // 
             // stsInfo
@@ -210,7 +210,7 @@
             this.lstMappedNames.IntegralHeight = false;
             this.lstMappedNames.Location = new System.Drawing.Point(872, 48);
             this.lstMappedNames.Name = "lstMappedNames";
-            this.lstMappedNames.Size = new System.Drawing.Size(346, 125);
+            this.lstMappedNames.Size = new System.Drawing.Size(574, 125);
             this.lstMappedNames.TabIndex = 12;
             // 
             // lstUnmappedItems
@@ -230,7 +230,7 @@
             this.lstMappedItems.IntegralHeight = false;
             this.lstMappedItems.Location = new System.Drawing.Point(872, 200);
             this.lstMappedItems.Name = "lstMappedItems";
-            this.lstMappedItems.Size = new System.Drawing.Size(345, 298);
+            this.lstMappedItems.Size = new System.Drawing.Size(574, 298);
             this.lstMappedItems.TabIndex = 16;
             // 
             // lblMappedItems
@@ -246,7 +246,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1229, 530);
+            this.ClientSize = new System.Drawing.Size(1458, 530);
             this.Controls.Add(this.lstMappedItems);
             this.Controls.Add(this.lblMappedItems);
             this.Controls.Add(this.lstUnmappedItems);
