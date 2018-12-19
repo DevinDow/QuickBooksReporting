@@ -6,9 +6,9 @@
 
 ## Design Decisions
 
-### Mapping Company Names
-- currently fills lstMappedNames then calls fillUnmappedNames() & fillLineItems()
-- Theoretically a second Mapping CSV could be loaded on top of the first.  Do we need a way to clear the current mappings?
+- Sales object represents one CSV, so a second CSV can be loaded for previous year.
 
-## Mapping Items
-- 
+### Mapping Company Names & Items
+- currently fills lstMapped___ then calls fillUnmapped___() & fillLineItems()
+- Theoretically a second Mapping CSV could be loaded on top of the first.  Do we need a way to clear the current mappings?
+- Item object stores fields

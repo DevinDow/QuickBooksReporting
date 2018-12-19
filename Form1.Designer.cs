@@ -89,6 +89,7 @@
             // lstSkipped
             // 
             this.lstSkipped.FormattingEnabled = true;
+            this.lstSkipped.HorizontalScrollbar = true;
             this.lstSkipped.IntegralHeight = false;
             this.lstSkipped.Location = new System.Drawing.Point(12, 419);
             this.lstSkipped.Name = "lstSkipped";
@@ -116,6 +117,7 @@
             // lstCredits
             // 
             this.lstCredits.FormattingEnabled = true;
+            this.lstCredits.HorizontalScrollbar = true;
             this.lstCredits.IntegralHeight = false;
             this.lstCredits.Location = new System.Drawing.Point(12, 292);
             this.lstCredits.Name = "lstCredits";
@@ -134,6 +136,7 @@
             // lstInvoices
             // 
             this.lstInvoices.FormattingEnabled = true;
+            this.lstInvoices.HorizontalScrollbar = true;
             this.lstInvoices.IntegralHeight = false;
             this.lstInvoices.Location = new System.Drawing.Point(12, 48);
             this.lstInvoices.Name = "lstInvoices";
@@ -161,6 +164,7 @@
             // lstUnmappedNames
             // 
             this.lstUnmappedNames.FormattingEnabled = true;
+            this.lstUnmappedNames.HorizontalScrollbar = true;
             this.lstUnmappedNames.IntegralHeight = false;
             this.lstUnmappedNames.Location = new System.Drawing.Point(676, 48);
             this.lstUnmappedNames.Name = "lstUnmappedNames";
@@ -202,6 +206,7 @@
             // lstMappedNames
             // 
             this.lstMappedNames.FormattingEnabled = true;
+            this.lstMappedNames.HorizontalScrollbar = true;
             this.lstMappedNames.IntegralHeight = false;
             this.lstMappedNames.Location = new System.Drawing.Point(872, 48);
             this.lstMappedNames.Name = "lstMappedNames";
@@ -211,6 +216,7 @@
             // lstUnmappedItems
             // 
             this.lstUnmappedItems.FormattingEnabled = true;
+            this.lstUnmappedItems.HorizontalScrollbar = true;
             this.lstUnmappedItems.IntegralHeight = false;
             this.lstUnmappedItems.Location = new System.Drawing.Point(676, 200);
             this.lstUnmappedItems.Name = "lstUnmappedItems";
@@ -220,6 +226,7 @@
             // lstMappedItems
             // 
             this.lstMappedItems.FormattingEnabled = true;
+            this.lstMappedItems.HorizontalScrollbar = true;
             this.lstMappedItems.IntegralHeight = false;
             this.lstMappedItems.Location = new System.Drawing.Point(872, 200);
             this.lstMappedItems.Name = "lstMappedItems";
