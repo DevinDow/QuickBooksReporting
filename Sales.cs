@@ -20,7 +20,8 @@ namespace QuickBooksReporting
         // maps of Names/Items to lists of LineItems with those Names/Items
         public Dictionary<string, List<LineItem>> UnmappedNames = new Dictionary<string, List<LineItem>>();
         public Dictionary<string, List<LineItem>> MappedNames = new Dictionary<string, List<LineItem>>();
-        public Dictionary<string, List<LineItem>> Items = new Dictionary<string, List<LineItem>>();
+        public Dictionary<string, List<LineItem>> UnmappedItems = new Dictionary<string, List<LineItem>>();
+        public Dictionary<string, List<LineItem>> MappedItems = new Dictionary<string, List<LineItem>>();
 
 
         // Methods
@@ -55,22 +56,24 @@ namespace QuickBooksReporting
         }
 
         /// <summary>
-        /// collect LineItems by unique Name/Item
+        /// collect LineItems by unique Name & Item
         /// </summary>
         /// <param name="lineItem"></param>
         private void TrackUnique(LineItem lineItem)
         {
+            // Company Names
             if (!UnmappedNames.ContainsKey(lineItem.name))
             {
                 UnmappedNames.Add(lineItem.name, new List<LineItem>());
             }
             UnmappedNames[lineItem.name].Add(lineItem);
 
-            if (!Items.ContainsKey(lineItem.item))
+            // Items
+            if (!UnmappedItems.ContainsKey(lineItem.item))
             {
-                Items.Add(lineItem.item, new List<LineItem>());
+                UnmappedItems.Add(lineItem.item, new List<LineItem>());
             }
-            Items[lineItem.item].Add(lineItem);
+            UnmappedItems[lineItem.item].Add(lineItem);
         }
     }
 }

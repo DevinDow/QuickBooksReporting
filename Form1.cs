@@ -61,10 +61,7 @@ namespace QuickBooksReporting
 
                 fillUnmappedNames();
 
-                // fill unique Items
-                string[] uniqueItems = Sales.Items.Keys.ToArray();
-                Array.Sort(uniqueItems);
-                lstItems.Items.AddRange(uniqueItems);
+                fillUnmappedItems();
 
                 Cursor.Current = Cursors.Default;
             }
@@ -102,6 +99,34 @@ namespace QuickBooksReporting
         }
 
         /// <summary>
+        /// use a CSV file to map Items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuNormalizeItems_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
+            ofd.RestoreDirectory = false;
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Items.Normalize(Sales, ofd.FileName);
+
+                // fill mapped Items
+                lstMappedItems.Items.Clear();
+                foreach (KeyValuePair<string, Item> entry in Items.Mapping)
+                {
+                    lstMappedItems.Items.Add(string.Format("\"{0}\" => \"{1}\"", entry.Key, entry.Value));
+                }
+
+                fillUnmappedItems();
+
+                fillLineItems();
+            }
+        }
+
+        /// <summary>
         /// clears & refills lstInvoices & lstCredits
         /// </summary>
         private void fillLineItems()
@@ -126,6 +151,17 @@ namespace QuickBooksReporting
             Array.Sort(unmappedNames);
             lstUnmappedNames.Items.Clear();
             lstUnmappedNames.Items.AddRange(unmappedNames);
+        }
+
+        /// <summary>
+        /// clears & refills lstUnmappedItems
+        /// </summary>
+        private void fillUnmappedItems()
+        {
+            string[] unmappedItems = Sales.UnmappedItems.Keys.ToArray();
+            Array.Sort(unmappedItems);
+            lstUnmappedItems.Items.Clear();
+            lstUnmappedItems.Items.AddRange(unmappedItems);
         }
     }
 }

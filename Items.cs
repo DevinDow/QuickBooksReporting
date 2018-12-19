@@ -8,54 +8,58 @@ using System.Windows.Forms;
 
 namespace QuickBooksReporting
 {
-    class Names
+    class Items
     {
         // Public Fields
-        public static Dictionary<string, string> Mapping = new Dictionary<string, string>();
+        public static Dictionary<string, Item> Mapping = new Dictionary<string, Item>();
 
 
         // Methods
 
         /// <summary>
-        /// import CSV of Company Name Mapping
+        /// import CSV of Item Mapping
         /// </summary>
         /// <param name="sales"></param>
         /// <param name="filename">CSV of Name mapping</param>
-        /// <returns>FALSE if duplicate "from" mapping</returns>
+        /// <returns></returns>
         public static bool Normalize(Sales sales, string filename)
         {
             foreach (string line in File.ReadLines(filename, Encoding.UTF8))
             {
+                // parse CSV mapping file
                 string[] nameMapping = line.Split(',');
                 string from = nameMapping[0];
-                string to = nameMapping[1];
                 if (Mapping.ContainsKey(from))
                 {
                     MessageBox.Show(string.Format("Duplicate mapping: \"{0}\"", from));
                     return false;
                 }
-                Mapping[from] = to;
 
-                // update matching LineItems
-                if (sales.UnmappedNames.ContainsKey(from))
+                // map "from" to Item object
+                Item item = new Item(nameMapping);
+                Mapping[from] = item;
+                string to = item.ToString();
+
+                // update matching UnmappedItems
+                if (sales.UnmappedItems.ContainsKey(from))
                 {
                     // create new MappedNames key
-                    if (!sales.MappedNames.ContainsKey(to))
+                    if (!sales.MappedItems.ContainsKey(to))
                     {
-                        sales.MappedNames.Add(to, new List<LineItem>());
+                        sales.MappedItems.Add(to, new List<LineItem>());
                     }
 
-                    foreach (LineItem lineItem in sales.UnmappedNames[from])
+                    foreach (LineItem lineItem in sales.UnmappedItems[from])
                     {
                         // update LineItem
-                        lineItem.normalizedName = to;
+                        lineItem.normalizedItem = item;
 
                         // move to new Key
-                        sales.MappedNames[to].Add(lineItem);
+                        sales.MappedItems[to].Add(lineItem);
                     }
 
                     // remove key from UnmappedNames
-                    sales.UnmappedNames.Remove(from);
+                    sales.UnmappedItems.Remove(from);
                 }
             }
 

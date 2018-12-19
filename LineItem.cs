@@ -21,6 +21,8 @@ namespace QuickBooksReporting
         // Data added from CSV of Company Name Mapping
         public string normalizedName;
 
+        public Item normalizedItem;
+
 
         // Constructor
         public LineItem(string[] fields)
@@ -37,7 +39,7 @@ namespace QuickBooksReporting
         // Overrides
         public override string ToString()
         {
-            return String.Format("{0} to \"{2}\" on {1}: {4} of \"{3}\" @ ${5}", type, date.ToShortDateString(), normalizedName ?? name, item, quantity, price);
+            return String.Format("{0} to \"{1}\" on {2}: {3} @ ${4} of \"{5}\"", type, normalizedName ?? name, date.ToShortDateString(), quantity, price, normalizedItem != null ? normalizedItem.ToString() : item);
         }
     }
 }
