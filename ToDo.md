@@ -1,11 +1,11 @@
 # ToDo
 
-- 2. Read Names.csv & Items.csv automatically at launch then apply
-- 5. DELETE in mapping CSV = skip LineItem
-- 1. Read multiple CSVs.  Select a Folder?
-- 4. multi-select Unmapped Names/Items, clipboard or append to CSV?
-- 6. Reporting UI, incl. multi-select of Unmapped
-- 3. Names/Items header line with flexible columns
+- #2: Read Names.csv & Items.csv automatically at launch then apply
+- #5: DELETE in mapping CSV = skip LineItem
+- #4: append any Unmapped Names/Items to CSV, any mappings missing a "to" are Unmapped.  (or multi-select to append or clipboard)
+- #1: Read multiple CSVs.  Select a Folder?
+- #6: Reporting UI, incl. multi-select of Unmapped
+- #3 Names/Items header line with flexible columns
 
 ## Report
 
@@ -14,9 +14,9 @@
 
 ## Future
 
-- 8. import ItemExport.csv for future Inventory Report, normalize Items
-- 7. App will populate DB in cloud
-- 10. forecasting module
+- #8: import ItemExport.csv for future Inventory Report, normalize Items
+- #7: App will populate DB in cloud
+- #10: forecasting module
 
 
 # Dino's comments on 12/20
