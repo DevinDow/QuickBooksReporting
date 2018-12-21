@@ -33,16 +33,8 @@
 
 > 6. Obviously we can simplify the user interface as there is more data shown than needed by a normal user. Most likely, a normal user will be placed directly into the reporting module that will have some key information about the data loaded and then allow them to select subsets of data for the report they want to generate.
 
-> 7. I am still up in the air as to where the data will live and what the user will need to do to access it. I guess it doesn’t matter for now, but I am still interested in making this a web app. If we do that, the parser you are working on would probably be my tool to load all the data we need for reporting and then export it to a database that lives in the cloud somewhere.
-
-> 8. I need to add one more set of data into the item data structure so it can be pulled during reporting. The data is our inventory levels which comes from another system. Attached to this email is the file ItemExport.csv. This comes out of inventory system. Of course, the product names are all jacked up in this report as well. Basically we will need to do one more pass of normalization for this data. When you look at the ItemExport.csv file you will see it has the following data in it for each item in the report.
-	Item, Description, Category, Location Main Warehouse, Tot Qty, Cost, Price
-	We only need 2 pieces of information from this file Item and Tot Qty
-	We will normalize the Item field to match a specific item that was found in the sales data report, then you just need to add the  Tot Qty to the proper data set.
-	This will be used to identify low inventory items in a future report.
-
-## Budget
-> 9. I have also arrived at a budget for this project. I have been allocated $2,500 to get this done. Done for me is to complete the data parser and to have a generic reporting module that I am still trying to define. I will keep it as simple as possible. Right now my thoughts are:
+## Requirements for Done
+> 9. Done for me is to complete the data parser and to have a generic reporting module that I am still trying to define. I will keep it as simple as possible. Right now my thoughts are:
 > - The user selects a data range for the desired report
 > 	- A calendar selector allows the user to select any date range that is supported by the data in the system
 > 		i.e if the earliest transaction is January 1, 2017 – they could not set a report that covers any date before January 1, 2017.
@@ -63,3 +55,11 @@
 
 ## Future
 > 10. We will add a forecasting module in the future. This will be a new project and not part of this initial sales reporting  application or the current allocated budget.
+
+> 8. I need to add one more set of data into the item data structure so it can be pulled during reporting. The data is our inventory levels which comes from another system. Attached to this email is the file ItemExport.csv. This comes out of inventory system. Of course, the product names are all jacked up in this report as well. Basically we will need to do one more pass of normalization for this data. When you look at the ItemExport.csv file you will see it has the following data in it for each item in the report.
+	Item, Description, Category, Location Main Warehouse, Tot Qty, Cost, Price
+	We only need 2 pieces of information from this file Item and Tot Qty
+	We will normalize the Item field to match a specific item that was found in the sales data report, then you just need to add the  Tot Qty to the proper data set.
+	This will be used to identify low inventory items in a future report.
+
+> 7. I am still up in the air as to where the data will live and what the user will need to do to access it. I guess it doesn’t matter for now, but I am still interested in making this a web app. If we do that, the parser you are working on would probably be my tool to load all the data we need for reporting and then export it to a database that lives in the cloud somewhere.
