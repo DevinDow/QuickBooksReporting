@@ -77,3 +77,51 @@ namespace QuickBooksReporting
         }
     }
 }
+
+/*
+    // update matching LineItems
+    if (sales.UnmappedNames.ContainsKey(from))
+    {
+        // create new MappedNames key
+        if (!sales.MappedNames.ContainsKey(to))
+        {
+            sales.MappedNames.Add(to, new List<LineItem>());
+        }
+
+        foreach (LineItem lineItem in sales.UnmappedNames[from])
+        {
+            // update LineItem
+            lineItem.normalizedName = to;
+
+            // move to new Key
+            sales.MappedNames[to].Add(lineItem);
+        }
+
+        // remove key from UnmappedNames
+        sales.UnmappedNames.Remove(from);
+    }
+*/
+
+/*
+    // update matching UnmappedItems
+    if (sales.UnmappedItems.ContainsKey(from))
+    {
+        // create new MappedNames key
+        if (!sales.MappedItems.ContainsKey(to))
+        {
+            sales.MappedItems.Add(to, new List<LineItem>());
+        }
+
+        foreach (LineItem lineItem in sales.UnmappedItems[from])
+        {
+            // update LineItem
+            lineItem.normalizedItem = item;
+
+            // move to new Key
+            sales.MappedItems[to].Add(lineItem);
+        }
+
+        // remove key from UnmappedNames
+        sales.UnmappedItems.Remove(from);
+    }
+*/

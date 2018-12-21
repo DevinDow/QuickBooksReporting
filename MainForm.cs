@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace QuickBooksReporting
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         // Private Fields
 
@@ -23,13 +23,46 @@ namespace QuickBooksReporting
 
 
         // Constructor
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
 
 
+        // Events
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            LoadMappings();
+        }
+
+
         // Methods
+
+        /// <summary>
+        /// prompts for path to mapping files then parses them
+        /// </summary>
+        private void LoadMappings()
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            folderBrowserDialog.Description = "Select folder for your mapping CSV files";
+            folderBrowserDialog.SelectedPath = Application.StartupPath;
+            if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
+            {
+                Application.Exit();
+            }
+
+            if (!Names.ParseMappingFile(folderBrowserDialog.SelectedPath))
+            {
+                Application.Exit();
+            }
+
+            if (!Items.ParseMappingFile(folderBrowserDialog.SelectedPath))
+            {
+                Application.Exit();
+            }
+
+            stsInfo.Text = string.Format("Parsed {0} Name mappings and {1} Item mappings from \"{2}\".", Names.Mapping.Count, Items.Mapping.Count, folderBrowserDialog.SelectedPath);
+        }
 
         /// <summary>
         /// import a CSV of Sales LineItems
@@ -64,65 +97,6 @@ namespace QuickBooksReporting
                 fillUnmappedItems();
 
                 Cursor.Current = Cursors.Default;
-            }
-        }
-
-
-        /// <summary>
-        /// use a CSV file to map Names
-        /// fills lstMappedNames
-        /// calls fillUnmappedNames() & fillLineItems()
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mnuNormalizeNames_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
-            ofd.RestoreDirectory = false;
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                Names.Normalize(Sales, ofd.FileName);
-
-                // fill mapped Names
-                lstMappedNames.Items.Clear();
-                foreach (KeyValuePair<string, string> entry in Names.Mapping)
-                {
-                    lstMappedNames.Items.Add(string.Format("\"{0}\" => \"{1}\"", entry.Key, entry.Value));
-                }
-
-                fillUnmappedNames();
-
-                fillLineItems();
-            }
-        }
-
-        /// <summary>
-        /// use a CSV file to map Items
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mnuNormalizeItems_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
-            ofd.RestoreDirectory = false;
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                Items.Normalize(Sales, ofd.FileName);
-
-                // fill mapped Items
-                lstMappedItems.Items.Clear();
-                foreach (KeyValuePair<string, Item> entry in Items.Mapping)
-                {
-                    lstMappedItems.Items.Add(string.Format("\"{0}\" => \"{1}\"", entry.Key, entry.Value));
-                }
-
-                fillUnmappedItems();
-
-                fillLineItems();
             }
         }
 

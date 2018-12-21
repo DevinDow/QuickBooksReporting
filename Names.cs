@@ -10,6 +10,10 @@ namespace QuickBooksReporting
 {
     class Names
     {
+        // Constants
+        public const string filename = "Names.csv";
+
+
         // Public Fields
         public static Dictionary<string, string> Mapping = new Dictionary<string, string>();
 
@@ -17,46 +21,28 @@ namespace QuickBooksReporting
         // Methods
 
         /// <summary>
-        /// import CSV of Company Name Mapping
+        /// parses Names.csv, filling Mapping dictionary
         /// </summary>
-        /// <param name="sales"></param>
-        /// <param name="filename">CSV of Name mapping</param>
-        /// <returns>FALSE if duplicate "from" mapping</returns>
-        public static bool Normalize(Sales sales, string filename)
+        /// <param name="folderPath"></param>
+        /// <returns>FALSE if there are duplicate mappings</returns>
+        public static bool ParseMappingFile(string folderPath)
         {
-            foreach (string line in File.ReadLines(filename, Encoding.UTF8))
+            string path = Path.Combine(folderPath, filename);
+
+            foreach (string line in File.ReadLines(path, Encoding.UTF8))
             {
+                // parse CSV mapping file
                 string[] nameMapping = line.Split(',');
                 string from = nameMapping[0];
                 string to = nameMapping[1];
                 if (Mapping.ContainsKey(from))
                 {
-                    MessageBox.Show(string.Format("Duplicate mapping: \"{0}\"", from));
+                    MessageBox.Show(string.Format("Duplicate Name mapping: \"{0}\"", from));
                     return false;
                 }
+
+                // map "from" to "to"
                 Mapping[from] = to;
-
-                // update matching LineItems
-                if (sales.UnmappedNames.ContainsKey(from))
-                {
-                    // create new MappedNames key
-                    if (!sales.MappedNames.ContainsKey(to))
-                    {
-                        sales.MappedNames.Add(to, new List<LineItem>());
-                    }
-
-                    foreach (LineItem lineItem in sales.UnmappedNames[from])
-                    {
-                        // update LineItem
-                        lineItem.normalizedName = to;
-
-                        // move to new Key
-                        sales.MappedNames[to].Add(lineItem);
-                    }
-
-                    // remove key from UnmappedNames
-                    sales.UnmappedNames.Remove(from);
-                }
             }
 
             return true;

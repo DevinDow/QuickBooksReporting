@@ -1,6 +1,6 @@
 ﻿namespace QuickBooksReporting
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -75,16 +75,12 @@
             // mnuNormalizeNames
             // 
             this.mnuNormalizeNames.Name = "mnuNormalizeNames";
-            this.mnuNormalizeNames.Size = new System.Drawing.Size(113, 20);
-            this.mnuNormalizeNames.Text = "Normalize &Names";
-            this.mnuNormalizeNames.Click += new System.EventHandler(this.mnuNormalizeNames_Click);
+            this.mnuNormalizeNames.Size = new System.Drawing.Size(12, 20);
             // 
             // mnuNormalizeItems
             // 
             this.mnuNormalizeItems.Name = "mnuNormalizeItems";
-            this.mnuNormalizeItems.Size = new System.Drawing.Size(105, 20);
-            this.mnuNormalizeItems.Text = "Normalize &Items";
-            this.mnuNormalizeItems.Click += new System.EventHandler(this.mnuNormalizeItems_Click);
+            this.mnuNormalizeItems.Size = new System.Drawing.Size(12, 20);
             // 
             // lstSkipped
             // 
@@ -242,7 +238,7 @@
             this.lblMappedItems.TabIndex = 15;
             this.lblMappedItems.Text = "Mapped Items";
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -264,8 +260,9 @@
             this.Controls.Add(this.lstSkipped);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "QuickBooks Reporting";
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.status.ResumeLayout(false);
