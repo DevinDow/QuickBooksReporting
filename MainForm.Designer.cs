@@ -33,10 +33,9 @@
             this.lblNames = new System.Windows.Forms.Label();
             this.lstUnmappedNames = new System.Windows.Forms.ListBox();
             this.lblItems = new System.Windows.Forms.Label();
-            this.status = new System.Windows.Forms.StatusStrip();
-            this.stsInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.lstUnmappedItems = new System.Windows.Forms.ListBox();
-            this.status.SuspendLayout();
+            this.lblMappings = new System.Windows.Forms.Label();
+            this.lblSales = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // menu
@@ -84,20 +83,6 @@
             this.lblItems.TabIndex = 10;
             this.lblItems.Text = "Unmapped Items";
             // 
-            // status
-            // 
-            this.status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.stsInfo});
-            this.status.Location = new System.Drawing.Point(0, 508);
-            this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(665, 22);
-            this.status.TabIndex = 11;
-            // 
-            // stsInfo
-            // 
-            this.stsInfo.Name = "stsInfo";
-            this.stsInfo.Size = new System.Drawing.Size(0, 17);
-            // 
             // lstUnmappedItems
             // 
             this.lstUnmappedItems.FormattingEnabled = true;
@@ -108,13 +93,32 @@
             this.lstUnmappedItems.Size = new System.Drawing.Size(190, 298);
             this.lstUnmappedItems.TabIndex = 14;
             // 
+            // lblMappings
+            // 
+            this.lblMappings.AutoSize = true;
+            this.lblMappings.Location = new System.Drawing.Point(12, 496);
+            this.lblMappings.Name = "lblMappings";
+            this.lblMappings.Size = new System.Drawing.Size(59, 13);
+            this.lblMappings.TabIndex = 15;
+            this.lblMappings.Text = "Mappings: ";
+            // 
+            // lblSales
+            // 
+            this.lblSales.AutoSize = true;
+            this.lblSales.Location = new System.Drawing.Point(12, 509);
+            this.lblSales.Name = "lblSales";
+            this.lblSales.Size = new System.Drawing.Size(39, 13);
+            this.lblSales.TabIndex = 16;
+            this.lblSales.Text = "Sales: ";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(665, 530);
+            this.Controls.Add(this.lblSales);
+            this.Controls.Add(this.lblMappings);
             this.Controls.Add(this.lstUnmappedItems);
-            this.Controls.Add(this.status);
             this.Controls.Add(this.lblItems);
             this.Controls.Add(this.lblNames);
             this.Controls.Add(this.lstUnmappedNames);
@@ -124,8 +128,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QuickBooks Reporting";
             this.Shown += new System.EventHandler(this.MainForm_Shown);
-            this.status.ResumeLayout(false);
-            this.status.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,10 +139,10 @@
         private System.Windows.Forms.Label lblNonInvoices;
         private System.Windows.Forms.Label lblNames;
         private System.Windows.Forms.Label lblItems;
-        private System.Windows.Forms.StatusStrip status;
-        private System.Windows.Forms.ToolStripStatusLabel stsInfo;
         private System.Windows.Forms.ListBox lstUnmappedNames;
         private System.Windows.Forms.ListBox lstUnmappedItems;
+        private System.Windows.Forms.Label lblMappings;
+        private System.Windows.Forms.Label lblSales;
     }
 }
 

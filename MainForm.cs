@@ -71,8 +71,7 @@ namespace QuickBooksReporting
                 return;
             }
 
-            stsInfo.Text = string.Format("Parsed {0} Name mappings and {1} Item mappings from \"{2}\".", Names.Mapping.Count, Items.Mapping.Count, path);
-            //Application.DoEvents(); // update the Status Bar before continuing
+            lblMappings.Text = string.Format("Mappings: Parsed {0} Name mappings and {1} Item mappings from \"{2}\".", Names.Mapping.Count, Items.Mapping.Count, path);
         }
 
         /// <summary>
@@ -95,7 +94,7 @@ namespace QuickBooksReporting
                 Sales.ParseCSV(filename);
             }
 
-            stsInfo.Text = string.Format("Parsed {0} Sales files from \"{1}\"", filenames.Length, folderBrowserDialog.SelectedPath);
+            lblSales.Text = string.Format("Sales: Parsed {0} Sales files from \"{1}\"", filenames.Length, folderBrowserDialog.SelectedPath);
 
             fillUnmappedNames();
 
