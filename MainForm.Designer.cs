@@ -42,7 +42,7 @@
             // 
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(665, 24);
+            this.menu.Size = new System.Drawing.Size(1046, 24);
             this.menu.TabIndex = 0;
             this.menu.Text = "menuStrip1";
             // 
@@ -90,13 +90,14 @@
             this.lstUnmappedItems.IntegralHeight = false;
             this.lstUnmappedItems.Location = new System.Drawing.Point(12, 195);
             this.lstUnmappedItems.Name = "lstUnmappedItems";
-            this.lstUnmappedItems.Size = new System.Drawing.Size(190, 298);
+            this.lstUnmappedItems.Size = new System.Drawing.Size(190, 223);
             this.lstUnmappedItems.TabIndex = 14;
             // 
             // lblMappings
             // 
+            this.lblMappings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblMappings.AutoSize = true;
-            this.lblMappings.Location = new System.Drawing.Point(12, 496);
+            this.lblMappings.Location = new System.Drawing.Point(12, 491);
             this.lblMappings.Name = "lblMappings";
             this.lblMappings.Size = new System.Drawing.Size(59, 13);
             this.lblMappings.TabIndex = 15;
@@ -104,8 +105,9 @@
             // 
             // lblSales
             // 
+            this.lblSales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSales.AutoSize = true;
-            this.lblSales.Location = new System.Drawing.Point(12, 509);
+            this.lblSales.Location = new System.Drawing.Point(12, 508);
             this.lblSales.Name = "lblSales";
             this.lblSales.Size = new System.Drawing.Size(39, 13);
             this.lblSales.TabIndex = 16;
@@ -115,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 530);
+            this.ClientSize = new System.Drawing.Size(1046, 530);
             this.Controls.Add(this.lblSales);
             this.Controls.Add(this.lblMappings);
             this.Controls.Add(this.lstUnmappedItems);

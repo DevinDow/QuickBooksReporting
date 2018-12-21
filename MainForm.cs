@@ -94,7 +94,7 @@ namespace QuickBooksReporting
                 Sales.ParseCSV(filename);
             }
 
-            lblSales.Text = string.Format("Sales: Parsed {0} Sales files from \"{1}\"", filenames.Length, folderBrowserDialog.SelectedPath);
+            lblSales.Text = string.Format("Sales: Parsed {0} Sales files from \"{1}\" : {2:n0} Invoices, {3:n0} Credits, {4:n0} Skipped", filenames.Length, folderBrowserDialog.SelectedPath, Sales.Invoices.Count, Sales.Credits.Count, Sales.Skipped.Count);
 
             fillUnmappedNames();
 
