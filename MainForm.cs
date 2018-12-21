@@ -33,6 +33,8 @@ namespace QuickBooksReporting
         private void MainForm_Shown(object sender, EventArgs e)
         {
             LoadMappings();
+
+            ImportSales();
         }
 
 
@@ -44,7 +46,7 @@ namespace QuickBooksReporting
         private void LoadMappings()
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.Description = "Select folder for your mapping CSV files";
+            folderBrowserDialog.Description = "Select folder for your MAPPING CSV files";
             folderBrowserDialog.SelectedPath = Application.StartupPath;
             if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
             {
@@ -67,53 +69,27 @@ namespace QuickBooksReporting
         /// <summary>
         /// import a CSV of Sales LineItems
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mnuImportSalesCSV_Click(object sender, EventArgs e)
+        private void ImportSales()
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
-            ofd.RestoreDirectory = false;
-            if (ofd.ShowDialog() == DialogResult.OK)
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            folderBrowserDialog.Description = "Select folder for your SALES CSV files";
+            folderBrowserDialog.SelectedPath = Application.StartupPath;
+            if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
             {
-                Cursor.Current = Cursors.WaitCursor;
-
-                // parse CSV
-                DateTime start = DateTime.Now;
-                stsInfo.Text = string.Format("Reading {0}", ofd.FileName);
-                Sales.ParseCSV(ofd.FileName);
-                stsInfo.Text = string.Format("{0} parsed in {1} seconds", ofd.FileName, DateTime.Now - start);
-                Application.DoEvents(); // update the Status Bar before continuing
-                Cursor.Current = Cursors.WaitCursor;
-
-                fillLineItems();
-
-                // fill Skipped lines
-                lblSkipped.Text = string.Format("{0:n0} Skipped", Sales.Skipped.Count);
-                lstSkipped.Items.AddRange(Sales.Skipped.ToArray());
-
-                fillUnmappedNames();
-
-                fillUnmappedItems();
-
-                Cursor.Current = Cursors.Default;
+                Application.Exit();
             }
-        }
 
-        /// <summary>
-        /// clears & refills lstInvoices & lstCredits
-        /// </summary>
-        private void fillLineItems()
-        {
-            // fill Invoices
-            lstInvoices.Items.Clear();
-            lblInvoices.Text = string.Format("{0:n0} Invoices", Sales.Invoices.Count);
-            lstInvoices.Items.AddRange(Sales.Invoices.ToArray());
+            string[] filenames = Directory.GetFiles(folderBrowserDialog.SelectedPath, "*.csv");
+            foreach (string filename in filenames)
+            {
+                Sales.ParseCSV(filename);
+            }
 
-            // fill Credits
-            lstCredits.Items.Clear();
-            lblCredits.Text = string.Format("{0:n0} Credits", Sales.Credits.Count);
-            lstCredits.Items.AddRange(Sales.Credits.ToArray());
+            stsInfo.Text = string.Format("Parsed {0} Sales files from \"{1}\"", filenames.Length, folderBrowserDialog.SelectedPath);
+
+            fillUnmappedNames();
+
+            fillUnmappedItems();
         }
 
         /// <summary>
