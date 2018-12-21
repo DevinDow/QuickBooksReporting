@@ -45,6 +45,7 @@ namespace QuickBooksReporting
         /// </summary>
         private void LoadMappings()
         {
+            /*
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             folderBrowserDialog.Description = "Select folder for your MAPPING CSV files";
             folderBrowserDialog.SelectedPath = Application.StartupPath;
@@ -53,17 +54,25 @@ namespace QuickBooksReporting
                 Application.Exit();
             }
 
-            if (!Names.ParseMappingFile(folderBrowserDialog.SelectedPath))
+            string path = folderBrowserDialog.SelectedPath;
+            */
+
+            string path = Application.StartupPath;
+
+            if (!Names.ParseMappingFile(path))
             {
                 Application.Exit();
+                return;
             }
 
-            if (!Items.ParseMappingFile(folderBrowserDialog.SelectedPath))
+            if (!Items.ParseMappingFile(path))
             {
                 Application.Exit();
+                return;
             }
 
-            stsInfo.Text = string.Format("Parsed {0} Name mappings and {1} Item mappings from \"{2}\".", Names.Mapping.Count, Items.Mapping.Count, folderBrowserDialog.SelectedPath);
+            stsInfo.Text = string.Format("Parsed {0} Name mappings and {1} Item mappings from \"{2}\".", Names.Mapping.Count, Items.Mapping.Count, path);
+            //Application.DoEvents(); // update the Status Bar before continuing
         }
 
         /// <summary>
@@ -77,6 +86,7 @@ namespace QuickBooksReporting
             if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
             {
                 Application.Exit();
+                return;
             }
 
             string[] filenames = Directory.GetFiles(folderBrowserDialog.SelectedPath, "*.csv");
