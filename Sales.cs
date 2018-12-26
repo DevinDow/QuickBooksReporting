@@ -31,7 +31,7 @@ namespace QuickBooksReporting
             foreach (string line in File.ReadLines(filename, Encoding.UTF8))
             {
                 // Create LineItem from split line
-                string[] fields = line.Split(',');
+                string[] fields = Parser.Split(line);
                 LineItem lineItem = new LineItem(fields);
 
                 // Categorize Invoice / Credit / Skipped

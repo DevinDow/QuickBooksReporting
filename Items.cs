@@ -33,22 +33,22 @@ namespace QuickBooksReporting
             foreach (string line in File.ReadLines(MappingFilePath, Encoding.UTF8))
             {
                 // parse CSV mapping file
-                string[] nameMapping = line.Split(',');
-                string from = nameMapping[0];
+                string[] mapping = Parser.Split(line);
+                string from = mapping[0];
                 if (Mapping.ContainsKey(from))
                 {
                     throw new Exception(string.Format("Duplicate Item mapping: \"{0}\"", from));
                 }
 
                 // skip unmapped Items
-                if (nameMapping.Length < 6)
+                if (mapping.Length < 6)
                 {
                     Unmapped.Add(from);
                     continue;
                 }
 
                 // map "from" to Item object
-                Item item = new Item(nameMapping);
+                Item item = new Item(mapping);
                 Mapping[from] = item;
                 string to = item.ToString();
             }

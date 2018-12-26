@@ -34,17 +34,17 @@ namespace QuickBooksReporting
             foreach (string line in File.ReadLines(MappingFilePath, Encoding.UTF8))
             {
                 // parse CSV mapping file
-                string[] nameMapping = line.Split(',');
-                string from = nameMapping[0];
+                string[] mapping = Parser.Split(line);
+                string from = mapping[0];
 
                 // skip unmapped Customers
-                if (nameMapping.Length < 2)
+                if (mapping.Length < 2)
                 {
                     Unmapped.Add(from);
                     continue;
                 }
 
-                string to = nameMapping[1];
+                string to = mapping[1];
 
                 // skip Customers mapped to "DELETE"
                 if (to == SKIP)

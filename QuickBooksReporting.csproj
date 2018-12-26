@@ -56,6 +56,7 @@
     <Compile Include="LineItem.cs" />
     <Compile Include="Items.cs" />
     <Compile Include="Customers.cs" />
+    <Compile Include="Parser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sales.cs" />
