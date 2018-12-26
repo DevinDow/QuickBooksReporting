@@ -32,50 +32,37 @@ namespace QuickBooksReporting
         // Events
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            LoadMappings();
+            try
+            {
+                LoadMappings();
 
-            ImportSales();
+                ImportSales();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Exception");
+            }
         }
 
 
         // Methods
 
         /// <summary>
-        /// prompts for path to mapping files then parses them
+        /// Parse mapping files
         /// </summary>
         private void LoadMappings()
         {
             string path = Application.StartupPath;
 
-            /* code to ask user for path to Mapping CSV files
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.Description = "Select folder for your MAPPING CSV files";
-            folderBrowserDialog.SelectedPath = Application.StartupPath;
-            if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
-            {
-                Application.Exit();
-            }
+            Customers.ParseMappingFile(path);
 
-            string path = folderBrowserDialog.SelectedPath;
-            */
-
-            if (!Customers.ParseMappingFile(path))
-            {
-                Application.Exit();
-                return;
-            }
-
-            if (!Items.ParseMappingFile(path))
-            {
-                Application.Exit();
-                return;
-            }
+            Items.ParseMappingFile(path);
 
             lblMappings.Text = string.Format("Mappings: Parsed {0} Customer mappings and {1} Item mappings from \"{2}\".", Customers.Mapping.Count, Items.Mapping.Count, path);
         }
 
         /// <summary>
-        /// import a CSV of Sales LineItems
+        /// Import all Sales LineItems CSVs in a folder
         /// </summary>
         private void ImportSales()
         {
@@ -103,7 +90,7 @@ namespace QuickBooksReporting
         }
 
         /// <summary>
-        /// clears & refills lstUnmappedNames
+        /// fill lstUnmappedNames
         /// </summary>
         private void fillUnmappedCustomers()
         {
@@ -114,7 +101,7 @@ namespace QuickBooksReporting
         }
 
         /// <summary>
-        /// clears & refills lstUnmappedItems
+        /// fill lstUnmappedItems
         /// </summary>
         private void fillUnmappedItems()
         {

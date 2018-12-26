@@ -25,7 +25,7 @@ namespace QuickBooksReporting
         /// </summary>
         /// <param name="folderPath"></param>
         /// <returns>FALSE if there are duplicate mappings</returns>
-        public static bool ParseMappingFile(string folderPath)
+        public static void ParseMappingFile(string folderPath)
         {
             string path = Path.Combine(folderPath, filename);
 
@@ -36,8 +36,7 @@ namespace QuickBooksReporting
                 string from = nameMapping[0];
                 if (Mapping.ContainsKey(from))
                 {
-                    MessageBox.Show(string.Format("Duplicate Item mapping: \"{0}\"", from));
-                    return false;
+                    throw new Exception(string.Format("Duplicate Item mapping: \"{0}\"", from));
                 }
 
                 // map "from" to Item object
@@ -45,8 +44,6 @@ namespace QuickBooksReporting
                 Mapping[from] = item;
                 string to = item.ToString();
             }
-
-            return true;
         }
     }
 }

@@ -2,11 +2,11 @@
 
 - #1: Read multiple CSVs.  Select a Folder?
 - #2: Read Customers.csv & Items.csv automatically at launch then apply
+- Exception Handling
 
 # ToDo
 
 - Apply Normalizations while reading Sales.csv
-- Exception Handling
 - #5: DELETE in mapping CSV = skip LineItem
 - #4: append any Unmapped Names/Items to CSV, any mappings missing a "to" are Unmapped.  (or multi-select to append or clipboard)
 - #6: Reporting UI, incl. multi-select of Unmapped

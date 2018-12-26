@@ -11,7 +11,7 @@ namespace QuickBooksReporting
     class Customers
     {
         // Constants
-        public const string filename = "Customers.csv";
+        public const string FILENAME = "Customers.csv";
 
 
         // Public Fields
@@ -25,9 +25,9 @@ namespace QuickBooksReporting
         /// </summary>
         /// <param name="folderPath"></param>
         /// <returns>FALSE if there are duplicate mappings</returns>
-        public static bool ParseMappingFile(string folderPath)
+        public static void ParseMappingFile(string folderPath)
         {
-            string path = Path.Combine(folderPath, filename);
+            string path = Path.Combine(folderPath, FILENAME);
 
             foreach (string line in File.ReadLines(path, Encoding.UTF8))
             {
@@ -35,17 +35,13 @@ namespace QuickBooksReporting
                 string[] nameMapping = line.Split(',');
                 string from = nameMapping[0];
                 string to = nameMapping[1];
-                if (Mapping.ContainsKey(from))
                 {
-                    MessageBox.Show(string.Format("Duplicate Customer mapping: \"{0}\"", from));
-                    return false;
+                    throw new Exception(string.Format("Duplicate Customer mapping: \"{0}\"", from));
                 }
 
                 // map "from" to "to"
                 Mapping[from] = to;
             }
-
-            return true;
         }
     }
 }
