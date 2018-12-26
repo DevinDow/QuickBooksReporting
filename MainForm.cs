@@ -32,16 +32,9 @@ namespace QuickBooksReporting
         // Events
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            try
-            {
-                LoadMappings();
+            LoadMappings();
 
-                ImportSales();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Exception");
-            }
+            ImportSales();
         }
 
 
@@ -96,10 +89,10 @@ namespace QuickBooksReporting
         /// </summary>
         private void fillUnmappedCustomers()
         {
-            string[] unmappedNames = Customers.Unmapped.ToArray();
-            Array.Sort(unmappedNames);
+            string[] unmappedCustomers = Sales.UnmappedCustomers.ToArray();
+            Array.Sort(unmappedCustomers);
             lstUnmappedCustomers.Items.Clear();
-            lstUnmappedCustomers.Items.AddRange(unmappedNames);
+            lstUnmappedCustomers.Items.AddRange(unmappedCustomers);
         }
 
         /// <summary>
@@ -107,7 +100,7 @@ namespace QuickBooksReporting
         /// </summary>
         private void fillUnmappedItems()
         {
-            string[] unmappedItems = Items.Unmapped.ToArray();
+            string[] unmappedItems = Sales.UnmappedItems.ToArray();
             Array.Sort(unmappedItems);
             lstUnmappedItems.Items.Clear();
             lstUnmappedItems.Items.AddRange(unmappedItems);

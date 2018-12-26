@@ -36,10 +36,18 @@ namespace QuickBooksReporting
                 // parse CSV mapping file
                 string[] nameMapping = line.Split(',');
                 string from = nameMapping[0];
+
+                // skip unmapped Customers
+                if (nameMapping.Length < 2)
+                {
+                    Unmapped.Add(from);
+                    continue;
+                }
+
                 string to = nameMapping[1];
 
-                // skip Customers mapped to "DELETE" or blank
-                if (to == SKIP || to.Length == 0)
+                // skip Customers mapped to "DELETE"
+                if (to == SKIP)
                 {
                     Unmapped.Add(from);
                     continue;
@@ -70,7 +78,7 @@ namespace QuickBooksReporting
                 // Append to Mapping File
                 using (StreamWriter writer = File.AppendText(MappingFilePath))
                 {
-                    writer.WriteLine(string.Format("{0},", customer));
+                    writer.WriteLine(customer);
                 }
             }
         }

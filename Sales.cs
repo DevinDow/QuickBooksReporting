@@ -14,6 +14,10 @@ namespace QuickBooksReporting
         public List<LineItem> Credits = new List<LineItem>();
         public List<string> Skipped = new List<string>();
 
+        // Lists of unmapped Names/Items in Sales file
+        public List<string> UnmappedCustomers = new List<string>();
+        public List<string> UnmappedItems = new List<string>();
+
 
         // Methods
 
@@ -53,6 +57,10 @@ namespace QuickBooksReporting
                 else
                 {
                     // add unmapped Customer to List & Mapping File
+                    if (!UnmappedCustomers.Contains(lineItem.customer))
+                    {
+                        UnmappedCustomers.Add(lineItem.customer);
+                    }
                     Customers.AppendUnmapped(lineItem.customer);
                 }
 
@@ -63,7 +71,11 @@ namespace QuickBooksReporting
                 }
                 else
                 {
-                    // add unmapped Customer to List & Mapping File
+                    // add unmapped Item to List & Mapping File
+                    if (!UnmappedItems.Contains(lineItem.item))
+                    {
+                        UnmappedItems.Add(lineItem.item);
+                    }
                     Items.AppendUnmapped(lineItem.item);
                 }
             }

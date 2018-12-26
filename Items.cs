@@ -40,6 +40,13 @@ namespace QuickBooksReporting
                     throw new Exception(string.Format("Duplicate Item mapping: \"{0}\"", from));
                 }
 
+                // skip unmapped Items
+                if (nameMapping.Length < 6)
+                {
+                    Unmapped.Add(from);
+                    continue;
+                }
+
                 // map "from" to Item object
                 Item item = new Item(nameMapping);
                 Mapping[from] = item;
@@ -61,7 +68,7 @@ namespace QuickBooksReporting
                 // Append to Mapping File
                 using (StreamWriter writer = File.AppendText(MappingFilePath))
                 {
-                    writer.WriteLine(string.Format("{0},", item));
+                    writer.WriteLine(item);
                 }
             }
         }

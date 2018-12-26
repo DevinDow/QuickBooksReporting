@@ -6,10 +6,11 @@
 - Apply Normalizations while reading Sales.csv
 - #5: DELETE in Customer mapping CSV = skip LineItem
 - #4: append any Unmapped Names/Items to CSV, any mappings missing a "to" are Unmapped
+- Separate Unmapped in Mapping File from Unmapped in LineItems
 
 # ToDo
 
-- Separate Unmapped in Mapping File from Unmapped in LineItems
+- improve parser to handle commas within quotes
 - #6: Reporting UI
 	- basic reports to show collected data for debugging
 - #3 Names/Items header line with flexible columns
