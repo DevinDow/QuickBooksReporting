@@ -14,10 +14,6 @@ namespace QuickBooksReporting
         public List<LineItem> Credits = new List<LineItem>();
         public List<string> Skipped = new List<string>();
 
-        // maps of Names/Items to lists of LineItems with those Names/Items
-        public Dictionary<string, List<LineItem>> UnmappedCustomers = new Dictionary<string, List<LineItem>>();
-        public Dictionary<string, List<LineItem>> UnmappedItems = new Dictionary<string, List<LineItem>>();
-
 
         // Methods
 
@@ -30,92 +26,47 @@ namespace QuickBooksReporting
         {
             foreach (string line in File.ReadLines(filename, Encoding.UTF8))
             {
+                // Create LineItem from split line
                 string[] fields = line.Split(',');
                 LineItem lineItem = new LineItem(fields);
+
+                // Categorize Invoice / Credit / Skipped
                 if (lineItem.type == "Invoice")
                 {
                     Invoices.Add(lineItem);
-                    Normalize(lineItem);
                 }
                 else if (lineItem.type == "Credit Memo")
                 {
                     Credits.Add(lineItem);
-                    Normalize(lineItem);
+                }
+                else // skip others
+                {
+                    Skipped.Add(line);
+                    continue;
+                }
+
+                // Normalize Customer
+                if (Customers.Mapping.ContainsKey(lineItem.customer))
+                {
+                    lineItem.normalizedCustomer = Customers.Mapping[lineItem.customer];
                 }
                 else
                 {
-                    Skipped.Add(line);
+                    // add unmapped Customer to List & Mapping File
+                    Customers.AppendUnmapped(lineItem.customer);
+                }
+
+                // Normalize Item
+                if (Items.Mapping.ContainsKey(lineItem.item))
+                {
+                    lineItem.normalizedItem = Items.Mapping[lineItem.item];
+                }
+                else
+                {
+                    // add unmapped Customer to List & Mapping File
+                    Items.AppendUnmapped(lineItem.item);
                 }
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="lineItem"></param>
-        private void Normalize(LineItem lineItem)
-        {
-            // Customers
-            if (!UnmappedCustomers.ContainsKey(lineItem.name))
-            {
-                UnmappedCustomers.Add(lineItem.name, new List<LineItem>());
-            }
-            UnmappedCustomers[lineItem.name].Add(lineItem);
-
-            // Items
-            if (!UnmappedItems.ContainsKey(lineItem.item))
-            {
-                UnmappedItems.Add(lineItem.item, new List<LineItem>());
-            }
-            UnmappedItems[lineItem.item].Add(lineItem);
-        }
     }
 }
-
-/*
-    // update matching LineItems
-    if (sales.UnmappedNames.ContainsKey(from))
-    {
-        // create new MappedNames key
-        if (!sales.MappedNames.ContainsKey(to))
-        {
-            sales.MappedNames.Add(to, new List<LineItem>());
-        }
-
-        foreach (LineItem lineItem in sales.UnmappedNames[from])
-        {
-            // update LineItem
-            lineItem.normalizedName = to;
-
-            // move to new Key
-            sales.MappedNames[to].Add(lineItem);
-        }
-
-        // remove key from UnmappedNames
-        sales.UnmappedNames.Remove(from);
-    }
-*/
-
-/*
-    // update matching UnmappedItems
-    if (sales.UnmappedItems.ContainsKey(from))
-    {
-        // create new MappedNames key
-        if (!sales.MappedItems.ContainsKey(to))
-        {
-            sales.MappedItems.Add(to, new List<LineItem>());
-        }
-
-        foreach (LineItem lineItem in sales.UnmappedItems[from])
-        {
-            // update LineItem
-            lineItem.normalizedItem = item;
-
-            // move to new Key
-            sales.MappedItems[to].Add(lineItem);
-        }
-
-        // remove key from UnmappedNames
-        sales.UnmappedItems.Remove(from);
-    }
-*/

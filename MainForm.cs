@@ -66,6 +66,7 @@ namespace QuickBooksReporting
         /// </summary>
         private void ImportSales()
         {
+            // Select Folder
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             folderBrowserDialog.Description = "Select folder for your SALES CSV files";
             folderBrowserDialog.SelectedPath = Application.StartupPath;
@@ -76,6 +77,7 @@ namespace QuickBooksReporting
                 return;
             }
 
+            // Parse all Sales Files
             string[] filenames = Directory.GetFiles(folderBrowserDialog.SelectedPath, "*.csv");
             foreach (string filename in filenames)
             {
@@ -84,8 +86,8 @@ namespace QuickBooksReporting
 
             lblSales.Text = string.Format("Sales: Parsed {0} Sales files from \"{1}\" : {2:n0} Invoices, {3:n0} Credits, {4:n0} Skipped", filenames.Length, folderBrowserDialog.SelectedPath, Sales.Invoices.Count, Sales.Credits.Count, Sales.Skipped.Count);
 
+            // Show unmapped Customers & Items
             fillUnmappedCustomers();
-
             fillUnmappedItems();
         }
 
@@ -94,7 +96,7 @@ namespace QuickBooksReporting
         /// </summary>
         private void fillUnmappedCustomers()
         {
-            string[] unmappedNames = Sales.UnmappedCustomers.Keys.ToArray();
+            string[] unmappedNames = Customers.Unmapped.ToArray();
             Array.Sort(unmappedNames);
             lstUnmappedCustomers.Items.Clear();
             lstUnmappedCustomers.Items.AddRange(unmappedNames);
@@ -105,7 +107,7 @@ namespace QuickBooksReporting
         /// </summary>
         private void fillUnmappedItems()
         {
-            string[] unmappedItems = Sales.UnmappedItems.Keys.ToArray();
+            string[] unmappedItems = Items.Unmapped.ToArray();
             Array.Sort(unmappedItems);
             lstUnmappedItems.Items.Clear();
             lstUnmappedItems.Items.AddRange(unmappedItems);

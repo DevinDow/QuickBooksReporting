@@ -3,14 +3,18 @@
 - #1: Read multiple CSVs.  Select a Folder?
 - #2: Read Customers.csv & Items.csv automatically at launch then apply
 - Exception Handling
+- Apply Normalizations while reading Sales.csv
+- #5: DELETE in Customer mapping CSV = skip LineItem
+- #4: append any Unmapped Names/Items to CSV, any mappings missing a "to" are Unmapped
 
 # ToDo
 
-- Apply Normalizations while reading Sales.csv
-- #5: DELETE in mapping CSV = skip LineItem
-- #4: append any Unmapped Names/Items to CSV, any mappings missing a "to" are Unmapped.  (or multi-select to append or clipboard)
-- #6: Reporting UI, incl. multi-select of Unmapped
+- Separate Unmapped in Mapping File from Unmapped in LineItems
+- #6: Reporting UI
+	- basic reports to show collected data for debugging
 - #3 Names/Items header line with flexible columns
+	- Item stores static array of field names
+	- Item stores simple array of field strings
 
 ## Report
 

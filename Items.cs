@@ -11,11 +11,13 @@ namespace QuickBooksReporting
     class Items
     {
         // Constants
-        public const string filename = "Items.csv";
+        public const string FILENAME = "Items.csv";
 
 
         // Public Fields
+        public static string MappingFilePath;
         public static Dictionary<string, Item> Mapping = new Dictionary<string, Item>();
+        public static List<string> Unmapped = new List<string>();
 
 
         // Methods
@@ -24,12 +26,11 @@ namespace QuickBooksReporting
         /// parses Items.csv, filling Mapping dictionary
         /// </summary>
         /// <param name="folderPath"></param>
-        /// <returns>FALSE if there are duplicate mappings</returns>
         public static void ParseMappingFile(string folderPath)
         {
-            string path = Path.Combine(folderPath, filename);
+            MappingFilePath = Path.Combine(folderPath, FILENAME);
 
-            foreach (string line in File.ReadLines(path, Encoding.UTF8))
+            foreach (string line in File.ReadLines(MappingFilePath, Encoding.UTF8))
             {
                 // parse CSV mapping file
                 string[] nameMapping = line.Split(',');
@@ -43,6 +44,25 @@ namespace QuickBooksReporting
                 Item item = new Item(nameMapping);
                 Mapping[from] = item;
                 string to = item.ToString();
+            }
+        }
+
+        /// <summary>
+        /// adds an unmapped Item to the List and appends it to the Mapping File
+        /// </summary>
+        /// <param name="item"></param>
+        public static void AppendUnmapped(string item)
+        {
+            if (!Unmapped.Contains(item))
+            {
+                // Add to Unmapped list
+                Unmapped.Add(item);
+
+                // Append to Mapping File
+                using (StreamWriter writer = File.AppendText(MappingFilePath))
+                {
+                    writer.WriteLine(string.Format("{0},", item));
+                }
             }
         }
     }
