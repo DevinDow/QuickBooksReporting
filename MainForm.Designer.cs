@@ -30,8 +30,8 @@
         {
             this.menu = new System.Windows.Forms.MenuStrip();
             this.lblNonInvoices = new System.Windows.Forms.Label();
-            this.lblNames = new System.Windows.Forms.Label();
-            this.lstUnmappedNames = new System.Windows.Forms.ListBox();
+            this.lblUnmappedCustomers = new System.Windows.Forms.Label();
+            this.lstUnmappedCustomers = new System.Windows.Forms.ListBox();
             this.lblItems = new System.Windows.Forms.Label();
             this.lstUnmappedItems = new System.Windows.Forms.ListBox();
             this.lblMappings = new System.Windows.Forms.Label();
@@ -55,24 +55,21 @@
             this.lblNonInvoices.TabIndex = 2;
             this.lblNonInvoices.Text = "non-Invoices";
             // 
-            // lblNames
+            // lblUnmappedCustomers
             // 
-            this.lblNames.AutoSize = true;
-            this.lblNames.Location = new System.Drawing.Point(9, 27);
-            this.lblNames.Name = "lblNames";
-            this.lblNames.Size = new System.Drawing.Size(95, 13);
-            this.lblNames.TabIndex = 8;
-            this.lblNames.Text = "Unmapped Names";
+            this.lblUnmappedCustomers.AutoSize = true;
+            this.lblUnmappedCustomers.Location = new System.Drawing.Point(9, 27);
+            this.lblUnmappedCustomers.Name = "lblUnmappedCustomers";
+            this.lblUnmappedCustomers.Size = new System.Drawing.Size(111, 13);
+            this.lblUnmappedCustomers.TabIndex = 8;
+            this.lblUnmappedCustomers.Text = "Unmapped Customers";
             // 
-            // lstUnmappedNames
+            // lstUnmappedCustomers
             // 
-            this.lstUnmappedNames.FormattingEnabled = true;
-            this.lstUnmappedNames.HorizontalScrollbar = true;
-            this.lstUnmappedNames.IntegralHeight = false;
-            this.lstUnmappedNames.Location = new System.Drawing.Point(12, 43);
-            this.lstUnmappedNames.Name = "lstUnmappedNames";
-            this.lstUnmappedNames.Size = new System.Drawing.Size(190, 125);
-            this.lstUnmappedNames.TabIndex = 7;
+            this.lstUnmappedCustomers.Location = new System.Drawing.Point(12, 42);
+            this.lstUnmappedCustomers.Name = "lstUnmappedCustomers";
+            this.lstUnmappedCustomers.Size = new System.Drawing.Size(190, 134);
+            this.lstUnmappedCustomers.TabIndex = 17;
             // 
             // lblItems
             // 
@@ -122,8 +119,8 @@
             this.Controls.Add(this.lblMappings);
             this.Controls.Add(this.lstUnmappedItems);
             this.Controls.Add(this.lblItems);
-            this.Controls.Add(this.lblNames);
-            this.Controls.Add(this.lstUnmappedNames);
+            this.Controls.Add(this.lblUnmappedCustomers);
+            this.Controls.Add(this.lstUnmappedCustomers);
             this.Controls.Add(this.menu);
             this.MainMenuStrip = this.menu;
             this.Name = "MainForm";
@@ -139,9 +136,9 @@
 
         private System.Windows.Forms.MenuStrip menu;
         private System.Windows.Forms.Label lblNonInvoices;
-        private System.Windows.Forms.Label lblNames;
+        private System.Windows.Forms.Label lblUnmappedCustomers;
         private System.Windows.Forms.Label lblItems;
-        private System.Windows.Forms.ListBox lstUnmappedNames;
+        private System.Windows.Forms.ListBox lstUnmappedCustomers;
         private System.Windows.Forms.ListBox lstUnmappedItems;
         private System.Windows.Forms.Label lblMappings;
         private System.Windows.Forms.Label lblSales;

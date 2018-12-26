@@ -8,10 +8,10 @@ using System.Windows.Forms;
 
 namespace QuickBooksReporting
 {
-    class Names
+    class Customers
     {
         // Constants
-        public const string filename = "Names.csv";
+        public const string filename = "Customers.csv";
 
 
         // Public Fields
@@ -37,7 +37,7 @@ namespace QuickBooksReporting
                 string to = nameMapping[1];
                 if (Mapping.ContainsKey(from))
                 {
-                    MessageBox.Show(string.Format("Duplicate Name mapping: \"{0}\"", from));
+                    MessageBox.Show(string.Format("Duplicate Customer mapping: \"{0}\"", from));
                     return false;
                 }
 

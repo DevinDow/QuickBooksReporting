@@ -9,19 +9,14 @@ namespace QuickBooksReporting
 {
     class Sales
     {
-        // Public Fields
-        public string Filename;
-
         // lists of LineItems parsed from CSV
         public List<LineItem> Invoices = new List<LineItem>();
         public List<LineItem> Credits = new List<LineItem>();
         public List<string> Skipped = new List<string>();
 
         // maps of Names/Items to lists of LineItems with those Names/Items
-        public Dictionary<string, List<LineItem>> UnmappedNames = new Dictionary<string, List<LineItem>>();
-        public Dictionary<string, List<LineItem>> MappedNames = new Dictionary<string, List<LineItem>>();
+        public Dictionary<string, List<LineItem>> UnmappedCustomers = new Dictionary<string, List<LineItem>>();
         public Dictionary<string, List<LineItem>> UnmappedItems = new Dictionary<string, List<LineItem>>();
-        public Dictionary<string, List<LineItem>> MappedItems = new Dictionary<string, List<LineItem>>();
 
 
         // Methods
@@ -33,7 +28,6 @@ namespace QuickBooksReporting
         /// <param name="filename"></param>
         public void ParseCSV(string filename)
         {
-            Filename = filename;
             foreach (string line in File.ReadLines(filename, Encoding.UTF8))
             {
                 string[] fields = line.Split(',');
@@ -41,12 +35,12 @@ namespace QuickBooksReporting
                 if (lineItem.type == "Invoice")
                 {
                     Invoices.Add(lineItem);
-                    TrackUnique(lineItem);
+                    Normalize(lineItem);
                 }
                 else if (lineItem.type == "Credit Memo")
                 {
                     Credits.Add(lineItem);
-                    TrackUnique(lineItem);
+                    Normalize(lineItem);
                 }
                 else
                 {
@@ -56,17 +50,17 @@ namespace QuickBooksReporting
         }
 
         /// <summary>
-        /// collect LineItems by unique Name & Item
+        /// 
         /// </summary>
         /// <param name="lineItem"></param>
-        private void TrackUnique(LineItem lineItem)
+        private void Normalize(LineItem lineItem)
         {
-            // Company Names
-            if (!UnmappedNames.ContainsKey(lineItem.name))
+            // Customers
+            if (!UnmappedCustomers.ContainsKey(lineItem.name))
             {
-                UnmappedNames.Add(lineItem.name, new List<LineItem>());
+                UnmappedCustomers.Add(lineItem.name, new List<LineItem>());
             }
-            UnmappedNames[lineItem.name].Add(lineItem);
+            UnmappedCustomers[lineItem.name].Add(lineItem);
 
             // Items
             if (!UnmappedItems.ContainsKey(lineItem.item))

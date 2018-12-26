@@ -45,7 +45,9 @@ namespace QuickBooksReporting
         /// </summary>
         private void LoadMappings()
         {
-            /*
+            string path = Application.StartupPath;
+
+            /* code to ask user for path to Mapping CSV files
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             folderBrowserDialog.Description = "Select folder for your MAPPING CSV files";
             folderBrowserDialog.SelectedPath = Application.StartupPath;
@@ -57,9 +59,7 @@ namespace QuickBooksReporting
             string path = folderBrowserDialog.SelectedPath;
             */
 
-            string path = Application.StartupPath;
-
-            if (!Names.ParseMappingFile(path))
+            if (!Customers.ParseMappingFile(path))
             {
                 Application.Exit();
                 return;
@@ -71,7 +71,7 @@ namespace QuickBooksReporting
                 return;
             }
 
-            lblMappings.Text = string.Format("Mappings: Parsed {0} Name mappings and {1} Item mappings from \"{2}\".", Names.Mapping.Count, Items.Mapping.Count, path);
+            lblMappings.Text = string.Format("Mappings: Parsed {0} Customer mappings and {1} Item mappings from \"{2}\".", Customers.Mapping.Count, Items.Mapping.Count, path);
         }
 
         /// <summary>
@@ -82,6 +82,7 @@ namespace QuickBooksReporting
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             folderBrowserDialog.Description = "Select folder for your SALES CSV files";
             folderBrowserDialog.SelectedPath = Application.StartupPath;
+            folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
             if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
             {
                 Application.Exit();
@@ -96,7 +97,7 @@ namespace QuickBooksReporting
 
             lblSales.Text = string.Format("Sales: Parsed {0} Sales files from \"{1}\" : {2:n0} Invoices, {3:n0} Credits, {4:n0} Skipped", filenames.Length, folderBrowserDialog.SelectedPath, Sales.Invoices.Count, Sales.Credits.Count, Sales.Skipped.Count);
 
-            fillUnmappedNames();
+            fillUnmappedCustomers();
 
             fillUnmappedItems();
         }
@@ -104,12 +105,12 @@ namespace QuickBooksReporting
         /// <summary>
         /// clears & refills lstUnmappedNames
         /// </summary>
-        private void fillUnmappedNames()
+        private void fillUnmappedCustomers()
         {
-            string[] unmappedNames = Sales.UnmappedNames.Keys.ToArray();
+            string[] unmappedNames = Sales.UnmappedCustomers.Keys.ToArray();
             Array.Sort(unmappedNames);
-            lstUnmappedNames.Items.Clear();
-            lstUnmappedNames.Items.AddRange(unmappedNames);
+            lstUnmappedCustomers.Items.Clear();
+            lstUnmappedCustomers.Items.AddRange(unmappedNames);
         }
 
         /// <summary>
