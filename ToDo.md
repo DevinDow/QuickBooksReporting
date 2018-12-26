@@ -1,8 +1,8 @@
 # Done
-- #1: Read multiple CSVs.  Select a Folder?
+- #1: Read multiple CSVs by selecting a folder
 - #2: Read Customers.csv & Items.csv automatically at launch then apply
-- #5: DELETE in Customer mapping CSV = skip LineItem
 - #4: append any Unmapped Names/Items to CSV, any mappings missing a "to" are Unmapped
+- #5: DELETE in Customer mapping CSV = skip LineItem
 
 # ToDo
 - #6: Reporting UI
