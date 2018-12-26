@@ -1,36 +1,28 @@
 # Done
-
 - #1: Read multiple CSVs.  Select a Folder?
 - #2: Read Customers.csv & Items.csv automatically at launch then apply
-- Exception Handling
-- Apply Normalizations while reading Sales.csv
 - #5: DELETE in Customer mapping CSV = skip LineItem
 - #4: append any Unmapped Names/Items to CSV, any mappings missing a "to" are Unmapped
-- Separate Unmapped in Mapping File from Unmapped in LineItems
-- improve parser to handle commas within quotes
 
 # ToDo
-
 - #6: Reporting UI
 	- basic reports to show collected data for debugging
+	- custom reports
 - #3 Names/Items header line with flexible columns
 	- Item stores static array of field names
 	- Item stores simple array of field strings
 
-## Report
-
+## Reporting
 - **Report Inputs:** select date (calendar picker, YTD, etc), Item or Customer Report, which data, Summary or Detailed
 - **Report Outputs:** printable on screen, export .CSV
 
 ## Future
-
 - #8: import ItemExport.csv for future Inventory Report, normalize Items
-- #7: App will populate DB in cloud
+- #7: App used to populate DB in cloud
 - #10: forecasting module
 
 
 # Dino's comments on 12/20
-
 > 1. I have learned that QuickBooks has limit of 32,769 lines when exporting a CSV file. Therefore, we will need to break up the reports exported from QuickBooks into smaller samples than a full year. To you this should not mater, but I would like to see a modification to the parser where I can either put in a wild card in the file name field or it automatically reads all files with the correct name structure. For example I will probably name the datafiles:  “Sales Data 2018 01 thru 06.csv” So for the file reader, we could prepopulate the file name field with “Sales Data *.csv”.
 
 > 2. I would also like to automatically read the Names.csv and Items.csv files so the changes are automatically applied every time the sales data is loaded.
