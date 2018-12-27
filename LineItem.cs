@@ -24,6 +24,10 @@ namespace QuickBooksReporting
         public Item normalizedItem;
 
 
+        // Properties
+        public string CustomerName { get { return normalizedCustomer ?? customer; } }
+
+
         // Constructor
         public LineItem(string[] fields)
         {
@@ -39,7 +43,7 @@ namespace QuickBooksReporting
         // Overrides
         public override string ToString()
         {
-            return String.Format("{0} to \"{1}\" on {2}: {3} @ ${4} of \"{5}\"", type, normalizedCustomer ?? customer, date.ToShortDateString(), quantity, price, normalizedItem != null ? normalizedItem.ToString() : item);
+            return String.Format("{0} to \"{1}\" on {2}: {3} @ ${4} of \"{5}\"", type, CustomerName, date.ToShortDateString(), quantity, price, normalizedItem != null ? normalizedItem.ToString() : item);
         }
     }
 }
