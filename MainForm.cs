@@ -22,7 +22,17 @@ namespace QuickBooksReporting
         /// </summary>
         private Sales Sales;
 
-        private string ReportPath;
+
+        // Properties
+        private string ReportPath
+        {
+            set
+            {
+                lblReportPath.Text = value;
+                web.Url = new Uri(value);
+                btnOpen.Enabled = true;
+            }
+        }
 
 
         // Constructor
@@ -111,29 +121,13 @@ namespace QuickBooksReporting
         /// </summary>
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            string date = DateTime.Now.ToString("yyyy-MM-dd HH-mm");
-            string reportType = radCustomer.Checked ? "customer" : "item";
-            string reportDetailed = chkDetailed.Checked ? "-detailed" : "";
-            string filename = string.Format("{0} {1}{2}.html", date, reportType, reportDetailed);
-            ReportPath = Path.Combine(Sales.FolderPath, filename);
-
-            using (StreamWriter streamWriter = new StreamWriter(ReportPath))
-            {
-                using (HtmlTextWriter writer = new HtmlTextWriter(streamWriter))
-                {
-                    writer.WriteLine("Testing 1..2..3..");
-
-                }
-            }
-
-            lblReportPath.Text = ReportPath;
-            web.Url = new Uri(ReportPath);
-            btnOpen.Enabled = true;
+            Report report = new Report(Sales, radCustomer.Checked, chkDetailed.Checked);
+            ReportPath = report.Path;
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(ReportPath);
+            System.Diagnostics.Process.Start(lblReportPath.Text);
         }
     }
 }
