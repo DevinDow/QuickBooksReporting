@@ -30,7 +30,7 @@ namespace QuickBooksReporting
 
             using (StreamWriter streamWriter = new StreamWriter(Path))
             {
-                using (HtmlTextWriter writer = new HtmlTextWriter(streamWriter))
+                using (HTML writer = new HTML(streamWriter))
                 {
                     if (customer)
                     {
@@ -44,9 +44,9 @@ namespace QuickBooksReporting
 
 
         // Methods
-        private void generateCustomerReport(HtmlTextWriter writer, bool detailed)
+        private void generateCustomerReport(HTML writer, bool detailed)
         {
-            writer.WriteLine("Customer Report");
+            writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Report");
 
             SortedDictionary<string, List<LineItem>> customerMap = new SortedDictionary<string, List<LineItem>>();
 
