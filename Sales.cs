@@ -9,6 +9,10 @@ namespace QuickBooksReporting
 {
     class Sales
     {
+        // Public Fields
+        public string FolderPath;
+        public int FileCount = 0;
+
         // lists of LineItems parsed from CSV
         public List<LineItem> Invoices = new List<LineItem>();
         public List<LineItem> Credits = new List<LineItem>();
@@ -19,6 +23,20 @@ namespace QuickBooksReporting
         public List<string> UnmappedItems = new List<string>();
 
 
+        // Constructor
+        public Sales(string folderPath)
+        {
+            FolderPath = folderPath;
+
+            // Parse all Sales Files
+            string[] filenames = Directory.GetFiles(folderPath, "*.csv");
+            foreach (string filename in filenames)
+            {
+                ParseCSV(filename);
+                FileCount++;
+            }
+        }
+
         // Methods
 
         /// <summary>
@@ -26,7 +44,7 @@ namespace QuickBooksReporting
         /// collect Invoices, Credits, & skipped
         /// </summary>
         /// <param name="filename"></param>
-        public void ParseCSV(string filename)
+        private void ParseCSV(string filename)
         {
             foreach (string line in File.ReadLines(filename, Encoding.UTF8))
             {

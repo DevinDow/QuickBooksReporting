@@ -45,6 +45,7 @@
             this.lblFrom = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.datFrom = new System.Windows.Forms.DateTimePicker();
+            this.web = new System.Windows.Forms.WebBrowser();
             this.grpReport.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -132,14 +133,14 @@
             this.grpReport.Controls.Add(this.datFrom);
             this.grpReport.Location = new System.Drawing.Point(228, 42);
             this.grpReport.Name = "grpReport";
-            this.grpReport.Size = new System.Drawing.Size(309, 168);
+            this.grpReport.Size = new System.Drawing.Size(562, 96);
             this.grpReport.TabIndex = 18;
             this.grpReport.TabStop = false;
             this.grpReport.Text = "Report";
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(9, 132);
+            this.btnGenerate.Location = new System.Drawing.Point(363, 22);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(75, 23);
             this.btnGenerate.TabIndex = 7;
@@ -150,7 +151,7 @@
             // chkDetailed
             // 
             this.chkDetailed.AutoSize = true;
-            this.chkDetailed.Location = new System.Drawing.Point(10, 103);
+            this.chkDetailed.Location = new System.Drawing.Point(269, 68);
             this.chkDetailed.Name = "chkDetailed";
             this.chkDetailed.Size = new System.Drawing.Size(65, 17);
             this.chkDetailed.TabIndex = 6;
@@ -160,7 +161,7 @@
             // radItem
             // 
             this.radItem.AutoSize = true;
-            this.radItem.Location = new System.Drawing.Point(85, 80);
+            this.radItem.Location = new System.Drawing.Point(269, 45);
             this.radItem.Name = "radItem";
             this.radItem.Size = new System.Drawing.Size(45, 17);
             this.radItem.TabIndex = 5;
@@ -172,7 +173,7 @@
             // 
             this.radCustomer.AutoSize = true;
             this.radCustomer.Checked = true;
-            this.radCustomer.Location = new System.Drawing.Point(10, 80);
+            this.radCustomer.Location = new System.Drawing.Point(269, 22);
             this.radCustomer.Name = "radCustomer";
             this.radCustomer.Size = new System.Drawing.Size(69, 17);
             this.radCustomer.TabIndex = 4;
@@ -200,23 +201,35 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(103, 45);
+            this.dateTimePicker2.Location = new System.Drawing.Point(45, 45);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker2.TabIndex = 1;
             // 
             // datFrom
             // 
-            this.datFrom.Location = new System.Drawing.Point(103, 19);
+            this.datFrom.Location = new System.Drawing.Point(45, 19);
             this.datFrom.Name = "datFrom";
             this.datFrom.Size = new System.Drawing.Size(200, 20);
             this.datFrom.TabIndex = 0;
+            // 
+            // web
+            // 
+            this.web.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.web.Location = new System.Drawing.Point(228, 144);
+            this.web.MinimumSize = new System.Drawing.Size(20, 20);
+            this.web.Name = "web";
+            this.web.Size = new System.Drawing.Size(562, 286);
+            this.web.TabIndex = 19;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(802, 471);
+            this.Controls.Add(this.web);
             this.Controls.Add(this.grpReport);
             this.Controls.Add(this.lblSales);
             this.Controls.Add(this.lblMappings);
@@ -256,6 +269,7 @@
         private System.Windows.Forms.DateTimePicker datFrom;
         private System.Windows.Forms.CheckBox chkDetailed;
         private System.Windows.Forms.Button btnGenerate;
+        private System.Windows.Forms.WebBrowser web;
     }
 }
 

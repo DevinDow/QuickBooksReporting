@@ -19,7 +19,7 @@ namespace QuickBooksReporting
         /// <summary>
         /// Sales object representing one CSV of Sales LineItems
         /// </summary>
-        private Sales Sales= new Sales();
+        private Sales Sales;
 
 
         // Constructor
@@ -72,14 +72,9 @@ namespace QuickBooksReporting
                 return;
             }
 
-            // Parse all Sales Files
-            string[] filenames = Directory.GetFiles(folderBrowserDialog.SelectedPath, "*.csv");
-            foreach (string filename in filenames)
-            {
-                Sales.ParseCSV(filename);
-            }
+            Sales = new Sales(folderBrowserDialog.SelectedPath);
 
-            lblSales.Text = string.Format("Sales: Parsed {0} Sales files from \"{1}\" : {2:n0} Invoices, {3:n0} Credits, {4:n0} Skipped", filenames.Length, folderBrowserDialog.SelectedPath, Sales.Invoices.Count, Sales.Credits.Count, Sales.Skipped.Count);
+            lblSales.Text = string.Format("Sales: Parsed {0} Sales files from \"{1}\" : {2:n0} Invoices, {3:n0} Credits, {4:n0} Skipped", Sales.FileCount, folderBrowserDialog.SelectedPath, Sales.Invoices.Count, Sales.Credits.Count, Sales.Skipped.Count);
 
             // Show unmapped Customers & Items
             fillUnmappedCustomers();
