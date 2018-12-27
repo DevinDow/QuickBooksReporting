@@ -6,8 +6,10 @@
 
 # ToDo
 - #6: Reporting UI
-	- basic reports to show collected data for debugging
-	- custom reports
+	- Date Range
+		- preset datepickers to range of data
+		- presets: YTD, MTD, QTD
+	- 
 - #3 Names/Items header line with flexible columns
 	- Item stores static array of field names
 	- Item stores simple array of field strings

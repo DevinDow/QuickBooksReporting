@@ -22,6 +22,7 @@ namespace QuickBooksReporting
             WriteLine(text);
             RenderEndTag();
             WriteLine();
+            WriteLine();
         }
     }
 }

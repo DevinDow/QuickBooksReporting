@@ -62,17 +62,31 @@ namespace QuickBooksReporting
                 customerMap[lineItem.CustomerName].Add(lineItem);
             }
 
+            decimal total = 0;
             foreach (var entry in customerMap)
             {
-                decimal total = 0;
+                writer.WriteHeading(HtmlTextWriterTag.H3, entry.Key);
+
+                decimal subtotal = 0;
                 foreach (LineItem lineItem in entry.Value)
                 {
-                    total += lineItem.price * lineItem.quantity;
+                    subtotal += lineItem.Subtotal;
+
+                    if (detailed)
+                    {
+                        writer.WriteLine(string.Format("{0} {1} @ {2} = {3:n2}", lineItem.quantity, lineItem.item, lineItem.price, lineItem.Subtotal));
+                        writer.WriteBreak();
+                        writer.WriteLine();
+                    }
                 }
 
-                writer.WriteHeading(HtmlTextWriterTag.H3, entry.Key);
-                writer.WriteLine(string.Format("{0:n0} Line Items totalling ${1:n2}", entry.Value.Count, total));
+                writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", entry.Value.Count, subtotal));
+                writer.WriteLine();
+
+                total += subtotal;
             }
+
+            writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
         }
     }
 }
