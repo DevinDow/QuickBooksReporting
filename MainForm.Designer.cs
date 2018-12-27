@@ -249,9 +249,8 @@
             this.lblReportPath.AutoSize = true;
             this.lblReportPath.Location = new System.Drawing.Point(7, 92);
             this.lblReportPath.Name = "lblReportPath";
-            this.lblReportPath.Size = new System.Drawing.Size(316, 13);
+            this.lblReportPath.Size = new System.Drawing.Size(0, 13);
             this.lblReportPath.TabIndex = 8;
-            this.lblReportPath.Text = "report path xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
             // 
             // MainForm
             // 
