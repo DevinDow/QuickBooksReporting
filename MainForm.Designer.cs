@@ -125,7 +125,13 @@
             // 
             // grpReport
             // 
+            this.grpReport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpReport.Controls.Add(this.web);
+            this.grpReport.Controls.Add(this.btnOpen);
             this.grpReport.Controls.Add(this.btnGenerate);
+            this.grpReport.Controls.Add(this.lblReportPath);
             this.grpReport.Controls.Add(this.chkDetailed);
             this.grpReport.Controls.Add(this.radItem);
             this.grpReport.Controls.Add(this.radCustomer);
@@ -135,7 +141,7 @@
             this.grpReport.Controls.Add(this.datFrom);
             this.grpReport.Location = new System.Drawing.Point(228, 42);
             this.grpReport.Name = "grpReport";
-            this.grpReport.Size = new System.Drawing.Size(562, 96);
+            this.grpReport.Size = new System.Drawing.Size(562, 388);
             this.grpReport.TabIndex = 7;
             this.grpReport.TabStop = false;
             this.grpReport.Text = "Report";
@@ -220,17 +226,17 @@
             this.web.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.web.Location = new System.Drawing.Point(228, 173);
+            this.web.Location = new System.Drawing.Point(6, 116);
             this.web.MinimumSize = new System.Drawing.Size(20, 20);
             this.web.Name = "web";
-            this.web.Size = new System.Drawing.Size(562, 257);
+            this.web.Size = new System.Drawing.Size(550, 266);
             this.web.TabIndex = 10;
             // 
             // btnOpen
             // 
             this.btnOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOpen.Enabled = false;
-            this.btnOpen.Location = new System.Drawing.Point(685, 144);
+            this.btnOpen.Location = new System.Drawing.Point(451, 87);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(105, 23);
             this.btnOpen.TabIndex = 9;
@@ -241,26 +247,24 @@
             // lblReportPath
             // 
             this.lblReportPath.AutoSize = true;
-            this.lblReportPath.Location = new System.Drawing.Point(234, 149);
+            this.lblReportPath.Location = new System.Drawing.Point(7, 92);
             this.lblReportPath.Name = "lblReportPath";
-            this.lblReportPath.Size = new System.Drawing.Size(0, 13);
+            this.lblReportPath.Size = new System.Drawing.Size(316, 13);
             this.lblReportPath.TabIndex = 8;
+            this.lblReportPath.Text = "report path xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(802, 471);
-            this.Controls.Add(this.btnOpen);
-            this.Controls.Add(this.lblReportPath);
-            this.Controls.Add(this.web);
-            this.Controls.Add(this.grpReport);
-            this.Controls.Add(this.lblSales);
-            this.Controls.Add(this.lblMappings);
             this.Controls.Add(this.lstUnmappedItems);
             this.Controls.Add(this.lblItems);
             this.Controls.Add(this.lblUnmappedCustomers);
             this.Controls.Add(this.lstUnmappedCustomers);
+            this.Controls.Add(this.grpReport);
+            this.Controls.Add(this.lblSales);
+            this.Controls.Add(this.lblMappings);
             this.Controls.Add(this.menu);
             this.MainMenuStrip = this.menu;
             this.Name = "MainForm";
