@@ -30,27 +30,30 @@ namespace QuickBooksReporting
         {
             MappingFilePath = Path.Combine(folderPath, FILENAME);
 
-            foreach (string line in File.ReadLines(MappingFilePath, Encoding.UTF8))
+            if (File.Exists(MappingFilePath))
             {
-                // parse CSV mapping file
-                string[] mapping = Parser.Split(line);
-                string from = mapping[0];
-                if (Mapping.ContainsKey(from))
+                foreach (string line in File.ReadLines(MappingFilePath, Encoding.UTF8))
                 {
-                    throw new Exception(string.Format("Duplicate Item mapping: \"{0}\"", from));
-                }
+                    // parse CSV mapping file
+                    string[] mapping = Parser.Split(line);
+                    string from = mapping[0];
+                    if (Mapping.ContainsKey(from))
+                    {
+                        throw new Exception(string.Format("Duplicate Item mapping: \"{0}\"", from));
+                    }
 
-                // skip unmapped Items
-                if (mapping.Length < 6)
-                {
-                    Unmapped.Add(from);
-                    continue;
-                }
+                    // skip unmapped Items
+                    if (mapping.Length < 6)
+                    {
+                        Unmapped.Add(from);
+                        continue;
+                    }
 
-                // map "from" to Item object
-                Item item = new Item(mapping);
-                Mapping[from] = item;
-                string to = item.ToString();
+                    // map "from" to Item object
+                    Item item = new Item(mapping);
+                    Mapping[from] = item;
+                    string to = item.ToString();
+                }
             }
         }
 
@@ -68,7 +71,7 @@ namespace QuickBooksReporting
                 // Append to Mapping File
                 using (StreamWriter writer = File.AppendText(MappingFilePath))
                 {
-                    writer.WriteLine(item);
+                    writer.WriteLine(string.Format("\"{0}\"", item));
                 }
             }
         }

@@ -31,36 +31,39 @@ namespace QuickBooksReporting
         {
             MappingFilePath = Path.Combine(folderPath, FILENAME);
 
-            foreach (string line in File.ReadLines(MappingFilePath, Encoding.UTF8))
+            if (File.Exists(MappingFilePath))
             {
-                // parse CSV mapping file
-                string[] mapping = Parser.Split(line);
-                string from = mapping[0];
-
-                // skip unmapped Customers
-                if (mapping.Length < 2)
+                foreach (string line in File.ReadLines(MappingFilePath, Encoding.UTF8))
                 {
-                    Unmapped.Add(from);
-                    continue;
+                    // parse CSV mapping file
+                    string[] mapping = Parser.Split(line);
+                    string from = mapping[0];
+
+                    // skip unmapped Customers
+                    if (mapping.Length < 2)
+                    {
+                        Unmapped.Add(from);
+                        continue;
+                    }
+
+                    string to = mapping[1];
+
+                    // skip Customers mapped to "DELETE"
+                    if (to == SKIP)
+                    {
+                        Unmapped.Add(from);
+                        continue;
+                    }
+
+                    // Throw if duplicate mappings for from
+                    if (Mapping.ContainsKey(from))
+                    {
+                        throw new Exception(string.Format("Duplicate Customer mapping: \"{0}\"", from));
+                    }
+
+                    // map "from" to "to"
+                    Mapping[from] = to;
                 }
-
-                string to = mapping[1];
-
-                // skip Customers mapped to "DELETE"
-                if (to == SKIP)
-                {
-                    Unmapped.Add(from);
-                    continue;
-                }
-
-                // Throw if duplicate mappings for from
-                if (Mapping.ContainsKey(from))
-                {
-                    throw new Exception(string.Format("Duplicate Customer mapping: \"{0}\"", from));
-                }
-
-                // map "from" to "to"
-                Mapping[from] = to;
             }
         }
 
@@ -78,7 +81,7 @@ namespace QuickBooksReporting
                 // Append to Mapping File
                 using (StreamWriter writer = File.AppendText(MappingFilePath))
                 {
-                    writer.WriteLine(customer);
+                    writer.WriteLine(string.Format("\"{0}\"", customer));
                 }
             }
         }

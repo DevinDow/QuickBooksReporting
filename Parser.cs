@@ -12,7 +12,15 @@ namespace QuickBooksReporting
         public static string[] Split(string line)
         {
             // Regular Expression to split on commas not within double-quotes
-            return Regex.Split(line, ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+            string[] fields = Regex.Split(line, ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+
+            // Trim the leading & trailing double-quotes
+            for (int i=0; i<fields.Length; i++)
+            {
+                fields[i] = fields[i].Trim('\"');
+            }
+
+            return fields;
         }
     }
 }
