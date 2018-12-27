@@ -109,8 +109,13 @@ namespace QuickBooksReporting
         /// </summary>
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            string filename = Path.Combine(Sales.FolderPath, "a.html");
-            using (StreamWriter streamWriter = new StreamWriter(filename))
+            string date = DateTime.Now.ToString("yyyy-MM-dd HH-mm");
+            string reportType = radCustomer.Checked ? "customer" : "item";
+            string reportDetailed = chkDetailed.Checked ? "-detailed" : "";
+            string filename = string.Format("{0} {1}{2}.html", date, reportType, reportDetailed);
+            string path = Path.Combine(Sales.FolderPath, filename);
+
+            using (StreamWriter streamWriter = new StreamWriter(path))
             {
                 using (HtmlTextWriter writer = new HtmlTextWriter(streamWriter))
                 {
@@ -119,7 +124,7 @@ namespace QuickBooksReporting
                 }
             }
 
-            web.Url = new Uri(filename);
+            web.Url = new Uri(path);
         }
     }
 }
