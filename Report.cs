@@ -64,8 +64,14 @@ namespace QuickBooksReporting
 
             foreach (var entry in customerMap)
             {
+                decimal total = 0;
+                foreach (LineItem lineItem in entry.Value)
+                {
+                    total += lineItem.price * lineItem.quantity;
+                }
+
                 writer.WriteHeading(HtmlTextWriterTag.H3, entry.Key);
-                writer.WriteLine(string.Format("{0:n0} Line Items", entry.Value.Count));
+                writer.WriteLine(string.Format("{0:n0} Line Items totalling ${1:n2}", entry.Value.Count, total));
             }
         }
     }
