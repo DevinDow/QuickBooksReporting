@@ -22,6 +22,8 @@ namespace QuickBooksReporting
         /// </summary>
         private Sales Sales;
 
+        private string ReportPath;
+
 
         // Constructor
         public MainForm()
@@ -113,9 +115,9 @@ namespace QuickBooksReporting
             string reportType = radCustomer.Checked ? "customer" : "item";
             string reportDetailed = chkDetailed.Checked ? "-detailed" : "";
             string filename = string.Format("{0} {1}{2}.html", date, reportType, reportDetailed);
-            string path = Path.Combine(Sales.FolderPath, filename);
+            ReportPath = Path.Combine(Sales.FolderPath, filename);
 
-            using (StreamWriter streamWriter = new StreamWriter(path))
+            using (StreamWriter streamWriter = new StreamWriter(ReportPath))
             {
                 using (HtmlTextWriter writer = new HtmlTextWriter(streamWriter))
                 {
@@ -124,7 +126,14 @@ namespace QuickBooksReporting
                 }
             }
 
-            web.Url = new Uri(path);
+            lblReportPath.Text = ReportPath;
+            web.Url = new Uri(ReportPath);
+            btnOpen.Enabled = true;
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(ReportPath);
         }
     }
 }

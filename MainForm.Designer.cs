@@ -46,6 +46,8 @@
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.datFrom = new System.Windows.Forms.DateTimePicker();
             this.web = new System.Windows.Forms.WebBrowser();
+            this.btnOpen = new System.Windows.Forms.Button();
+            this.lblReportPath = new System.Windows.Forms.Label();
             this.grpReport.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,7 +74,7 @@
             this.lblUnmappedCustomers.Location = new System.Drawing.Point(9, 27);
             this.lblUnmappedCustomers.Name = "lblUnmappedCustomers";
             this.lblUnmappedCustomers.Size = new System.Drawing.Size(111, 13);
-            this.lblUnmappedCustomers.TabIndex = 8;
+            this.lblUnmappedCustomers.TabIndex = 1;
             this.lblUnmappedCustomers.Text = "Unmapped Customers";
             // 
             // lstUnmappedCustomers
@@ -80,7 +82,7 @@
             this.lstUnmappedCustomers.Location = new System.Drawing.Point(12, 42);
             this.lstUnmappedCustomers.Name = "lstUnmappedCustomers";
             this.lstUnmappedCustomers.Size = new System.Drawing.Size(190, 134);
-            this.lstUnmappedCustomers.TabIndex = 17;
+            this.lstUnmappedCustomers.TabIndex = 2;
             // 
             // lblItems
             // 
@@ -88,7 +90,7 @@
             this.lblItems.Location = new System.Drawing.Point(9, 179);
             this.lblItems.Name = "lblItems";
             this.lblItems.Size = new System.Drawing.Size(87, 13);
-            this.lblItems.TabIndex = 10;
+            this.lblItems.TabIndex = 3;
             this.lblItems.Text = "Unmapped Items";
             // 
             // lstUnmappedItems
@@ -99,7 +101,7 @@
             this.lstUnmappedItems.Location = new System.Drawing.Point(12, 195);
             this.lstUnmappedItems.Name = "lstUnmappedItems";
             this.lstUnmappedItems.Size = new System.Drawing.Size(190, 223);
-            this.lstUnmappedItems.TabIndex = 14;
+            this.lstUnmappedItems.TabIndex = 4;
             // 
             // lblMappings
             // 
@@ -108,7 +110,7 @@
             this.lblMappings.Location = new System.Drawing.Point(12, 432);
             this.lblMappings.Name = "lblMappings";
             this.lblMappings.Size = new System.Drawing.Size(59, 13);
-            this.lblMappings.TabIndex = 15;
+            this.lblMappings.TabIndex = 5;
             this.lblMappings.Text = "Mappings: ";
             // 
             // lblSales
@@ -118,7 +120,7 @@
             this.lblSales.Location = new System.Drawing.Point(12, 449);
             this.lblSales.Name = "lblSales";
             this.lblSales.Size = new System.Drawing.Size(39, 13);
-            this.lblSales.TabIndex = 16;
+            this.lblSales.TabIndex = 6;
             this.lblSales.Text = "Sales: ";
             // 
             // grpReport
@@ -134,7 +136,7 @@
             this.grpReport.Location = new System.Drawing.Point(228, 42);
             this.grpReport.Name = "grpReport";
             this.grpReport.Size = new System.Drawing.Size(562, 96);
-            this.grpReport.TabIndex = 18;
+            this.grpReport.TabIndex = 7;
             this.grpReport.TabStop = false;
             this.grpReport.Text = "Report";
             // 
@@ -187,7 +189,7 @@
             this.lblTo.Location = new System.Drawing.Point(7, 51);
             this.lblTo.Name = "lblTo";
             this.lblTo.Size = new System.Drawing.Size(23, 13);
-            this.lblTo.TabIndex = 3;
+            this.lblTo.TabIndex = 2;
             this.lblTo.Text = "To:";
             // 
             // lblFrom
@@ -196,7 +198,7 @@
             this.lblFrom.Location = new System.Drawing.Point(6, 25);
             this.lblFrom.Name = "lblFrom";
             this.lblFrom.Size = new System.Drawing.Size(33, 13);
-            this.lblFrom.TabIndex = 2;
+            this.lblFrom.TabIndex = 0;
             this.lblFrom.Text = "From:";
             // 
             // dateTimePicker2
@@ -204,31 +206,53 @@
             this.dateTimePicker2.Location = new System.Drawing.Point(45, 45);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 1;
+            this.dateTimePicker2.TabIndex = 3;
             // 
             // datFrom
             // 
             this.datFrom.Location = new System.Drawing.Point(45, 19);
             this.datFrom.Name = "datFrom";
             this.datFrom.Size = new System.Drawing.Size(200, 20);
-            this.datFrom.TabIndex = 0;
+            this.datFrom.TabIndex = 1;
             // 
             // web
             // 
             this.web.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.web.Location = new System.Drawing.Point(228, 144);
+            this.web.Location = new System.Drawing.Point(228, 173);
             this.web.MinimumSize = new System.Drawing.Size(20, 20);
             this.web.Name = "web";
-            this.web.Size = new System.Drawing.Size(562, 286);
-            this.web.TabIndex = 19;
+            this.web.Size = new System.Drawing.Size(562, 257);
+            this.web.TabIndex = 10;
+            // 
+            // btnOpen
+            // 
+            this.btnOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpen.Enabled = false;
+            this.btnOpen.Location = new System.Drawing.Point(685, 144);
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Size = new System.Drawing.Size(105, 23);
+            this.btnOpen.TabIndex = 9;
+            this.btnOpen.Text = "Open in Browser";
+            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+            // 
+            // lblReportPath
+            // 
+            this.lblReportPath.AutoSize = true;
+            this.lblReportPath.Location = new System.Drawing.Point(234, 149);
+            this.lblReportPath.Name = "lblReportPath";
+            this.lblReportPath.Size = new System.Drawing.Size(0, 13);
+            this.lblReportPath.TabIndex = 8;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(802, 471);
+            this.Controls.Add(this.btnOpen);
+            this.Controls.Add(this.lblReportPath);
             this.Controls.Add(this.web);
             this.Controls.Add(this.grpReport);
             this.Controls.Add(this.lblSales);
@@ -270,6 +294,8 @@
         private System.Windows.Forms.CheckBox chkDetailed;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.WebBrowser web;
+        private System.Windows.Forms.Button btnOpen;
+        private System.Windows.Forms.Label lblReportPath;
     }
 }
 
