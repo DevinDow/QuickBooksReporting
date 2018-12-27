@@ -37,6 +37,7 @@ namespace QuickBooksReporting
                         generateCustomerReport(writer, detailed);
                     }
 
+                    writer.WriteBreak();
                     writer.WriteLine("generated " + date);
                 }
             }
@@ -63,7 +64,8 @@ namespace QuickBooksReporting
 
             foreach (var entry in customerMap)
             {
-                writer.WriteLine(string.Format("{0} has {1} Line Items", entry.Key, entry.Value.Count));
+                writer.WriteHeading(HtmlTextWriterTag.H3, entry.Key);
+                writer.WriteLine(string.Format("{0:n0} Line Items", entry.Value.Count));
             }
         }
     }
