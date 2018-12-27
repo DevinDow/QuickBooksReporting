@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 using System.Windows.Forms;
 
 namespace QuickBooksReporting
@@ -108,7 +109,17 @@ namespace QuickBooksReporting
         /// </summary>
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            string filename = Path.Combine(Sales.FolderPath, "a.html");
+            using (StreamWriter streamWriter = new StreamWriter(filename))
+            {
+                using (HtmlTextWriter writer = new HtmlTextWriter(streamWriter))
+                {
+                    writer.WriteLine("Testing 1..2..3..");
 
+                }
+            }
+
+            web.Url = new Uri(filename);
         }
     }
 }
