@@ -26,6 +26,8 @@ namespace QuickBooksReporting
         public MainForm()
         {
             InitializeComponent();
+
+            datFrom.Value = new DateTime(DateTime.Now.Year, 1, 1);
         }
 
 
@@ -104,6 +106,14 @@ namespace QuickBooksReporting
             Array.Sort(unmappedItems);
             lstUnmappedItems.Items.Clear();
             lstUnmappedItems.Items.AddRange(unmappedItems);
+        }
+
+        /// <summary>
+        /// Generate Report
+        /// </summary>
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

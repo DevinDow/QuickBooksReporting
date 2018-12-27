@@ -1,3 +1,7 @@
+# Bugs
+- quotes needed in Mapping files to handle commas
+- new line handling
+
 # Done
 - #1: Read multiple CSVs by selecting a folder
 - #2: Read Customers.csv & Items.csv automatically at launch then apply
