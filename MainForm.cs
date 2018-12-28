@@ -157,7 +157,7 @@ namespace QuickBooksReporting
                         break;
                     case "YTD":
                         datFrom.Value = new DateTime(DateTime.Now.Year, 1, 1);
-                        datTo.Value = DateTime.Now;
+                        datTo.Value = Sales.MaxDate;
                         break;
                 }
             }

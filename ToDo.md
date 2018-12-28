@@ -8,10 +8,9 @@
 	- **Report Outputs:** printable on screen, export .CSV
 
 # ToDo
-- Reload Mappings or Sales
 - Date Range
 	- presets: YTD, MTD, QTD, LYTD, LMTD, LQTD
-- #3 Names/Items header line with flexible columns
+- #3 Item Mapping header line with flexible columns
 	- Item stores static array of field names
 	- Item stores simple array of field strings
 
