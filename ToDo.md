@@ -3,13 +3,11 @@
 - #2: Read Customers.csv & Items.csv automatically at launch then apply
 - #4: append any Unmapped Names/Items to CSV, any mappings missing a "to" are Unmapped
 - #5: DELETE in Customer mapping CSV = skip LineItem
+- #6: Reporting UI
 
 # ToDo
-- #6: Reporting UI
-	- Date Range
-		- preset datepickers to range of data
-		- presets: YTD, MTD, QTD
-	- 
+- Date Range
+	- presets: YTD, MTD, QTD, LYTD, LMTD, LQTD
 - #3 Names/Items header line with flexible columns
 	- Item stores static array of field names
 	- Item stores simple array of field strings

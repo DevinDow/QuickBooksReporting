@@ -30,7 +30,7 @@ namespace QuickBooksReporting
             {
                 lblReportPath.Text = value;
                 web.Url = new Uri(value);
-                btnOpen.Enabled = true;
+                btnOpenReport.Enabled = true;
             }
         }
 
@@ -92,6 +92,11 @@ namespace QuickBooksReporting
             // Show unmapped Customers & Items
             fillUnmappedCustomers();
             fillUnmappedItems();
+
+            // set Date Range
+            cmbDateRange.SelectedItem = "All";
+            datFrom.MinDate = datTo.MinDate = datFrom.Value = Sales.MinDate;
+            datFrom.MaxDate = datTo.MaxDate = datTo.Value = Sales.MaxDate;
         }
 
         /// <summary>
@@ -117,15 +122,46 @@ namespace QuickBooksReporting
         }
 
         /// <summary>
+        /// cmbDateRange selection
+        /// </summary>
+        private void cmbDateRange_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            datFrom.Enabled = datTo.Enabled = (string)cmbDateRange.SelectedItem == "Custom";
+
+            try
+            {
+                switch (cmbDateRange.SelectedItem)
+                {
+                    case "All":
+                        datFrom.Value = Sales.MinDate;
+                        datTo.Value = Sales.MaxDate;
+                        break;
+                    case "YTD":
+                        datFrom.Value = new DateTime(DateTime.Now.Year, 1, 1);
+                        datTo.Value = DateTime.Now;
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Invalid Date Range for the imported Sales");
+                cmbDateRange.SelectedItem = "All";
+            }
+        }
+
+        /// <summary>
         /// Generate Report
         /// </summary>
-        private void btnGenerate_Click(object sender, EventArgs e)
+        private void btnGeneratReport_Click(object sender, EventArgs e)
         {
-            Report report = new Report(Sales, radCustomer.Checked, chkDetailed.Checked);
+            Report report = new Report(Sales, radCustomer.Checked, chkDetailed.Checked, datFrom.Value, datTo.Value);
             ReportPath = report.Path;
         }
 
-        private void btnOpen_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Open Report in Browser
+        /// </summary>
+        private void btnOpenReport_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(lblReportPath.Text);
         }

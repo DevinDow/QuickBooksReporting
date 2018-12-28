@@ -22,6 +22,10 @@ namespace QuickBooksReporting
         public List<string> UnmappedCustomers = new List<string>();
         public List<string> UnmappedItems = new List<string>();
 
+        // Date Range
+        public DateTime MinDate = DateTime.Now;
+        public DateTime MaxDate = DateTime.MinValue;
+
 
         // Constructor
         public Sales(string folderPath)
@@ -65,6 +69,16 @@ namespace QuickBooksReporting
                 {
                     Skipped.Add(line);
                     continue;
+                }
+
+                // Date Range
+                if (lineItem.date < MinDate)
+                {
+                    MinDate = lineItem.date;
+                }
+                if (lineItem.date > MaxDate)
+                {
+                    MaxDate = lineItem.date;
                 }
 
                 // Normalize Customer

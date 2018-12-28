@@ -37,17 +37,19 @@
             this.lblMappings = new System.Windows.Forms.Label();
             this.lblSales = new System.Windows.Forms.Label();
             this.grpReport = new System.Windows.Forms.GroupBox();
-            this.btnGenerate = new System.Windows.Forms.Button();
+            this.cmbDateRange = new System.Windows.Forms.ComboBox();
+            this.lblDateRange = new System.Windows.Forms.Label();
+            this.web = new System.Windows.Forms.WebBrowser();
+            this.btnOpenReport = new System.Windows.Forms.Button();
+            this.btnGenerateReport = new System.Windows.Forms.Button();
+            this.lblReportPath = new System.Windows.Forms.Label();
             this.chkDetailed = new System.Windows.Forms.CheckBox();
             this.radItem = new System.Windows.Forms.RadioButton();
             this.radCustomer = new System.Windows.Forms.RadioButton();
             this.lblTo = new System.Windows.Forms.Label();
             this.lblFrom = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.datTo = new System.Windows.Forms.DateTimePicker();
             this.datFrom = new System.Windows.Forms.DateTimePicker();
-            this.web = new System.Windows.Forms.WebBrowser();
-            this.btnOpen = new System.Windows.Forms.Button();
-            this.lblReportPath = new System.Windows.Forms.Label();
             this.grpReport.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,16 +130,18 @@
             this.grpReport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpReport.Controls.Add(this.cmbDateRange);
+            this.grpReport.Controls.Add(this.lblDateRange);
             this.grpReport.Controls.Add(this.web);
-            this.grpReport.Controls.Add(this.btnOpen);
-            this.grpReport.Controls.Add(this.btnGenerate);
+            this.grpReport.Controls.Add(this.btnOpenReport);
+            this.grpReport.Controls.Add(this.btnGenerateReport);
             this.grpReport.Controls.Add(this.lblReportPath);
             this.grpReport.Controls.Add(this.chkDetailed);
             this.grpReport.Controls.Add(this.radItem);
             this.grpReport.Controls.Add(this.radCustomer);
             this.grpReport.Controls.Add(this.lblTo);
             this.grpReport.Controls.Add(this.lblFrom);
-            this.grpReport.Controls.Add(this.dateTimePicker2);
+            this.grpReport.Controls.Add(this.datTo);
             this.grpReport.Controls.Add(this.datFrom);
             this.grpReport.Location = new System.Drawing.Point(228, 42);
             this.grpReport.Name = "grpReport";
@@ -146,15 +150,70 @@
             this.grpReport.TabStop = false;
             this.grpReport.Text = "Report";
             // 
-            // btnGenerate
+            // cmbDateRange
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(363, 22);
-            this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(75, 23);
-            this.btnGenerate.TabIndex = 7;
-            this.btnGenerate.Text = "Generate";
-            this.btnGenerate.UseVisualStyleBackColor = true;
-            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
+            this.cmbDateRange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDateRange.FormattingEnabled = true;
+            this.cmbDateRange.Items.AddRange(new object[] {
+            "All",
+            "YTD",
+            "Custom"});
+            this.cmbDateRange.Location = new System.Drawing.Point(81, 17);
+            this.cmbDateRange.Name = "cmbDateRange";
+            this.cmbDateRange.Size = new System.Drawing.Size(121, 21);
+            this.cmbDateRange.TabIndex = 12;
+            this.cmbDateRange.SelectedIndexChanged += new System.EventHandler(this.cmbDateRange_SelectedIndexChanged);
+            // 
+            // lblDateRange
+            // 
+            this.lblDateRange.AutoSize = true;
+            this.lblDateRange.Location = new System.Drawing.Point(7, 20);
+            this.lblDateRange.Name = "lblDateRange";
+            this.lblDateRange.Size = new System.Drawing.Size(68, 13);
+            this.lblDateRange.TabIndex = 11;
+            this.lblDateRange.Text = "Date Range:";
+            // 
+            // web
+            // 
+            this.web.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.web.Location = new System.Drawing.Point(6, 117);
+            this.web.MinimumSize = new System.Drawing.Size(20, 20);
+            this.web.Name = "web";
+            this.web.Size = new System.Drawing.Size(550, 265);
+            this.web.TabIndex = 10;
+            // 
+            // btnOpenReport
+            // 
+            this.btnOpenReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenReport.Enabled = false;
+            this.btnOpenReport.Location = new System.Drawing.Point(451, 88);
+            this.btnOpenReport.Name = "btnOpenReport";
+            this.btnOpenReport.Size = new System.Drawing.Size(105, 23);
+            this.btnOpenReport.TabIndex = 9;
+            this.btnOpenReport.Text = "Open in Browser";
+            this.btnOpenReport.UseVisualStyleBackColor = true;
+            this.btnOpenReport.Click += new System.EventHandler(this.btnOpenReport_Click);
+            // 
+            // btnGenerateReport
+            // 
+            this.btnGenerateReport.Location = new System.Drawing.Point(363, 22);
+            this.btnGenerateReport.Name = "btnGenerateReport";
+            this.btnGenerateReport.Size = new System.Drawing.Size(102, 23);
+            this.btnGenerateReport.TabIndex = 7;
+            this.btnGenerateReport.Text = "Generate Report";
+            this.btnGenerateReport.UseVisualStyleBackColor = true;
+            this.btnGenerateReport.Click += new System.EventHandler(this.btnGeneratReport_Click);
+            // 
+            // lblReportPath
+            // 
+            this.lblReportPath.AutoSize = true;
+            this.lblReportPath.Location = new System.Drawing.Point(7, 98);
+            this.lblReportPath.Name = "lblReportPath";
+            this.lblReportPath.Size = new System.Drawing.Size(81, 13);
+            this.lblReportPath.TabIndex = 8;
+            this.lblReportPath.Text = "Report filename";
             // 
             // chkDetailed
             // 
@@ -192,7 +251,7 @@
             // lblTo
             // 
             this.lblTo.AutoSize = true;
-            this.lblTo.Location = new System.Drawing.Point(7, 51);
+            this.lblTo.Location = new System.Drawing.Point(7, 74);
             this.lblTo.Name = "lblTo";
             this.lblTo.Size = new System.Drawing.Size(23, 13);
             this.lblTo.TabIndex = 2;
@@ -201,56 +260,27 @@
             // lblFrom
             // 
             this.lblFrom.AutoSize = true;
-            this.lblFrom.Location = new System.Drawing.Point(6, 25);
+            this.lblFrom.Location = new System.Drawing.Point(6, 48);
             this.lblFrom.Name = "lblFrom";
             this.lblFrom.Size = new System.Drawing.Size(33, 13);
             this.lblFrom.TabIndex = 0;
             this.lblFrom.Text = "From:";
             // 
-            // dateTimePicker2
+            // datTo
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(45, 45);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 3;
+            this.datTo.Enabled = false;
+            this.datTo.Location = new System.Drawing.Point(45, 70);
+            this.datTo.Name = "datTo";
+            this.datTo.Size = new System.Drawing.Size(200, 20);
+            this.datTo.TabIndex = 3;
             // 
             // datFrom
             // 
-            this.datFrom.Location = new System.Drawing.Point(45, 19);
+            this.datFrom.Enabled = false;
+            this.datFrom.Location = new System.Drawing.Point(45, 44);
             this.datFrom.Name = "datFrom";
             this.datFrom.Size = new System.Drawing.Size(200, 20);
             this.datFrom.TabIndex = 1;
-            // 
-            // web
-            // 
-            this.web.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.web.Location = new System.Drawing.Point(6, 116);
-            this.web.MinimumSize = new System.Drawing.Size(20, 20);
-            this.web.Name = "web";
-            this.web.Size = new System.Drawing.Size(550, 266);
-            this.web.TabIndex = 10;
-            // 
-            // btnOpen
-            // 
-            this.btnOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpen.Enabled = false;
-            this.btnOpen.Location = new System.Drawing.Point(451, 87);
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(105, 23);
-            this.btnOpen.TabIndex = 9;
-            this.btnOpen.Text = "Open in Browser";
-            this.btnOpen.UseVisualStyleBackColor = true;
-            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
-            // 
-            // lblReportPath
-            // 
-            this.lblReportPath.AutoSize = true;
-            this.lblReportPath.Location = new System.Drawing.Point(7, 92);
-            this.lblReportPath.Name = "lblReportPath";
-            this.lblReportPath.Size = new System.Drawing.Size(0, 13);
-            this.lblReportPath.TabIndex = 8;
             // 
             // MainForm
             // 
@@ -292,13 +322,15 @@
         private System.Windows.Forms.RadioButton radCustomer;
         private System.Windows.Forms.Label lblTo;
         private System.Windows.Forms.Label lblFrom;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker datTo;
         private System.Windows.Forms.DateTimePicker datFrom;
         private System.Windows.Forms.CheckBox chkDetailed;
-        private System.Windows.Forms.Button btnGenerate;
+        private System.Windows.Forms.Button btnGenerateReport;
         private System.Windows.Forms.WebBrowser web;
-        private System.Windows.Forms.Button btnOpen;
+        private System.Windows.Forms.Button btnOpenReport;
         private System.Windows.Forms.Label lblReportPath;
+        private System.Windows.Forms.ComboBox cmbDateRange;
+        private System.Windows.Forms.Label lblDateRange;
     }
 }
 
