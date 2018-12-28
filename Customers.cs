@@ -17,8 +17,8 @@ namespace QuickBooksReporting
 
         // Public Fields
         public static string MappingFilePath;
-        public static Dictionary<string, string> Mapping = new Dictionary<string, string>();
-        public static List<string> Unmapped = new List<string>();
+        public static Dictionary<string, string> Mapping;
+        public static List<string> Unmapped;
 
 
         // Methods
@@ -29,6 +29,8 @@ namespace QuickBooksReporting
         /// <param name="folderPath"></param>
         public static void ParseMappingFile(string folderPath)
         {
+            Mapping = new Dictionary<string, string>();
+            Unmapped = new List<string>();
             MappingFilePath = Path.Combine(folderPath, FILENAME);
 
             if (File.Exists(MappingFilePath))

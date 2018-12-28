@@ -4,17 +4,16 @@
 - #4: append any Unmapped Names/Items to CSV, any mappings missing a "to" are Unmapped
 - #5: DELETE in Customer mapping CSV = skip LineItem
 - #6: Reporting UI
+	- **Report Inputs:** select date (calendar picker, YTD, etc), Item or Customer Report, which data, Summary or Detailed
+	- **Report Outputs:** printable on screen, export .CSV
 
 # ToDo
+- Reload Mappings or Sales
 - Date Range
 	- presets: YTD, MTD, QTD, LYTD, LMTD, LQTD
 - #3 Names/Items header line with flexible columns
 	- Item stores static array of field names
 	- Item stores simple array of field strings
-
-## Reporting
-- **Report Inputs:** select date (calendar picker, YTD, etc), Item or Customer Report, which data, Summary or Detailed
-- **Report Outputs:** printable on screen, export .CSV
 
 ## Future
 - #8: import ItemExport.csv for future Inventory Report, normalize Items

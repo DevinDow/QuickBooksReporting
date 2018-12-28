@@ -52,6 +52,23 @@ namespace QuickBooksReporting
             ImportSales();
         }
 
+        private void mnuReloadMappings_Click(object sender, EventArgs e)
+        {
+            Sales = null;
+            lblSales.Text = lblReportPath.Text = string.Empty;
+            lstUnmappedCustomers.Items.Clear();
+            lstUnmappedItems.Items.Clear();
+            web.Url = null;
+            LoadMappings();
+        }
+
+        private void mnuImportSales_Click(object sender, EventArgs e)
+        {
+            datFrom.MinDate = datTo.MinDate = DateTimePicker.MinDateTime;
+            datFrom.MaxDate = datTo.MaxDate = DateTimePicker.MaxDateTime;
+            ImportSales();
+        }
+
 
         // Methods
 
@@ -95,8 +112,10 @@ namespace QuickBooksReporting
 
             // set Date Range
             cmbDateRange.SelectedItem = "All";
-            datFrom.MinDate = datTo.MinDate = datFrom.Value = Sales.MinDate;
-            datFrom.MaxDate = datTo.MaxDate = datTo.Value = Sales.MaxDate;
+            datFrom.MinDate = datTo.MinDate = Sales.MinDate;
+            datFrom.MaxDate = datTo.MaxDate = Sales.MaxDate;
+            datFrom.Value = Sales.MinDate;
+            datTo.Value = Sales.MaxDate;
         }
 
         /// <summary>

@@ -50,11 +50,17 @@
             this.lblFrom = new System.Windows.Forms.Label();
             this.datTo = new System.Windows.Forms.DateTimePicker();
             this.datFrom = new System.Windows.Forms.DateTimePicker();
+            this.mnuReloadMappings = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuImportSales = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu.SuspendLayout();
             this.grpReport.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu
             // 
+            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuReloadMappings,
+            this.mnuImportSales});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(802, 24);
@@ -282,6 +288,20 @@
             this.datFrom.Size = new System.Drawing.Size(200, 20);
             this.datFrom.TabIndex = 1;
             // 
+            // mnuReloadMappings
+            // 
+            this.mnuReloadMappings.Name = "mnuReloadMappings";
+            this.mnuReloadMappings.Size = new System.Drawing.Size(111, 20);
+            this.mnuReloadMappings.Text = "Reload &Mappings";
+            this.mnuReloadMappings.Click += new System.EventHandler(this.mnuReloadMappings_Click);
+            // 
+            // mnuImportSales
+            // 
+            this.mnuImportSales.Name = "mnuImportSales";
+            this.mnuImportSales.Size = new System.Drawing.Size(84, 20);
+            this.mnuImportSales.Text = "Import &Sales";
+            this.mnuImportSales.Click += new System.EventHandler(this.mnuImportSales_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,6 +320,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QuickBooks Reporting";
             this.Shown += new System.EventHandler(this.MainForm_Shown);
+            this.menu.ResumeLayout(false);
+            this.menu.PerformLayout();
             this.grpReport.ResumeLayout(false);
             this.grpReport.PerformLayout();
             this.ResumeLayout(false);
@@ -331,6 +353,8 @@
         private System.Windows.Forms.Label lblReportPath;
         private System.Windows.Forms.ComboBox cmbDateRange;
         private System.Windows.Forms.Label lblDateRange;
+        private System.Windows.Forms.ToolStripMenuItem mnuReloadMappings;
+        private System.Windows.Forms.ToolStripMenuItem mnuImportSales;
     }
 }
 
