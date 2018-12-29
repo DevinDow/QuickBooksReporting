@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menu = new System.Windows.Forms.MenuStrip();
+            this.mnuReloadMappings = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuImportSales = new System.Windows.Forms.ToolStripMenuItem();
             this.lblNonInvoices = new System.Windows.Forms.Label();
             this.lblUnmappedCustomers = new System.Windows.Forms.Label();
             this.lstUnmappedCustomers = new System.Windows.Forms.ListBox();
@@ -50,8 +53,6 @@
             this.lblFrom = new System.Windows.Forms.Label();
             this.datTo = new System.Windows.Forms.DateTimePicker();
             this.datFrom = new System.Windows.Forms.DateTimePicker();
-            this.mnuReloadMappings = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuImportSales = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.grpReport.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +67,20 @@
             this.menu.Size = new System.Drawing.Size(802, 24);
             this.menu.TabIndex = 0;
             this.menu.Text = "menuStrip1";
+            // 
+            // mnuReloadMappings
+            // 
+            this.mnuReloadMappings.Name = "mnuReloadMappings";
+            this.mnuReloadMappings.Size = new System.Drawing.Size(111, 20);
+            this.mnuReloadMappings.Text = "Reload &Mappings";
+            this.mnuReloadMappings.Click += new System.EventHandler(this.mnuReloadMappings_Click);
+            // 
+            // mnuImportSales
+            // 
+            this.mnuImportSales.Name = "mnuImportSales";
+            this.mnuImportSales.Size = new System.Drawing.Size(84, 20);
+            this.mnuImportSales.Text = "Import &Sales";
+            this.mnuImportSales.Click += new System.EventHandler(this.mnuImportSales_Click);
             // 
             // lblNonInvoices
             // 
@@ -288,20 +303,6 @@
             this.datFrom.Size = new System.Drawing.Size(200, 20);
             this.datFrom.TabIndex = 1;
             // 
-            // mnuReloadMappings
-            // 
-            this.mnuReloadMappings.Name = "mnuReloadMappings";
-            this.mnuReloadMappings.Size = new System.Drawing.Size(111, 20);
-            this.mnuReloadMappings.Text = "Reload &Mappings";
-            this.mnuReloadMappings.Click += new System.EventHandler(this.mnuReloadMappings_Click);
-            // 
-            // mnuImportSales
-            // 
-            this.mnuImportSales.Name = "mnuImportSales";
-            this.mnuImportSales.Size = new System.Drawing.Size(84, 20);
-            this.mnuImportSales.Text = "Import &Sales";
-            this.mnuImportSales.Click += new System.EventHandler(this.mnuImportSales_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -315,6 +316,7 @@
             this.Controls.Add(this.lblSales);
             this.Controls.Add(this.lblMappings);
             this.Controls.Add(this.menu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menu;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
