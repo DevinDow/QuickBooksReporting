@@ -87,6 +87,11 @@ namespace QuickBooksReporting
             {
                 Writer.WriteHeading(HtmlTextWriterTag.H3, entry.Key);
 
+                if (Detailed)
+                {
+                    WriteTableHeader(new string[] { "Item", "Quantity", "Price", "Subtotal" });
+                }
+
                 decimal subtotal = 0;
                 foreach (LineItem lineItem in entry.Value)
                 {
@@ -94,10 +99,13 @@ namespace QuickBooksReporting
 
                     if (Detailed)
                     {
-                        Writer.WriteLine(string.Format("{0} {1} @ {2} = {3:n2}", lineItem.quantity, lineItem.item, lineItem.price, lineItem.Subtotal));
-                        Writer.WriteBreak();
-                        Writer.WriteLine();
+                        WriteTableRow(new string[] { lineItem.item, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) });
                     }
+                }
+
+                if (Detailed)
+                {
+                    Writer.RenderEndTag();
                 }
 
                 Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", entry.Value.Count, subtotal));
@@ -113,6 +121,27 @@ namespace QuickBooksReporting
         {
             Writer.WriteLine(string.Format("From {0} to {1}", From.ToShortDateString(), To.ToShortDateString()));
             Writer.WriteBreak();
+            Writer.WriteLine();
+        }
+
+        private void WriteTableHeader(string[] columns)
+        {
+            Writer.AddAttribute(HtmlTextWriterAttribute.Border, "1");
+            Writer.RenderBeginTag(HtmlTextWriterTag.Table);
+            WriteTableRow(columns, true);
+        }
+
+        private void WriteTableRow(string[] columns, bool header = false)
+        {
+            Writer.RenderBeginTag(HtmlTextWriterTag.Tr);
+            foreach (string column in columns)
+            {
+                Writer.RenderBeginTag(header ? HtmlTextWriterTag.Th : HtmlTextWriterTag.Td);
+                Writer.WriteLine(column);
+                Writer.RenderEndTag();
+                Writer.WriteLine();
+            }
+            Writer.RenderEndTag();
             Writer.WriteLine();
         }
     }
