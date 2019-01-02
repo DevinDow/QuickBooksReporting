@@ -26,8 +26,10 @@ namespace QuickBooksReporting
 
         // Properties
         public decimal Subtotal { get { return price * quantity; } }
-        
+
         public string CustomerName { get { return normalizedCustomer ?? customer; } }
+
+        public string ItemName { get { return normalizedItem != null ? normalizedItem.Name : item; } }
 
 
         // Constructor
