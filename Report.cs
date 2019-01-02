@@ -139,7 +139,7 @@ namespace QuickBooksReporting
                 if (lineItem.date < From || lineItem.date > To)
                     continue;
 
-                // Collect LineItems by Customer
+                // Collect LineItems by ItemName
                 if (!itemMap.ContainsKey(lineItem.ItemName))
                 {
                     itemMap.Add(lineItem.ItemName, new List<LineItem>());
@@ -156,7 +156,7 @@ namespace QuickBooksReporting
 
                 if (Detailed)
                 {
-                    WriteTableHeader(new string[] { "Customer", "Quantity", "Price", "Subtotal" });
+                    WriteTableHeader(new string[] { "Customer", "Quantity", "Price", "Subtotal", "Item" });
                 }
 
                 decimal subtotal = 0;
@@ -166,7 +166,7 @@ namespace QuickBooksReporting
 
                     if (Detailed)
                     {
-                        WriteTableRow(new string[] { lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) });
+                        WriteTableRow(new string[] { lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal, lineItem.ItemFullName) });
                     }
                 }
 

@@ -30,6 +30,7 @@ namespace QuickBooksReporting
         public string CustomerName { get { return normalizedCustomer ?? customer; } }
 
         public string ItemName { get { return normalizedItem != null ? normalizedItem.Family : item; } }
+        public string ItemFullName { get { return normalizedItem != null ? normalizedItem.ToString() : string.Empty; } }
 
 
         // Constructor
