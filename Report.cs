@@ -156,7 +156,7 @@ namespace QuickBooksReporting
 
                 if (Detailed)
                 {
-                    WriteTableHeader(new string[] { "Customer", "Quantity", "Price", "Subtotal", "Item" });
+                    WriteTableHeader(MergeColumns(new string[] { "Customer", "Quantity", "Price", "Subtotal" }, Items.Columns));
                 }
 
                 decimal subtotal = 0;
@@ -166,7 +166,12 @@ namespace QuickBooksReporting
 
                     if (Detailed)
                     {
-                        WriteTableRow(new string[] { lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal), lineItem.ItemFullName });
+                        string[] columns = new string[] { lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) };
+                        if (lineItem.itemMap != null)
+                        {
+                            columns = MergeColumns(columns, lineItem.itemMap);
+                        }
+                        WriteTableRow(columns);
                     }
                 }
 
@@ -189,6 +194,14 @@ namespace QuickBooksReporting
             Writer.WriteLine(string.Format("From {0} to {1}", From.ToShortDateString(), To.ToShortDateString()));
             Writer.WriteBreak();
             Writer.WriteLine();
+        }
+
+        private string[] MergeColumns(string[] arr1, string[] arr2)
+        {
+            int destinationIndex = arr1.Length;
+            Array.Resize<string>(ref arr1, arr1.Length + arr2.Length);
+            Array.Copy(arr2, 0, arr1, destinationIndex, arr2.Length);
+            return arr1;
         }
 
         private void WriteTableHeader(string[] columns)

@@ -17,6 +17,7 @@ namespace QuickBooksReporting
 
         // Public Fields
         public static string MappingFilePath;
+        public static string[] Columns;
         public static Dictionary<string, string[]> Mapping;
         public static List<string> Unmapped;
         public static List<string> Skip;
@@ -42,6 +43,14 @@ namespace QuickBooksReporting
                 {
                     // parse CSV mapping file
                     string[] mapping = Parser.Split(line);
+
+                    // first line fills Columns
+                    if (Columns == null)
+                    {
+                        Columns = mapping;
+                        continue;
+                    }
+
                     string from = mapping[0];
 
                     // skip unmapped Items
