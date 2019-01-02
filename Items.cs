@@ -12,12 +12,15 @@ namespace QuickBooksReporting
     {
         // Constants
         public const string FILENAME = "Items.csv";
+        public const string SKIP = "DELETE";
 
 
         // Public Fields
         public static string MappingFilePath;
         public static Dictionary<string, Item> Mapping;
         public static List<string> Unmapped;
+        public static List<string> Skip;
+
 
 
         // Methods
@@ -30,6 +33,7 @@ namespace QuickBooksReporting
         {
             Mapping = new Dictionary<string, Item>();
             Unmapped = new List<string>();
+            Skip = new List<string>();
             MappingFilePath = Path.Combine(folderPath, FILENAME);
 
             if (File.Exists(MappingFilePath))
@@ -39,22 +43,32 @@ namespace QuickBooksReporting
                     // parse CSV mapping file
                     string[] mapping = Parser.Split(line);
                     string from = mapping[0];
-                    if (Mapping.ContainsKey(from))
-                    {
-                        throw new Exception(string.Format("Duplicate Item mapping: \"{0}\"", from));
-                    }
 
                     // skip unmapped Items
-                    if (mapping.Length < 6)
+                    if (mapping.Length < 2)
                     {
                         Unmapped.Add(from);
                         continue;
                     }
 
+                    string to = mapping[1];
+
+                    // skip Items mapped to "DELETE"
+                    if (to == SKIP)
+                    {
+                        Skip.Add(from);
+                        continue;
+                    }
+
+                    // Throw if duplicate mappings for from
+                    if (Mapping.ContainsKey(from))
+                    {
+                        throw new Exception(string.Format("Duplicate Item mapping: \"{0}\"", from));
+                    }
+
                     // map "from" to Item object
                     Item item = new Item(mapping);
                     Mapping[from] = item;
-                    string to = item.ToString();
                 }
             }
         }

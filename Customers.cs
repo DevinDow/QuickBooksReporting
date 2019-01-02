@@ -19,6 +19,7 @@ namespace QuickBooksReporting
         public static string MappingFilePath;
         public static Dictionary<string, string> Mapping;
         public static List<string> Unmapped;
+        public static List<string> Skip;
 
 
         // Methods
@@ -31,6 +32,7 @@ namespace QuickBooksReporting
         {
             Mapping = new Dictionary<string, string>();
             Unmapped = new List<string>();
+            Skip = new List<string>();
             MappingFilePath = Path.Combine(folderPath, FILENAME);
 
             if (File.Exists(MappingFilePath))
@@ -53,7 +55,7 @@ namespace QuickBooksReporting
                     // skip Customers mapped to "DELETE"
                     if (to == SKIP)
                     {
-                        Unmapped.Add(from);
+                        Skip.Add(from);
                         continue;
                     }
 

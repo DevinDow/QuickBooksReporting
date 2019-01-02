@@ -56,6 +56,13 @@ namespace QuickBooksReporting
                 string[] fields = Parser.Split(line);
                 LineItem lineItem = new LineItem(fields);
 
+                // Skip Customers/Items mapped to "DELETE"
+                if (Customers.Skip.Contains(lineItem.customer) || Items.Skip.Contains(lineItem.item))
+                {
+                    Skipped.Add(line);
+                    continue;
+                }
+
                 // Categorize Invoice / Credit / Skipped
                 if (lineItem.type == "Invoice")
                 {

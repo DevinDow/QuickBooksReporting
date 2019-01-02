@@ -20,10 +20,10 @@ namespace QuickBooksReporting
         public Item(string[] fields)
         {
             Family = fields[1];
-            Name = fields[2];
-            UpcCode = fields[3];
-            PackageStyle = fields[4];
-            RetailDisplay = fields[5];
+            if (fields.Length > 2) Name = fields[2];
+            if (fields.Length > 3) UpcCode = fields[3];
+            if (fields.Length > 4) PackageStyle = fields[4];
+            if (fields.Length > 5) RetailDisplay = fields[5];
         }
 
 
