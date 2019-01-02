@@ -66,6 +66,7 @@ namespace QuickBooksReporting
         {
             datFrom.MinDate = datTo.MinDate = DateTimePicker.MinDateTime;
             datFrom.MaxDate = datTo.MaxDate = DateTimePicker.MaxDateTime;
+            web.Url = null;
             ImportSales();
         }
 
