@@ -106,7 +106,7 @@ namespace QuickBooksReporting
                 // Normalize Item
                 if (Items.Mapping.ContainsKey(lineItem.item))
                 {
-                    lineItem.normalizedItem = Items.Mapping[lineItem.item];
+                    lineItem.itemMap = Items.Mapping[lineItem.item];
                 }
                 else
                 {

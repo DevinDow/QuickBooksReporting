@@ -57,7 +57,6 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Item.cs" />
     <Compile Include="LineItem.cs" />
     <Compile Include="Items.cs" />
     <Compile Include="Customers.cs" />

@@ -17,7 +17,7 @@ namespace QuickBooksReporting
 
         // Public Fields
         public static string MappingFilePath;
-        public static Dictionary<string, Item> Mapping;
+        public static Dictionary<string, string[]> Mapping;
         public static List<string> Unmapped;
         public static List<string> Skip;
 
@@ -31,7 +31,7 @@ namespace QuickBooksReporting
         /// <param name="folderPath"></param>
         public static void ParseMappingFile(string folderPath)
         {
-            Mapping = new Dictionary<string, Item>();
+            Mapping = new Dictionary<string, string[]>();
             Unmapped = new List<string>();
             Skip = new List<string>();
             MappingFilePath = Path.Combine(folderPath, FILENAME);
@@ -66,9 +66,7 @@ namespace QuickBooksReporting
                         throw new Exception(string.Format("Duplicate Item mapping: \"{0}\"", from));
                     }
 
-                    // map "from" to Item object
-                    Item item = new Item(mapping);
-                    Mapping[from] = item;
+                    Mapping[from] = mapping;
                 }
             }
         }

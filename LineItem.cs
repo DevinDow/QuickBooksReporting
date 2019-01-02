@@ -21,7 +21,7 @@ namespace QuickBooksReporting
         // Data added from CSV of Company Name Mapping
         public string normalizedCustomer;
 
-        public Item normalizedItem;
+        public string[] itemMap;
 
 
         // Properties
@@ -29,8 +29,22 @@ namespace QuickBooksReporting
 
         public string CustomerName { get { return normalizedCustomer ?? customer; } }
 
-        public string ItemName { get { return normalizedItem != null ? normalizedItem.Family : item; } }
-        public string ItemFullName { get { return normalizedItem != null ? normalizedItem.ToString() : string.Empty; } }
+        public string ItemName { get { return itemMap != null ? itemMap[1] : item; } }
+        public string ItemFullName
+        {
+            get
+            {
+                if (itemMap == null)
+                    return string.Empty;
+
+                StringBuilder sb = new StringBuilder(itemMap[1]);
+                for (int i=2; i<itemMap.Length; i++)
+                {
+                    sb.AppendFormat(" - {0}", itemMap[i]);
+                }
+                return sb.ToString();
+            }
+        }
 
 
         // Constructor
@@ -48,7 +62,7 @@ namespace QuickBooksReporting
         // Overrides
         public override string ToString()
         {
-            return String.Format("{0} to \"{1}\" on {2}: {3} @ ${4} of \"{5}\"", type, CustomerName, date.ToShortDateString(), quantity, price, normalizedItem != null ? normalizedItem.ToString() : item);
+            return String.Format("{0} to \"{1}\" on {2}: {3} @ ${4} of \"{5}\"", type, CustomerName, date.ToShortDateString(), quantity, price, ItemFullName);
         }
     }
 }
