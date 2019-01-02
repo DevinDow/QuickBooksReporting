@@ -166,7 +166,7 @@ namespace QuickBooksReporting
 
                     if (Detailed)
                     {
-                        WriteTableRow(new string[] { lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal, lineItem.ItemFullName) });
+                        WriteTableRow(new string[] { lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal), lineItem.ItemFullName });
                     }
                 }
 
