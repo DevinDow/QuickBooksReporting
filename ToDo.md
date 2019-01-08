@@ -7,10 +7,10 @@
 	- **Report Inputs:** select date (calendar picker, YTD, etc), Item or Customer Report, which data, Summary or Detailed
 	- **Report Outputs:** printable on screen, export .CSV
 - #3 Item Mapping header line with flexible columns
-
-# ToDo
 - Date Range
 	- presets: YTD, MTD, QTD, LYTD, LMTD, LQTD
+
+# ToDo
 
 ## Future
 - #8: import ItemExport.csv for future Inventory Report, normalize Items
