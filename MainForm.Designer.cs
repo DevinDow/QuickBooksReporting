@@ -40,6 +40,7 @@
             this.lblMappings = new System.Windows.Forms.Label();
             this.lblSales = new System.Windows.Forms.Label();
             this.grpReport = new System.Windows.Forms.GroupBox();
+            this.btnGenerateCSV = new System.Windows.Forms.Button();
             this.cmbDateRange = new System.Windows.Forms.ComboBox();
             this.lblDateRange = new System.Windows.Forms.Label();
             this.web = new System.Windows.Forms.WebBrowser();
@@ -53,7 +54,6 @@
             this.lblFrom = new System.Windows.Forms.Label();
             this.datTo = new System.Windows.Forms.DateTimePicker();
             this.datFrom = new System.Windows.Forms.DateTimePicker();
-            this.btnGenerateCSV = new System.Windows.Forms.Button();
             this.menu.SuspendLayout();
             this.grpReport.SuspendLayout();
             this.SuspendLayout();
@@ -173,14 +173,20 @@
             this.grpReport.TabStop = false;
             this.grpReport.Text = "Report";
             // 
+            // btnGenerateCSV
+            // 
+            this.btnGenerateCSV.Location = new System.Drawing.Point(454, 19);
+            this.btnGenerateCSV.Name = "btnGenerateCSV";
+            this.btnGenerateCSV.Size = new System.Drawing.Size(102, 23);
+            this.btnGenerateCSV.TabIndex = 13;
+            this.btnGenerateCSV.Text = "Generate CSV";
+            this.btnGenerateCSV.UseVisualStyleBackColor = true;
+            this.btnGenerateCSV.Click += new System.EventHandler(this.btnGenerateCSV_Click);
+            // 
             // cmbDateRange
             // 
             this.cmbDateRange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDateRange.FormattingEnabled = true;
-            this.cmbDateRange.Items.AddRange(new object[] {
-            "All",
-            "YTD",
-            "Custom"});
             this.cmbDateRange.Location = new System.Drawing.Point(81, 17);
             this.cmbDateRange.Name = "cmbDateRange";
             this.cmbDateRange.Size = new System.Drawing.Size(121, 21);
@@ -304,16 +310,6 @@
             this.datFrom.Name = "datFrom";
             this.datFrom.Size = new System.Drawing.Size(200, 20);
             this.datFrom.TabIndex = 1;
-            // 
-            // btnGenerateCSV
-            // 
-            this.btnGenerateCSV.Location = new System.Drawing.Point(454, 19);
-            this.btnGenerateCSV.Name = "btnGenerateCSV";
-            this.btnGenerateCSV.Size = new System.Drawing.Size(102, 23);
-            this.btnGenerateCSV.TabIndex = 13;
-            this.btnGenerateCSV.Text = "Generate CSV";
-            this.btnGenerateCSV.UseVisualStyleBackColor = true;
-            this.btnGenerateCSV.Click += new System.EventHandler(this.btnGenerateCSV_Click);
             // 
             // MainForm
             // 

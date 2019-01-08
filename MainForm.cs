@@ -15,6 +15,17 @@ namespace QuickBooksReporting
 {
     public partial class MainForm : Form
     {
+        // Constants
+        private const string ALL = "All";
+        private const string YTD = "YTD";
+        private const string LYTD = "LYTD";
+        private const string QTD = "QTD";
+        private const string LQTD = "LQTD";
+        private const string MTD = "MTD";
+        private const string LMTD = "LMTD";
+        private const string CUSTOM = "Custom";
+
+
         // Private Fields
 
         /// <summary>
@@ -39,6 +50,18 @@ namespace QuickBooksReporting
         public MainForm()
         {
             InitializeComponent();
+
+            cmbDateRange.Items.AddRange(new object[]
+                {
+                    ALL,
+                    YTD,
+                    LYTD,
+                    QTD,
+                    LQTD,
+                    MTD,
+                    LMTD,
+                    CUSTOM
+                });
 
             datFrom.Value = new DateTime(DateTime.Now.Year, 1, 1);
         }
@@ -148,16 +171,46 @@ namespace QuickBooksReporting
         {
             datFrom.Enabled = datTo.Enabled = (string)cmbDateRange.SelectedItem == "Custom";
 
+            int firstMonthOfQuarter;
+            if (DateTime.Now.Month <= 3)
+                firstMonthOfQuarter = 1;
+            else if (DateTime.Now.Month <= 6)
+                firstMonthOfQuarter = 4;
+            else if (DateTime.Now.Month <= 9)
+                firstMonthOfQuarter = 7;
+            else
+                firstMonthOfQuarter = 10;
+
             try
             {
                 switch (cmbDateRange.SelectedItem)
                 {
-                    case "All":
+                    case ALL:
                         datFrom.Value = Sales.MinDate;
                         datTo.Value = Sales.MaxDate;
                         break;
-                    case "YTD":
+                    case YTD:
                         datFrom.Value = new DateTime(DateTime.Now.Year, 1, 1);
+                        datTo.Value = Sales.MaxDate;
+                        break;
+                    case LYTD:
+                        datFrom.Value = new DateTime(DateTime.Now.Year, 1, 1).AddYears(-1);
+                        datTo.Value = Sales.MaxDate;
+                        break;
+                    case QTD:
+                        datFrom.Value = new DateTime(DateTime.Now.Year, firstMonthOfQuarter, 1);
+                        datTo.Value = Sales.MaxDate;
+                        break;
+                    case LQTD:
+                        datFrom.Value = new DateTime(DateTime.Now.Year, firstMonthOfQuarter, 1).AddMonths(-3);
+                        datTo.Value = Sales.MaxDate;
+                        break;
+                    case MTD:
+                        datFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                        datTo.Value = Sales.MaxDate;
+                        break;
+                    case LMTD:
+                        datFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-1);
                         datTo.Value = Sales.MaxDate;
                         break;
                 }
