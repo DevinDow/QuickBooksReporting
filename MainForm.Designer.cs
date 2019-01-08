@@ -53,6 +53,7 @@
             this.lblFrom = new System.Windows.Forms.Label();
             this.datTo = new System.Windows.Forms.DateTimePicker();
             this.datFrom = new System.Windows.Forms.DateTimePicker();
+            this.btnGenerateCSV = new System.Windows.Forms.Button();
             this.menu.SuspendLayout();
             this.grpReport.SuspendLayout();
             this.SuspendLayout();
@@ -151,6 +152,7 @@
             this.grpReport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpReport.Controls.Add(this.btnGenerateCSV);
             this.grpReport.Controls.Add(this.cmbDateRange);
             this.grpReport.Controls.Add(this.lblDateRange);
             this.grpReport.Controls.Add(this.web);
@@ -219,7 +221,7 @@
             // 
             // btnGenerateReport
             // 
-            this.btnGenerateReport.Location = new System.Drawing.Point(363, 22);
+            this.btnGenerateReport.Location = new System.Drawing.Point(346, 19);
             this.btnGenerateReport.Name = "btnGenerateReport";
             this.btnGenerateReport.Size = new System.Drawing.Size(102, 23);
             this.btnGenerateReport.TabIndex = 7;
@@ -303,6 +305,16 @@
             this.datFrom.Size = new System.Drawing.Size(200, 20);
             this.datFrom.TabIndex = 1;
             // 
+            // btnGenerateCSV
+            // 
+            this.btnGenerateCSV.Location = new System.Drawing.Point(454, 19);
+            this.btnGenerateCSV.Name = "btnGenerateCSV";
+            this.btnGenerateCSV.Size = new System.Drawing.Size(102, 23);
+            this.btnGenerateCSV.TabIndex = 13;
+            this.btnGenerateCSV.Text = "Generate CSV";
+            this.btnGenerateCSV.UseVisualStyleBackColor = true;
+            this.btnGenerateCSV.Click += new System.EventHandler(this.btnGenerateCSV_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -357,6 +369,7 @@
         private System.Windows.Forms.Label lblDateRange;
         private System.Windows.Forms.ToolStripMenuItem mnuReloadMappings;
         private System.Windows.Forms.ToolStripMenuItem mnuImportSales;
+        private System.Windows.Forms.Button btnGenerateCSV;
     }
 }
 

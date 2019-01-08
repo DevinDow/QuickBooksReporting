@@ -30,11 +30,18 @@ namespace QuickBooksReporting
             To = to;
 
             // Path for Report
-            string date = DateTime.Now.ToString("yyyy-MM-dd HH-mm");
+            string date = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
             string reportType = customer ? "customer" : "item";
             string reportDetailed = detailed ? "-detailed" : "";
             string filename = string.Format("{0} {1}{2}.html", date, reportType, reportDetailed);
-            Path = System.IO.Path.Combine(sales.FolderPath, filename);
+            
+            // reportsFolder
+            string reportsFolder = System.IO.Path.Combine(sales.FolderPath, "reports");
+            if (!Directory.Exists(reportsFolder))
+            {
+                Directory.CreateDirectory(reportsFolder);
+            }
+            Path = System.IO.Path.Combine(reportsFolder, filename);
 
             // Write Report file
             using (StreamWriter streamWriter = new StreamWriter(Path))
@@ -196,14 +203,6 @@ namespace QuickBooksReporting
             Writer.WriteLine();
         }
 
-        private string[] MergeColumns(string[] arr1, string[] arr2)
-        {
-            int destinationIndex = arr1.Length;
-            Array.Resize<string>(ref arr1, arr1.Length + arr2.Length);
-            Array.Copy(arr2, 0, arr1, destinationIndex, arr2.Length);
-            return arr1;
-        }
-
         private void WriteTableHeader(string[] columns)
         {
             Writer.AddAttribute(HtmlTextWriterAttribute.Border, "1");
@@ -223,6 +222,14 @@ namespace QuickBooksReporting
             }
             Writer.RenderEndTag();
             Writer.WriteLine();
+        }
+
+        public static string[] MergeColumns(string[] arr1, string[] arr2)
+        {
+            int destinationIndex = arr1.Length;
+            Array.Resize<string>(ref arr1, arr1.Length + arr2.Length);
+            Array.Copy(arr2, 0, arr1, destinationIndex, arr2.Length);
+            return arr1;
         }
     }
 }

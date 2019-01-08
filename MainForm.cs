@@ -178,6 +178,14 @@ namespace QuickBooksReporting
             ReportPath = report.Path;
         }
 
+        private void btnGenerateCSV_Click(object sender, EventArgs e)
+        {
+            CSV csv = new CSV(Sales, datFrom.Value, datTo.Value);
+            lblReportPath.Text = csv.Path;
+            web.Url = null;
+            btnOpenReport.Enabled = true;
+        }
+
         /// <summary>
         /// Open Report in Browser
         /// </summary>
