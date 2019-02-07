@@ -9,6 +9,7 @@
 - #3 Item Mapping header line with flexible columns
 - Date Range
 	- presets: YTD, MTD, QTD, LYTD, LMTD, LQTD
+- Export a CSV file of Report
 
 # ToDo
 
@@ -19,7 +20,7 @@
 
 
 # Dino's comments on 12/20
-> 1. I have learned that QuickBooks has limit of 32,769 lines when exporting a CSV file. Therefore, we will need to break up the reports exported from QuickBooks into smaller samples than a full year. To you this should not mater, but I would like to see a modification to the parser where I can either put in a wild card in the file name field or it automatically reads all files with the correct name structure. For example I will probably name the datafiles:  “Sales Data 2018 01 thru 06.csv” So for the file reader, we could prepopulate the file name field with “Sales Data *.csv”.
+> 1. I have learned that QuickBooks has limit of 32,769 lines when exporting a CSV file. Therefore, we will need to break up the reports exported from QuickBooks into smaller samples than a full year. To you this should not mater, but I would like to see a modification to the parser where I can either put in a wild card in the file name field or it automatically reads all files with the correct name structure. For example I will probably name the datafiles:  â€œSales Data 2018 01 thru 06.csvâ€ So for the file reader, we could prepopulate the file name field with â€œSales Data *.csvâ€.
 
 > 2. I would also like to automatically read the Names.csv and Items.csv files so the changes are automatically applied every time the sales data is loaded.
 
@@ -35,8 +36,8 @@
 > 9. Done for me is to complete the data parser and to have a generic reporting module that I am still trying to define. I will keep it as simple as possible. Right now my thoughts are:
 > - The user selects a data range for the desired report
 > 	- A calendar selector allows the user to select any date range that is supported by the data in the system
-> 		i.e if the earliest transaction is January 1, 2017 – they could not set a report that covers any date before January 1, 2017.
-> 	- There will be a few pre-defined data ranges for common reports – e.g.
+> 		i.e if the earliest transaction is January 1, 2017 â€“ they could not set a report that covers any date before January 1, 2017.
+> 	- There will be a few pre-defined data ranges for common reports â€“ e.g.
 > 		- Year to Date
 > 		- Last Year to Date
 > 		- Month to Date
@@ -60,4 +61,4 @@
 	We will normalize the Item field to match a specific item that was found in the sales data report, then you just need to add the  Tot Qty to the proper data set.
 	This will be used to identify low inventory items in a future report.
 
-> 7. I am still up in the air as to where the data will live and what the user will need to do to access it. I guess it doesn’t matter for now, but I am still interested in making this a web app. If we do that, the parser you are working on would probably be my tool to load all the data we need for reporting and then export it to a database that lives in the cloud somewhere.
+> 7. I am still up in the air as to where the data will live and what the user will need to do to access it. I guess it doesnâ€™t matter for now, but I am still interested in making this a web app. If we do that, the parser you are working on would probably be my tool to load all the data we need for reporting and then export it to a database that lives in the cloud somewhere.
