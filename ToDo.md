@@ -1,12 +1,12 @@
 # Done
 - #1: Read multiple CSVs by selecting a folder
 - #2: Read Customers.csv & Items.csv automatically at launch then apply
+- #3 Item Mapping header line with flexible columns
 - #4: append any Unmapped Names/Items to CSV, any mappings missing a "to" are Unmapped
 - #5: DELETE in Customer mapping CSV = skip LineItem
 - #6: Reporting UI
 	- **Report Inputs:** select date (calendar picker, YTD, etc), Item or Customer Report, which data, Summary or Detailed
 	- **Report Outputs:** printable on screen, export .CSV
-- #3 Item Mapping header line with flexible columns
 - Date Range
 	- presets: YTD, MTD, QTD, LYTD, LMTD, LQTD
 - Export a CSV file of Report
