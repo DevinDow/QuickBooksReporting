@@ -7,4 +7,4 @@
 4. User creates report:
     - choose *Date Range*, *Customer* or *Item*, *Detailed*
     - hit *Generate Report* or *Generate CSV* button
-    - **.HTML** or **.CSV** file is written to "reports" subdirectory of the imported directory, HTML is shown in the app, *Open in Browser* button launches **.HTML** file for printing
+    - **.HTML** or **.CSV** report file is written to "reports" subdirectory of the imported directory, HTML is shown in the app, *Open in Browser* button launches **.HTML** file for printing
