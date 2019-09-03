@@ -70,7 +70,10 @@ namespace QuickBooksReporting
         // Events
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            LoadMappings();
+            if (!LoadMappings())
+            {
+                Application.Exit();
+            }
 
             ImportSales();
         }
@@ -99,15 +102,25 @@ namespace QuickBooksReporting
         /// <summary>
         /// Parse mapping files
         /// </summary>
-        private void LoadMappings()
+        private bool LoadMappings()
         {
-            string path = Application.StartupPath;
+            try
+            {
+                string path = Application.StartupPath;
 
-            Customers.ParseMappingFile(path);
+                Customers.ParseMappingFile(path);
 
-            Items.ParseMappingFile(path);
+                Items.ParseMappingFile(path);
 
-            lblMappings.Text = string.Format("Mappings: Parsed {0} Customer mappings and {1} Item mappings from \"{2}\".", Customers.Mapping.Count, Items.Mapping.Count, path);
+                lblMappings.Text = string.Format("Mappings: Parsed {0} Customer mappings and {1} Item mappings from \"{2}\".", Customers.Mapping.Count, Items.Mapping.Count, path);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to load Mappings", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -115,31 +128,38 @@ namespace QuickBooksReporting
         /// </summary>
         private void ImportSales()
         {
-            // Select Folder
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.Description = "Select folder for your SALES CSV files";
-            folderBrowserDialog.SelectedPath = Application.StartupPath;
-            folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
-            if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
+            try
             {
-                Application.Exit();
-                return;
+                // Select Folder
+                FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                folderBrowserDialog.Description = "Select folder for your SALES CSV files";
+                folderBrowserDialog.SelectedPath = Application.StartupPath;
+                folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
+                if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
+                {
+                    Application.Exit();
+                    return;
+                }
+
+                Sales = new Sales(folderBrowserDialog.SelectedPath);
+
+                lblSales.Text = string.Format("Sales: Parsed {0} Sales files from \"{1}\" : {2:n0} Invoices, {3:n0} Credits, {4:n0} Skipped", Sales.FileCount, folderBrowserDialog.SelectedPath, Sales.Invoices.Count, Sales.Credits.Count, Sales.Skipped.Count);
+
+                // Show unmapped Customers & Items
+                fillUnmappedCustomers();
+                fillUnmappedItems();
+
+                // set Date Range
+                cmbDateRange.SelectedItem = "All";
+                datFrom.MinDate = datTo.MinDate = Sales.MinDate;
+                datFrom.MaxDate = datTo.MaxDate = Sales.MaxDate;
+                datFrom.Value = Sales.MinDate;
+                datTo.Value = Sales.MaxDate;
             }
-
-            Sales = new Sales(folderBrowserDialog.SelectedPath);
-
-            lblSales.Text = string.Format("Sales: Parsed {0} Sales files from \"{1}\" : {2:n0} Invoices, {3:n0} Credits, {4:n0} Skipped", Sales.FileCount, folderBrowserDialog.SelectedPath, Sales.Invoices.Count, Sales.Credits.Count, Sales.Skipped.Count);
-
-            // Show unmapped Customers & Items
-            fillUnmappedCustomers();
-            fillUnmappedItems();
-
-            // set Date Range
-            cmbDateRange.SelectedItem = "All";
-            datFrom.MinDate = datTo.MinDate = Sales.MinDate;
-            datFrom.MaxDate = datTo.MaxDate = Sales.MaxDate;
-            datFrom.Value = Sales.MinDate;
-            datTo.Value = Sales.MaxDate;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to import Sales", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
