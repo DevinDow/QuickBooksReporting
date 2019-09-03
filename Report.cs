@@ -30,10 +30,10 @@ namespace QuickBooksReporting
             To = to;
 
             // Path for Report
-            string date = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
-            string reportType = customer ? "customer" : "item";
-            string reportDetailed = detailed ? "-detailed" : "";
-            string filename = string.Format("{0} {1}{2}.html", date, reportType, reportDetailed);
+            string reportType = customer ? "Customer" : "Item";
+            string reportDetail = detailed ? "Detail" : "Summary";
+            string reportDate = FormatDate(DateTime.Now);
+            string filename = string.Format("{0} {1} {2} thru {3} Created {4}.html", reportType, reportDetail, FormatDate(From), FormatDate(To), reportDate);
             
             // reportsFolder
             string reportsFolder = System.IO.Path.Combine(sales.FolderPath, "reports");
@@ -58,7 +58,7 @@ namespace QuickBooksReporting
                     }
 
                     Writer.WriteBreak();
-                    Writer.WriteLine("generated " + date);
+                    Writer.WriteLine(string.Format("Created {0} at {1}", reportDate, DateTime.Now.ToLongTimeString()));
                 }
             }
         }
@@ -69,9 +69,9 @@ namespace QuickBooksReporting
         {
             // Write Headings
             if (Detailed)
-                Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Report - detailed");
+                Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Detail");
             else
-                Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Report");
+                Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Summary");
 
             WriteReportParameters();
 
@@ -132,9 +132,9 @@ namespace QuickBooksReporting
         {
             // Write Headings
             if (Detailed)
-                Writer.WriteHeading(HtmlTextWriterTag.H1, "Item Report - detailed");
+                Writer.WriteHeading(HtmlTextWriterTag.H1, "Item Detail");
             else
-                Writer.WriteHeading(HtmlTextWriterTag.H1, "Item Report");
+                Writer.WriteHeading(HtmlTextWriterTag.H1, "Item Summary");
 
             WriteReportParameters();
 
@@ -196,9 +196,14 @@ namespace QuickBooksReporting
             Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
         }
 
+        private string FormatDate(DateTime date)
+        {
+            return date.ToString("yyyy-MM-dd");
+        }
+
         private void WriteReportParameters()
         {
-            Writer.WriteLine(string.Format("From {0} to {1}", From.ToShortDateString(), To.ToShortDateString()));
+            Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("{0} thru {1}", FormatDate(From), FormatDate(To)));
             Writer.WriteBreak();
             Writer.WriteLine();
         }
