@@ -32,7 +32,7 @@ namespace QuickBooksReporting
             // Path for Report
             string reportType = customer ? "Customer" : "Item";
             string reportDetail = detailed ? "Detail" : "Summary";
-            string reportDate = FormatDate(DateTime.Now, true);
+            string reportDate = FormatDate(DateTime.Now);
             string filename = string.Format("{0} {1} {2} thru {3} Created {4}.html", reportType, reportDetail, FormatDate(From), FormatDate(To), reportDate);
             
             // reportsFolder
@@ -58,7 +58,7 @@ namespace QuickBooksReporting
                     }
 
                     Writer.WriteBreak();
-                    Writer.WriteLine("Created " + reportDate);
+                    Writer.WriteLine(string.Format("Created {0} at {1}", reportDate, DateTime.Now.ToLongTimeString()));
                 }
             }
         }
@@ -196,17 +196,14 @@ namespace QuickBooksReporting
             Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
         }
 
-        private string FormatDate(DateTime date, bool includeTime = false)
+        private string FormatDate(DateTime date)
         {
-            if (includeTime)
-                return date.ToString("yyyy-MM-dd HH-mm-ss");
-            else
-                return date.ToString("yyyy-MM-dd");
+            return date.ToString("yyyy-MM-dd");
         }
 
         private void WriteReportParameters()
         {
-            Writer.WriteLine(string.Format("{0} thru {1}", FormatDate(From), FormatDate(To)));
+            Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("{0} thru {1}", FormatDate(From), FormatDate(To)));
             Writer.WriteBreak();
             Writer.WriteLine();
         }
