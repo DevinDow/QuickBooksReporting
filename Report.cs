@@ -69,9 +69,9 @@ namespace QuickBooksReporting
         {
             // Write Headings
             if (Detailed)
-                Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Report - detailed");
+                Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Detail");
             else
-                Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Report");
+                Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Summary");
 
             WriteReportParameters();
 
@@ -132,9 +132,9 @@ namespace QuickBooksReporting
         {
             // Write Headings
             if (Detailed)
-                Writer.WriteHeading(HtmlTextWriterTag.H1, "Item Report - detailed");
+                Writer.WriteHeading(HtmlTextWriterTag.H1, "Item Detail");
             else
-                Writer.WriteHeading(HtmlTextWriterTag.H1, "Item Report");
+                Writer.WriteHeading(HtmlTextWriterTag.H1, "Item Summary");
 
             WriteReportParameters();
 
