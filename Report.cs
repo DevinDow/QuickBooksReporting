@@ -29,19 +29,7 @@ namespace QuickBooksReporting
             From = from;
             To = to;
 
-            // Path for Report
-            string reportType = customer ? "Customer" : "Item";
-            string reportDetail = detailed ? "Detail" : "Summary";
-            string reportDate = FormatDate(DateTime.Now);
-            string filename = string.Format("{0} {1} {2} thru {3} Created {4}.html", reportType, reportDetail, FormatDate(From), FormatDate(To), reportDate);
-            
-            // reportsFolder
-            string reportsFolder = System.IO.Path.Combine(sales.FolderPath, "reports");
-            if (!Directory.Exists(reportsFolder))
-            {
-                Directory.CreateDirectory(reportsFolder);
-            }
-            Path = System.IO.Path.Combine(reportsFolder, filename);
+            Path = Formatter.GenerateReportPath(sales.FolderPath, customer, detailed, from, to);
 
             // Write Report file
             using (StreamWriter streamWriter = new StreamWriter(Path))
@@ -58,7 +46,7 @@ namespace QuickBooksReporting
                     }
 
                     Writer.WriteBreak();
-                    Writer.WriteLine(string.Format("Created {0} at {1}", reportDate, DateTime.Now.ToLongTimeString()));
+                    Writer.WriteLine(string.Format("created {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString()));
                 }
             }
         }
@@ -196,14 +184,9 @@ namespace QuickBooksReporting
             Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
         }
 
-        private string FormatDate(DateTime date)
-        {
-            return date.ToString("yyyy-MM-dd");
-        }
-
         private void WriteReportParameters()
         {
-            Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("{0} thru {1}", FormatDate(From), FormatDate(To)));
+            Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("{0} thru {1}", Formatter.FormatDate(From), Formatter.FormatDate(To)));
             Writer.WriteBreak();
             Writer.WriteLine();
         }

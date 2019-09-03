@@ -23,17 +23,7 @@ namespace QuickBooksReporting
         {
             Sales = sales;
 
-            // Path for Report
-            string date = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
-            string filename = string.Format("{0}.csv", date);
-
-            // reportsFolder
-            string reportsFolder = System.IO.Path.Combine(sales.FolderPath, "reports");
-            if (!Directory.Exists(reportsFolder))
-            {
-                Directory.CreateDirectory(reportsFolder);
-            }
-            Path = System.IO.Path.Combine(reportsFolder, filename);
+            Path = Formatter.GenerateCSVPath(sales.FolderPath, from, to);
 
             // Write Report file
             using (StreamWriter streamWriter = new StreamWriter(Path))
