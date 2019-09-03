@@ -1,8 +1,10 @@
-# ToDo 2019
+# Done 2019
 - Report Title
 	- Report Type & Date Range at top of every Report
 - Report Naming Convention
 	- Item Detail 2018-01-15 thru 2018-12-31 Created 2019-09-03.csv
+
+# ToDo 2019
 
 # Done 2018
 - #1: Read multiple CSVs by selecting a folder
