@@ -227,16 +227,30 @@ namespace QuickBooksReporting
         /// </summary>
         private void btnGeneratReport_Click(object sender, EventArgs e)
         {
-            Report report = new Report(Sales, radCustomer.Checked, chkDetailed.Checked, datFrom.Value, datTo.Value);
-            ReportPath = report.Path;
+            try
+            {
+                Report report = new Report(Sales, radCustomer.Checked, chkDetailed.Checked, datFrom.Value, datTo.Value);
+                ReportPath = report.Path;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to generate CSV", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnGenerateCSV_Click(object sender, EventArgs e)
         {
-            CSV csv = new CSV(Sales, datFrom.Value, datTo.Value);
-            lblReportPath.Text = csv.Path;
-            web.Url = null;
-            btnOpenReport.Enabled = true;
+            try
+            {
+                CSV csv = new CSV(Sales, datFrom.Value, datTo.Value);
+                lblReportPath.Text = csv.Path;
+                web.Url = null;
+                btnOpenReport.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to generate CSV", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
