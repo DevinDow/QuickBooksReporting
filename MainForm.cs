@@ -234,7 +234,7 @@ namespace QuickBooksReporting
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Failed to generate CSV", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Failed to generate HTML report", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -249,7 +249,7 @@ namespace QuickBooksReporting
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Failed to generate CSV", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Failed to generate CSV report", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
