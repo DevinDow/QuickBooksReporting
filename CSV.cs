@@ -19,11 +19,11 @@ namespace QuickBooksReporting
 
 
         // Constructor
-        public CSV(Sales sales, DateTime from, DateTime to)
+        public CSV(Sales sales, bool customer, bool detailed, DateTime from, DateTime to)
         {
             Sales = sales;
 
-            Path = Formatter.GenerateCSVPath(sales.FolderPath, from, to);
+            Path = Formatter.GenerateCSVPath(sales.FolderPath, customer, detailed, from, to);
 
             // Write Report file
             using (StreamWriter streamWriter = new StreamWriter(Path))

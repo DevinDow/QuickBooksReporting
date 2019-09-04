@@ -262,7 +262,7 @@ namespace QuickBooksReporting
         {
             try
             {
-                CSV csv = new CSV(Sales, datFrom.Value, datTo.Value);
+                CSV csv = new CSV(Sales, radCustomer.Checked, chkDetailed.Checked, datFrom.Value, datTo.Value);
                 lblReportPath.Text = csv.Path;
                 web.Url = null;
                 btnOpenReport.Enabled = true;

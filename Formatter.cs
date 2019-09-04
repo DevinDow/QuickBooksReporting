@@ -19,11 +19,20 @@ namespace QuickBooksReporting
             return System.IO.Path.Combine(reportsFolder, filename);
         }
 
-        public static string GenerateCSVPath(string salesFolderPath, DateTime from, DateTime to)
+        public static string GenerateCSVPath(string salesFolderPath, bool customer, bool detailed, DateTime from, DateTime to)
         {
             string reportsFolder = GenerateReportsFolder(salesFolderPath);
             string reportDate = FormatDate(DateTime.Now);
-            string filename = string.Format("{0} thru {1} Created {2}.csv", FormatDate(from), FormatDate(to), reportDate);
+            string reportType;
+            if (detailed)
+            {
+                reportType = "Detail";
+            }
+            else
+            {
+                reportType = customer ? "Customer Summary" : "Item Summary";
+            }
+            string filename = string.Format("{0} {1} thru {2} Created {3}.csv", reportType, FormatDate(from), FormatDate(to), reportDate);
             return System.IO.Path.Combine(reportsFolder, filename);
         }
 
