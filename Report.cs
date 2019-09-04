@@ -53,69 +53,6 @@ namespace QuickBooksReporting
 
 
         // Methods
-        private void generateCustomerReport()
-        {
-            // Write Headings
-            if (Detailed)
-                Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Detail");
-            else
-                Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Summary");
-
-            WriteReportParameters();
-
-            // Filter & Collect
-            SortedDictionary<string, List<LineItem>> customerMap = new SortedDictionary<string, List<LineItem>>();
-            foreach (LineItem lineItem in Sales.Invoices)
-            {
-                // Filter by Date range
-                if (lineItem.date < From || lineItem.date > To)
-                    continue;
-
-                // Collect LineItems by Customer
-                if (!customerMap.ContainsKey(lineItem.CustomerName))
-                {
-                    customerMap.Add(lineItem.CustomerName, new List<LineItem>());
-                }
-
-                customerMap[lineItem.CustomerName].Add(lineItem);
-            }
-
-            // Loop customerMap
-            decimal total = 0;
-            foreach (var customerEntry in customerMap)
-            {
-                Writer.WriteHeading(HtmlTextWriterTag.H3, customerEntry.Key);
-
-                if (Detailed)
-                {
-                    WriteTableHeader(new string[] { "Customer", "Date", "Product", "Qty", "Price", "Total" });
-                }
-
-                decimal customerSubtotal = 0;
-                foreach (LineItem lineItem in customerEntry.Value)
-                {
-                    customerSubtotal += lineItem.Subtotal;
-
-                    if (Detailed)
-                    {
-                        WriteTableRow(new string[] { lineItem.CustomerName, lineItem.date.ToShortDateString(), lineItem.item, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) });
-                    }
-                }
-
-                if (Detailed)
-                {
-                    Writer.RenderEndTag();
-                }
-
-                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", customerEntry.Value.Count, customerSubtotal));
-                Writer.WriteLine();
-
-                total += customerSubtotal;
-            }
-
-            Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
-        }
-
         private void generateItemReport()
         {
             // Write Headings
@@ -195,6 +132,69 @@ namespace QuickBooksReporting
             {
                 Writer.RenderEndTag(); // end table
                 Writer.WriteLine();
+            }
+
+            Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
+        }
+
+        private void generateCustomerReport()
+        {
+            // Write Headings
+            if (Detailed)
+                Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Detail");
+            else
+                Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Summary");
+
+            WriteReportParameters();
+
+            // Filter & Collect
+            SortedDictionary<string, List<LineItem>> customerMap = new SortedDictionary<string, List<LineItem>>();
+            foreach (LineItem lineItem in Sales.Invoices)
+            {
+                // Filter by Date range
+                if (lineItem.date < From || lineItem.date > To)
+                    continue;
+
+                // Collect LineItems by Customer
+                if (!customerMap.ContainsKey(lineItem.CustomerName))
+                {
+                    customerMap.Add(lineItem.CustomerName, new List<LineItem>());
+                }
+
+                customerMap[lineItem.CustomerName].Add(lineItem);
+            }
+
+            // Loop customerMap
+            decimal total = 0;
+            foreach (var customerEntry in customerMap)
+            {
+                Writer.WriteHeading(HtmlTextWriterTag.H3, customerEntry.Key);
+
+                if (Detailed)
+                {
+                    WriteTableHeader(new string[] { "Customer", "Date", "Product", "Qty", "Price", "Total" });
+                }
+
+                decimal customerSubtotal = 0;
+                foreach (LineItem lineItem in customerEntry.Value)
+                {
+                    customerSubtotal += lineItem.Subtotal;
+
+                    if (Detailed)
+                    {
+                        WriteTableRow(new string[] { lineItem.CustomerName, lineItem.date.ToShortDateString(), lineItem.item, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) });
+                    }
+                }
+
+                if (Detailed)
+                {
+                    Writer.RenderEndTag();
+                }
+
+                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", customerEntry.Value.Count, customerSubtotal));
+                Writer.WriteLine();
+
+                total += customerSubtotal;
             }
 
             Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
