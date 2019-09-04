@@ -144,28 +144,24 @@ namespace QuickBooksReporting
 
         private void generateCustomerReport()
         {
-            // Write Headings
+            // write Headings
             if (Detailed)
                 Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Detail");
             else
                 Writer.WriteHeading(HtmlTextWriterTag.H1, "Customer Summary");
-
             WriteReportParameters();
 
-            // Filter & Collect
+            // filter LineItems & collect Customers
             SortedDictionary<string, List<LineItem>> customerMap = new SortedDictionary<string, List<LineItem>>();
             foreach (LineItem lineItem in Sales.Invoices)
             {
-                // Filter by Date range
+                // filter by Date range
                 if (lineItem.date < From || lineItem.date > To)
                     continue;
 
-                // Collect LineItems by Customer
+                // collect LineItems by CustomerName
                 if (!customerMap.ContainsKey(lineItem.CustomerName))
-                {
                     customerMap.Add(lineItem.CustomerName, new List<LineItem>());
-                }
-
                 customerMap[lineItem.CustomerName].Add(lineItem);
             }
 
