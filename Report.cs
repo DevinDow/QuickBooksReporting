@@ -91,10 +91,10 @@ namespace QuickBooksReporting
                     WriteTableHeader(new string[] { "Customer", "Date", "Product", "Qty", "Price", "Total" });
                 }
 
-                decimal subtotal = 0;
+                decimal customerSubtotal = 0;
                 foreach (LineItem lineItem in customerEntry.Value)
                 {
-                    subtotal += lineItem.Subtotal;
+                    customerSubtotal += lineItem.Subtotal;
 
                     if (Detailed)
                     {
@@ -107,10 +107,10 @@ namespace QuickBooksReporting
                     Writer.RenderEndTag();
                 }
 
-                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", customerEntry.Value.Count, subtotal));
+                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", customerEntry.Value.Count, customerSubtotal));
                 Writer.WriteLine();
 
-                total += subtotal;
+                total += customerSubtotal;
             }
 
             Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
@@ -158,9 +158,11 @@ namespace QuickBooksReporting
                     WriteTableHeader(MergeColumns(new string[] { "Product", "Date", "Customer", "Qty", "Price", "Total" }, Items.Columns));
                 }
 
+                int quantity = 0;
                 decimal subtotal = 0;
                 foreach (LineItem lineItem in itemEntry.Value)
                 {
+                    quantity += lineItem.quantity;
                     subtotal += lineItem.Subtotal;
 
                     if (Detailed)
@@ -178,12 +180,12 @@ namespace QuickBooksReporting
                 {
                     Writer.RenderEndTag(); // end table
                     Writer.WriteLine();
-                    Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", itemEntry.Value.Count, subtotal));
+                    Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} line items totalling ${1:n2} for {2} products", itemEntry.Value.Count, subtotal, quantity));
                     Writer.WriteLine();
                 }
                 else
                 {
-                    WriteTableRow(new string[] { itemEntry.Key, itemEntry.Value.Count.ToString(), string.Format("${0}", subtotal) });
+                    WriteTableRow(new string[] { itemEntry.Key, quantity.ToString(), string.Format("${0}", subtotal) });
                 }
 
                 total += subtotal;
