@@ -92,10 +92,7 @@ namespace QuickBooksReporting
 
                 // collect LineItems by ItemName
                 if (!itemMap.ContainsKey(lineItem.ItemName))
-                {
                     itemMap.Add(lineItem.ItemName, new List<LineItem>());
-                }
-
                 itemMap[lineItem.ItemName].Add(lineItem);
             }
 
@@ -104,6 +101,7 @@ namespace QuickBooksReporting
             {
                 int quantity = 0;
                 decimal subtotal = 0;
+                // loop LineItems
                 foreach (LineItem lineItem in itemEntry.Value)
                 {
                     quantity += lineItem.quantity;
@@ -132,35 +130,28 @@ namespace QuickBooksReporting
 
                 // collect LineItems by CustomerName
                 if (!customerMap.ContainsKey(lineItem.CustomerName))
-                {
                     customerMap.Add(lineItem.CustomerName, new List<LineItem>());
-                }
-
                 customerMap[lineItem.CustomerName].Add(lineItem);
             }
 
             // loop Customers
             foreach (var customerEntry in customerMap)
             {
-                // collect LineItems by Items for this Customer
+                // collect LineItems for this Customer by ItemName
                 SortedDictionary<string, List<LineItem>> itemMap = new SortedDictionary<string, List<LineItem>>();
                 foreach (LineItem lineItem in customerEntry.Value)
                 {
-                    // collect LineItems by ItemName
                     if (!itemMap.ContainsKey(lineItem.ItemName))
-                    {
                         itemMap.Add(lineItem.ItemName, new List<LineItem>());
-                    }
-
                     itemMap[lineItem.ItemName].Add(lineItem);
                 }
 
                 // loop Items for this Customer
                 foreach (var itemEntry in itemMap)
                 {
-                    // loop LineItems for this Item for this Customer
                     int quantity = 0;
                     decimal subtotal = 0;
+                    // loop LineItems for this Item for this Customer
                     foreach (LineItem lineItem in itemEntry.Value)
                     {
                         quantity += lineItem.quantity;

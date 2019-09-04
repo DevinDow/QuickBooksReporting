@@ -55,40 +55,38 @@ namespace QuickBooksReporting
         // Methods
         private void generateItemReport()
         {
-            // Write Headings
+            // write Headings
             if (Detailed)
                 Writer.WriteHeading(HtmlTextWriterTag.H1, "Item Detail");
             else
                 Writer.WriteHeading(HtmlTextWriterTag.H1, "Item Summary");
-
             WriteReportParameters();
 
-            // Filter & Collect
+            // filter LineItems & collect Items
             SortedDictionary<string, List<LineItem>> itemMap = new SortedDictionary<string, List<LineItem>>();
             foreach (LineItem lineItem in Sales.Invoices)
             {
-                // Filter by Date range
+                // filter by Date range
                 if (lineItem.date < From || lineItem.date > To)
                     continue;
 
-                // Collect LineItems by ItemName
+                // collect LineItems by ItemName
                 if (!itemMap.ContainsKey(lineItem.ItemName))
-                {
                     itemMap.Add(lineItem.ItemName, new List<LineItem>());
-                }
-
                 itemMap[lineItem.ItemName].Add(lineItem);
             }
 
+            // write Summary Header
             if (!Detailed)
             {
                 WriteTableHeader(new string[] { "Product", "Qty", "Total" });
             }
 
-            // Loop itemMap
+            // loop Items
             decimal total = 0;
             foreach (var itemEntry in itemMap)
             {
+                // write Detail Header
                 if (Detailed)
                 {
                     Writer.WriteHeading(HtmlTextWriterTag.H3, itemEntry.Key);
@@ -97,11 +95,13 @@ namespace QuickBooksReporting
 
                 int quantity = 0;
                 decimal subtotal = 0;
+                // loop LineItems
                 foreach (LineItem lineItem in itemEntry.Value)
                 {
                     quantity += lineItem.quantity;
                     subtotal += lineItem.Subtotal;
 
+                    // write LineItem
                     if (Detailed)
                     {
                         string[] columns = new string[] { lineItem.ItemName, lineItem.date.ToShortDateString(), lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) };
@@ -115,13 +115,16 @@ namespace QuickBooksReporting
 
                 if (Detailed)
                 {
-                    Writer.RenderEndTag(); // end table
+                    // end table
+                    Writer.RenderEndTag();
                     Writer.WriteLine();
+                    // write Summary
                     Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} line items totalling ${1:n2} for {2} products", itemEntry.Value.Count, subtotal, quantity));
                     Writer.WriteLine();
                 }
                 else
                 {
+                    // write Summary
                     WriteTableRow(new string[] { itemEntry.Key, quantity.ToString(), string.Format("${0}", subtotal) });
                 }
 
@@ -130,10 +133,12 @@ namespace QuickBooksReporting
 
             if (!Detailed)
             {
-                Writer.RenderEndTag(); // end table
+                // end table
+                Writer.RenderEndTag();
                 Writer.WriteLine();
             }
 
+            // write Total
             Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
         }
 
