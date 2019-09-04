@@ -106,9 +106,7 @@ namespace QuickBooksReporting
                     {
                         string[] columns = new string[] { lineItem.ItemName, lineItem.date.ToShortDateString(), lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) };
                         if (lineItem.itemMap != null)
-                        {
                             columns = MergeColumns(columns, lineItem.itemMap);
-                        }
                         WriteTableRow(columns);
                     }
                 }
@@ -165,39 +163,72 @@ namespace QuickBooksReporting
                 customerMap[lineItem.CustomerName].Add(lineItem);
             }
 
-            // Loop customerMap
+            // loop Customers
             decimal total = 0;
             foreach (var customerEntry in customerMap)
             {
                 Writer.WriteHeading(HtmlTextWriterTag.H3, customerEntry.Key);
 
+                int customerQuantity = 0;
+                decimal customerSubtotal = 0;
+
                 if (Detailed)
                 {
+                    // write Header
                     WriteTableHeader(new string[] { "Customer", "Date", "Product", "Qty", "Price", "Total" });
-                }
 
-                decimal customerSubtotal = 0;
-                foreach (LineItem lineItem in customerEntry.Value)
-                {
-                    customerSubtotal += lineItem.Subtotal;
-
-                    if (Detailed)
+                    // loop LineItems for this Customer
+                    foreach (LineItem lineItem in customerEntry.Value)
                     {
+                        customerQuantity += lineItem.quantity;
+                        customerSubtotal += lineItem.Subtotal;
                         WriteTableRow(new string[] { lineItem.CustomerName, lineItem.date.ToShortDateString(), lineItem.item, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) });
                     }
                 }
-
-                if (Detailed)
+                else
                 {
-                    Writer.RenderEndTag();
+                    // write Header
+                    WriteTableHeader(new string[] { "Customer", "Product", "Qty", "Total" });
+
+                    // collect LineItems for this Customer by ItemName
+                    SortedDictionary<string, List<LineItem>> itemMap = new SortedDictionary<string, List<LineItem>>();
+                    foreach (LineItem lineItem in customerEntry.Value)
+                    {
+                        if (!itemMap.ContainsKey(lineItem.ItemName))
+                            itemMap.Add(lineItem.ItemName, new List<LineItem>());
+                        itemMap[lineItem.ItemName].Add(lineItem);
+                    }
+
+                    // loop Items for this Customer
+                    foreach (var itemEntry in itemMap)
+                    {
+                        int quantity = 0;
+                        decimal subtotal = 0;
+                        // loop LineItems for this Item for this Customer
+                        foreach (LineItem lineItem in itemEntry.Value)
+                        {
+                            quantity += lineItem.quantity;
+                            subtotal += lineItem.Subtotal;
+                        }
+
+                        customerQuantity += quantity;
+                        customerSubtotal += subtotal;
+                        WriteTableRow(new string[] { customerEntry.Key, itemEntry.Key, quantity.ToString(), string.Format("${0}", subtotal) });
+                    }
                 }
 
-                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", customerEntry.Value.Count, customerSubtotal));
+                // end table
+                Writer.RenderEndTag();
+                Writer.WriteLine();
+
+                // write Summary
+                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} line items totalling ${1:n2} for {2} products", customerEntry.Value.Count, customerSubtotal, customerQuantity));
                 Writer.WriteLine();
 
                 total += customerSubtotal;
             }
 
+            // write Total
             Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
         }
 
