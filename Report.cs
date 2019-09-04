@@ -91,10 +91,10 @@ namespace QuickBooksReporting
                     WriteTableHeader(new string[] { "Customer", "Date", "Product", "Qty", "Price", "Total" });
                 }
 
-                decimal subtotal = 0;
+                decimal customerSubtotal = 0;
                 foreach (LineItem lineItem in customerEntry.Value)
                 {
-                    subtotal += lineItem.Subtotal;
+                    customerSubtotal += lineItem.Subtotal;
 
                     if (Detailed)
                     {
@@ -107,10 +107,10 @@ namespace QuickBooksReporting
                     Writer.RenderEndTag();
                 }
 
-                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", customerEntry.Value.Count, subtotal));
+                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", customerEntry.Value.Count, customerSubtotal));
                 Writer.WriteLine();
 
-                total += subtotal;
+                total += customerSubtotal;
             }
 
             Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
