@@ -75,7 +75,7 @@ namespace QuickBooksReporting
 
         private void generateItemSummary()
         {
-            string[] columns = Report.MergeColumns(new string[] { "Product", "Qty", "Total Sales" }, Items.Columns);
+            string[] columns = new string[] { "Product", "Qty", "Total Sales" };
             Writer.WriteLine(string.Join(",", columns));
 
             // Filter & Collect
