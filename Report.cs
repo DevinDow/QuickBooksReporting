@@ -82,23 +82,23 @@ namespace QuickBooksReporting
 
             // Loop customerMap
             decimal total = 0;
-            foreach (var entry in customerMap)
+            foreach (var customerEntry in customerMap)
             {
-                Writer.WriteHeading(HtmlTextWriterTag.H3, entry.Key);
+                Writer.WriteHeading(HtmlTextWriterTag.H3, customerEntry.Key);
 
                 if (Detailed)
                 {
-                    WriteTableHeader(new string[] { "Item", "Quantity", "Price", "Subtotal" });
+                    WriteTableHeader(new string[] { "Customer", "Date", "Product", "Qty", "Price", "Total" });
                 }
 
                 decimal subtotal = 0;
-                foreach (LineItem lineItem in entry.Value)
+                foreach (LineItem lineItem in customerEntry.Value)
                 {
                     subtotal += lineItem.Subtotal;
 
                     if (Detailed)
                     {
-                        WriteTableRow(new string[] { lineItem.item, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) });
+                        WriteTableRow(new string[] { lineItem.CustomerName, lineItem.date.ToShortDateString(), lineItem.item, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) });
                     }
                 }
 
@@ -107,7 +107,7 @@ namespace QuickBooksReporting
                     Writer.RenderEndTag();
                 }
 
-                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", entry.Value.Count, subtotal));
+                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", customerEntry.Value.Count, subtotal));
                 Writer.WriteLine();
 
                 total += subtotal;
@@ -145,23 +145,23 @@ namespace QuickBooksReporting
 
             // Loop itemMap
             decimal total = 0;
-            foreach (var entry in itemMap)
+            foreach (var itemEntry in itemMap)
             {
-                Writer.WriteHeading(HtmlTextWriterTag.H3, entry.Key);
+                Writer.WriteHeading(HtmlTextWriterTag.H3, itemEntry.Key);
 
                 if (Detailed)
                 {
-                    WriteTableHeader(MergeColumns(new string[] { "Customer", "Quantity", "Price", "Subtotal" }, Items.Columns));
+                    WriteTableHeader(MergeColumns(new string[] { "Product", "Date", "Customer", "Qty", "Price", "Total" }, Items.Columns));
                 }
 
                 decimal subtotal = 0;
-                foreach (LineItem lineItem in entry.Value)
+                foreach (LineItem lineItem in itemEntry.Value)
                 {
                     subtotal += lineItem.Subtotal;
 
                     if (Detailed)
                     {
-                        string[] columns = new string[] { lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) };
+                        string[] columns = new string[] { lineItem.ItemName, lineItem.date.ToShortDateString(), lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) };
                         if (lineItem.itemMap != null)
                         {
                             columns = MergeColumns(columns, lineItem.itemMap);
@@ -175,7 +175,7 @@ namespace QuickBooksReporting
                     Writer.RenderEndTag();
                 }
 
-                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", entry.Value.Count, subtotal));
+                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} Line Items totalling ${1:n2}", itemEntry.Value.Count, subtotal));
                 Writer.WriteLine();
 
                 total += subtotal;
