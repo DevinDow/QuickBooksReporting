@@ -73,11 +73,43 @@ namespace QuickBooksReporting
             }
         }
 
-        private void generateCustomerSummary()
+        private void generateItemSummary()
         {
+            string[] columns = Report.MergeColumns(new string[] { "Product", "Qty", "Total Sales" }, Items.Columns);
+            Writer.WriteLine(string.Join(",", columns));
+
+            // Filter & Collect
+            SortedDictionary<string, List<LineItem>> itemMap = new SortedDictionary<string, List<LineItem>>();
+            foreach (LineItem lineItem in Sales.Invoices)
+            {
+                // Filter by Date range
+                if (lineItem.date < From || lineItem.date > To)
+                    continue;
+
+                // Collect LineItems by ItemName
+                if (!itemMap.ContainsKey(lineItem.ItemName))
+                {
+                    itemMap.Add(lineItem.ItemName, new List<LineItem>());
+                }
+
+                itemMap[lineItem.ItemName].Add(lineItem);
+            }
+
+            foreach (var itemEntry in itemMap)
+            {
+                int quantity = 0;
+                decimal subtotal = 0;
+                foreach (LineItem lineItem in itemEntry.Value)
+                {
+                    quantity += lineItem.quantity;
+                    subtotal += lineItem.Subtotal;
+                }
+                columns = new string[] { itemEntry.Key, quantity.ToString(), string.Format("${0}", subtotal) };
+                Writer.WriteLine(string.Join(",", columns));
+            }
         }
 
-        private void generateItemSummary()
+        private void generateCustomerSummary()
         {
         }
     }
