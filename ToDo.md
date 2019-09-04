@@ -1,4 +1,6 @@
 # Done 2019
+- Customer Summary HTML Reports need rows of subtotaled Items
+- Add Customer & Item Summary CSV Reports
 - Item Summary HTML Reports now in one table
 - Columns added to Customer & Item Detail HTML Reports
 - Report Title
@@ -7,7 +9,6 @@
 	- Item Detail 2018-01-15 thru 2018-12-31 Created 2019-09-03.csv
 
 # ToDo 2019
-- Customer Summary Reports need rows of subtotaled Items
 - Date Preset changes
 	- All = All data from first day of data to last day of data
 	- YTD = Year to Date (Current Year e.g  January 1, 2019 to September 4, 2019 or last day of data)
@@ -15,7 +16,6 @@
 	- Last Year = Last Full Year (e.g January 1, 2018 to December 31, 2018)
 	- Last Quarter = Last Full Quarter (e.g. April 1, 2019 to June 30, 2019)
 	- Custom = User selected data range
-- Add Customer & Item Summary CSV Reports
 
 # Done 2018
 - #1: Read multiple CSVs by selecting a folder
