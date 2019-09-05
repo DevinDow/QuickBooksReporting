@@ -90,7 +90,7 @@ namespace QuickBooksReporting
                 if (Detailed)
                 {
                     Writer.WriteHeading(HtmlTextWriterTag.H3, itemEntry.Key);
-                    WriteTableHeader(MergeColumns(new string[] { "Product", "Date", "Customer", "Qty", "Price", "Total" }, Items.Columns));
+                    WriteTableHeader(MergeColumns(new string[] { "Date", "Customer", "Qty", "Price", "Total", "Product" }, Items.Columns));
                 }
 
                 int quantity = 0;
@@ -104,7 +104,7 @@ namespace QuickBooksReporting
                     // write LineItem
                     if (Detailed)
                     {
-                        string[] columns = new string[] { lineItem.ItemName, lineItem.date.ToShortDateString(), lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("{0:C2}", lineItem.price), string.Format("{0:C2}", lineItem.Subtotal) };
+                        string[] columns = new string[] { lineItem.date.ToShortDateString(), lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("{0:C2}", lineItem.price), string.Format("{0:C2}", lineItem.Subtotal), lineItem.ItemName };
                         if (lineItem.itemMap != null)
                             columns = MergeColumns(columns, lineItem.itemMap);
                         WriteTableRow(columns);
@@ -260,12 +260,16 @@ namespace QuickBooksReporting
             Writer.WriteLine();
         }
 
-        public static string[] MergeColumns(string[] arr1, string[] arr2)
+        public static string[] MergeColumns(string[] initialArray, string[] appendingArray, int columnsToSkip = 2)
         {
-            int destinationIndex = arr1.Length;
-            Array.Resize<string>(ref arr1, arr1.Length + arr2.Length);
-            Array.Copy(arr2, 0, arr1, destinationIndex, arr2.Length);
-            return arr1;
+            string[] destinationArray = new string[initialArray.Length + appendingArray.Length - columnsToSkip];
+            Array.Copy(initialArray, 0, destinationArray, 0, initialArray.Length);
+            if (appendingArray.Length > columnsToSkip)
+            {
+                int destinationIndex = initialArray.Length;
+                Array.Copy(appendingArray, columnsToSkip, destinationArray, destinationIndex, appendingArray.Length - columnsToSkip);
+            }
+            return destinationArray;
         }
     }
 }

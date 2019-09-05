@@ -51,7 +51,7 @@ namespace QuickBooksReporting
         private void generateDetailed()
         {
             // write Header
-            string[] columns = Report.MergeColumns(new string[] { "Date", "Customer", "Qty", "Price Each", "Total Sales" }, Items.Columns);
+            string[] columns = Report.MergeColumns(new string[] { "Date", "Customer", "Qty", "Price Each", "Total Sales", "Product" }, Items.Columns);
             Writer.WriteLine(string.Join(",", columns));
 
             // loop LineItems
@@ -62,14 +62,10 @@ namespace QuickBooksReporting
                     continue;
 
                 // write LineItem
-                columns = new string[] { lineItem.date.ToShortDateString(), lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("{0:$0.00}", lineItem.price), string.Format("{0:$0.00}", lineItem.Subtotal) };
+                columns = new string[] { lineItem.date.ToShortDateString(), lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("{0:$0.00}", lineItem.price), string.Format("{0:$0.00}", lineItem.Subtotal), lineItem.ItemName };
                 if (lineItem.itemMap != null)
                 {
                     columns = Report.MergeColumns(columns, lineItem.itemMap);
-                }
-                else
-                {
-                    columns = Report.MergeColumns(columns, new string[] { lineItem.ItemName });
                 }
 
                 Writer.WriteLine(string.Join(",", columns));
