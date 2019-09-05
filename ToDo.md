@@ -1,4 +1,5 @@
 # Done 2019
+- Date Preset changes & improvements
 - Item Detail HTML & Detail CSV: put "Product" instead of "Item" & "Name"
 - Generate missing Items.csv with a first row of "Item","Product"
 - Customer Detail HTML: Product = mapped name
@@ -13,13 +14,6 @@
 	- Item Detail 2018-01-15 thru 2018-12-31 Created 2019-09-03.csv
 
 # ToDo 2019
-- Date Preset changes
-	- All = All data from first day of data to last day of data
-	- YTD = Year to Date (Current Year e.g  January 1, 2019 to September 4, 2019 or last day of data)
-	- QTD = Quarter to Date (Current Quarter e.g. July 1, 2019 to September 4, 2019 or last day of data)
-	- Last Year = Last Full Year (e.g January 1, 2018 to December 31, 2018)
-	- Last Quarter = Last Full Quarter (e.g. April 1, 2019 to June 30, 2019)
-	- Custom = User selected data range
 
 
 # Done 2018
