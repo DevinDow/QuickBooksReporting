@@ -122,13 +122,11 @@ namespace QuickBooksReporting
             SortedDictionary<string, List<LineItem>> customerMap = new SortedDictionary<string, List<LineItem>>();
             foreach (LineItem lineItem in Sales.Invoices)
             {
-                // filter by Date range
-                if (lineItem.date < From || lineItem.date > To)
-                    continue;
-
-                // collect LineItems by CustomerName
+                // collect all CustomerNames in the Sales
                 if (!customerMap.ContainsKey(lineItem.CustomerName))
                     customerMap.Add(lineItem.CustomerName, new List<LineItem>());
+
+                // collect LineItems by CustomerName
                 customerMap[lineItem.CustomerName].Add(lineItem);
             }
 
@@ -139,8 +137,15 @@ namespace QuickBooksReporting
                 SortedDictionary<string, List<LineItem>> itemMap = new SortedDictionary<string, List<LineItem>>();
                 foreach (LineItem lineItem in customerEntry.Value)
                 {
+                    // collect all ItemNames in the Sales
                     if (!itemMap.ContainsKey(lineItem.ItemName))
                         itemMap.Add(lineItem.ItemName, new List<LineItem>());
+
+                    // filter by Date range
+                    if (lineItem.date < From || lineItem.date > To)
+                        continue;
+
+                    // collect LineItems by ItemName
                     itemMap[lineItem.ItemName].Add(lineItem);
                 }
 
