@@ -104,7 +104,7 @@ namespace QuickBooksReporting
                     // write LineItem
                     if (Detailed)
                     {
-                        string[] columns = new string[] { lineItem.ItemName, lineItem.date.ToShortDateString(), lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) };
+                        string[] columns = new string[] { lineItem.ItemName, lineItem.date.ToShortDateString(), lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("{0:C2}", lineItem.price), string.Format("{0:C2}", lineItem.Subtotal) };
                         if (lineItem.itemMap != null)
                             columns = MergeColumns(columns, lineItem.itemMap);
                         WriteTableRow(columns);
@@ -117,13 +117,13 @@ namespace QuickBooksReporting
                     Writer.RenderEndTag();
                     Writer.WriteLine();
                     // write Summary
-                    Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} line items totalling ${1:n2} for {2} products", itemEntry.Value.Count, subtotal, quantity));
+                    Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0} line items totalling {1:C2} for {2} products", itemEntry.Value.Count, subtotal, quantity));
                     Writer.WriteLine();
                 }
                 else
                 {
                     // write Summary
-                    WriteTableRow(new string[] { itemEntry.Key, quantity.ToString(), string.Format("${0}", subtotal) });
+                    WriteTableRow(new string[] { itemEntry.Key, quantity.ToString(), string.Format("{0:C2}", subtotal) });
                 }
 
                 total += subtotal;
@@ -137,7 +137,7 @@ namespace QuickBooksReporting
             }
 
             // write Total
-            Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
+            Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = {0:C2}", total));
         }
 
         private void generateCustomerReport()
@@ -182,7 +182,7 @@ namespace QuickBooksReporting
                     {
                         customerQuantity += lineItem.quantity;
                         customerSubtotal += lineItem.Subtotal;
-                        WriteTableRow(new string[] { lineItem.CustomerName, lineItem.date.ToShortDateString(), lineItem.item, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) });
+                        WriteTableRow(new string[] { lineItem.CustomerName, lineItem.date.ToShortDateString(), lineItem.item, lineItem.quantity.ToString(), string.Format("{0:C2}", lineItem.price), string.Format("{0:C2}", lineItem.Subtotal) });
                     }
                 }
                 else
@@ -213,7 +213,7 @@ namespace QuickBooksReporting
 
                         customerQuantity += quantity;
                         customerSubtotal += subtotal;
-                        WriteTableRow(new string[] { customerEntry.Key, itemEntry.Key, quantity.ToString(), string.Format("${0}", subtotal) });
+                        WriteTableRow(new string[] { customerEntry.Key, itemEntry.Key, quantity.ToString(), string.Format("{0:C2}", subtotal) });
                     }
                 }
 
@@ -222,14 +222,14 @@ namespace QuickBooksReporting
                 Writer.WriteLine();
 
                 // write Summary
-                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0:n0} line items totalling ${1:n2} for {2} products", customerEntry.Value.Count, customerSubtotal, customerQuantity));
+                Writer.WriteHeading(HtmlTextWriterTag.H5, string.Format("{0} line items totalling {1:C2} for {2} products", customerEntry.Value.Count, customerSubtotal, customerQuantity));
                 Writer.WriteLine();
 
                 total += customerSubtotal;
             }
 
             // write Total
-            Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = ${0:n2}", total));
+            Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = {0:C2}", total));
         }
 
         private void WriteReportParameters()

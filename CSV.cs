@@ -62,7 +62,7 @@ namespace QuickBooksReporting
                     continue;
 
                 // write LineItem
-                columns = new string[] { lineItem.date.ToShortDateString(), lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("${0}", lineItem.price), string.Format("${0}", lineItem.Subtotal) };
+                columns = new string[] { lineItem.date.ToShortDateString(), lineItem.CustomerName, lineItem.quantity.ToString(), string.Format("{0:$0.00}", lineItem.price), string.Format("{0:$0.00}", lineItem.Subtotal) };
                 if (lineItem.itemMap != null)
                 {
                     columns = Report.MergeColumns(columns, lineItem.itemMap);
@@ -109,7 +109,7 @@ namespace QuickBooksReporting
                 }
 
                 // write Item summary
-                columns = new string[] { itemEntry.Key, quantity.ToString(), string.Format("${0}", subtotal) };
+                columns = new string[] { itemEntry.Key, quantity.ToString(), string.Format("{0:$0.00}", subtotal) };
                 Writer.WriteLine(string.Join(",", columns));
             }
         }
@@ -157,7 +157,7 @@ namespace QuickBooksReporting
                         quantity += lineItem.quantity;
                         subtotal += lineItem.Subtotal;
                     }
-                    columns = new string[] { customerEntry.Key, itemEntry.Key, quantity.ToString(), string.Format("${0}", subtotal) };
+                    columns = new string[] { customerEntry.Key, itemEntry.Key, quantity.ToString(), string.Format("{0:$0.00}", subtotal) };
                     Writer.WriteLine(string.Join(",", columns));
                 }
             }

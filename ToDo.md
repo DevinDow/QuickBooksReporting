@@ -1,4 +1,5 @@
 # Done 2019
+- Currency formatting to commas & 2 decimal places
 - Customer Summary HTML Reports need rows of subtotaled Items
 - Add Customer & Item Summary CSV Reports
 - Item Summary HTML Reports now in one table
@@ -10,8 +11,9 @@
 
 # ToDo 2019
 - Customer Detail HTML: Product = mapped name
-- Item Detail HTML & Detail CSV: eliminate "Item" column, "Name" -> "Product"
-- Currency formatting to commas & 2 decimal places
+- Item Detail HTML & Detail CSV
+	- eliminate "Item" column
+	- "Name" -> "Product" - This is the first line in Items.csv
 - Date Preset changes
 	- All = All data from first day of data to last day of data
 	- YTD = Year to Date (Current Year e.g  January 1, 2019 to September 4, 2019 or last day of data)
