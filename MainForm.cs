@@ -149,10 +149,7 @@ namespace QuickBooksReporting
 
                 // set Date Range
                 cmbDateRange.SelectedItem = "All";
-                datFrom.MinDate = datTo.MinDate = Sales.MinDate;
-                datFrom.MaxDate = datTo.MaxDate = Sales.MaxDate;
-                datFrom.Value = Sales.MinDate;
-                datTo.Value = Sales.MaxDate;
+                updateCalendarPickers();
             }
             catch (Exception ex)
             {
@@ -187,8 +184,15 @@ namespace QuickBooksReporting
         /// </summary>
         private void cmbDateRange_SelectedIndexChanged(object sender, EventArgs e)
         {
+            updateCalendarPickers();
+        }
+
+        private void updateCalendarPickers()
+        { 
+            // Custom enables calendar pickers
             datFrom.Enabled = datTo.Enabled = (string)cmbDateRange.SelectedItem == "Custom";
 
+            // calculate quarter's month
             int firstMonthOfQuarter;
             if (DateTime.Now.Month <= 3)
                 firstMonthOfQuarter = 1;
@@ -201,6 +205,17 @@ namespace QuickBooksReporting
 
             try
             {
+                if ((string)cmbDateRange.SelectedItem == CUSTOM)
+                {
+                    datFrom.MinDate = datTo.MinDate = Sales.MinDate;
+                    datFrom.MaxDate = datTo.MaxDate = Sales.MaxDate;
+                }
+                else
+                {
+                    datFrom.MinDate = datTo.MinDate = DateTimePicker.MinimumDateTime;
+                    datFrom.MaxDate = datTo.MaxDate = DateTimePicker.MaximumDateTime;
+                }
+
                 switch (cmbDateRange.SelectedItem)
                 {
                     case ALL:
@@ -209,33 +224,33 @@ namespace QuickBooksReporting
                         break;
                     case YTD:
                         datFrom.Value = new DateTime(DateTime.Now.Year, 1, 1);
-                        datTo.Value = Sales.MaxDate;
+                        datTo.Value = DateTime.Now;
                         break;
                     case LY:
                         datFrom.Value = new DateTime(DateTime.Now.Year, 1, 1).AddYears(-1);
-                        datTo.Value = Sales.MaxDate;
+                        datTo.Value = datFrom.Value.AddYears(1).AddSeconds(-1);
                         break;
                     case QTD:
                         datFrom.Value = new DateTime(DateTime.Now.Year, firstMonthOfQuarter, 1);
-                        datTo.Value = Sales.MaxDate;
+                        datTo.Value = DateTime.Now;
                         break;
                     case LQ:
                         datFrom.Value = new DateTime(DateTime.Now.Year, firstMonthOfQuarter, 1).AddMonths(-3);
-                        datTo.Value = Sales.MaxDate;
+                        datTo.Value = datFrom.Value.AddMonths(3).AddSeconds(-1);
                         break;
                     case MTD:
                         datFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                        datTo.Value = Sales.MaxDate;
+                        datTo.Value = DateTime.Now;
                         break;
                     case LM:
                         datFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-1);
-                        datTo.Value = Sales.MaxDate;
+                        datTo.Value = datFrom.Value.AddMonths(1).AddSeconds(-1);
                         break;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Invalid Date Range for the imported Sales");
+                MessageBox.Show(ex.Message, "Invalid date");
                 cmbDateRange.SelectedItem = "All";
             }
         }
