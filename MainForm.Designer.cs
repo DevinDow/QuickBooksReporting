@@ -65,7 +65,7 @@
             this.mnuImportSales});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(802, 24);
+            this.menu.Size = new System.Drawing.Size(1334, 24);
             this.menu.TabIndex = 0;
             this.menu.Text = "menuStrip1";
             // 
@@ -131,7 +131,7 @@
             // 
             this.lblMappings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblMappings.AutoSize = true;
-            this.lblMappings.Location = new System.Drawing.Point(12, 432);
+            this.lblMappings.Location = new System.Drawing.Point(12, 724);
             this.lblMappings.Name = "lblMappings";
             this.lblMappings.Size = new System.Drawing.Size(59, 13);
             this.lblMappings.TabIndex = 5;
@@ -141,7 +141,7 @@
             // 
             this.lblSales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSales.AutoSize = true;
-            this.lblSales.Location = new System.Drawing.Point(12, 449);
+            this.lblSales.Location = new System.Drawing.Point(12, 741);
             this.lblSales.Name = "lblSales";
             this.lblSales.Size = new System.Drawing.Size(39, 13);
             this.lblSales.TabIndex = 6;
@@ -168,7 +168,7 @@
             this.grpReport.Controls.Add(this.datFrom);
             this.grpReport.Location = new System.Drawing.Point(228, 42);
             this.grpReport.Name = "grpReport";
-            this.grpReport.Size = new System.Drawing.Size(562, 388);
+            this.grpReport.Size = new System.Drawing.Size(1094, 680);
             this.grpReport.TabIndex = 7;
             this.grpReport.TabStop = false;
             this.grpReport.Text = "Report";
@@ -210,14 +210,14 @@
             this.web.Location = new System.Drawing.Point(6, 117);
             this.web.MinimumSize = new System.Drawing.Size(20, 20);
             this.web.Name = "web";
-            this.web.Size = new System.Drawing.Size(550, 265);
+            this.web.Size = new System.Drawing.Size(1082, 557);
             this.web.TabIndex = 10;
             // 
             // btnOpenReport
             // 
             this.btnOpenReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOpenReport.Enabled = false;
-            this.btnOpenReport.Location = new System.Drawing.Point(451, 88);
+            this.btnOpenReport.Location = new System.Drawing.Point(983, 88);
             this.btnOpenReport.Name = "btnOpenReport";
             this.btnOpenReport.Size = new System.Drawing.Size(105, 23);
             this.btnOpenReport.TabIndex = 9;
@@ -315,7 +315,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 471);
+            this.ClientSize = new System.Drawing.Size(1334, 763);
             this.Controls.Add(this.lstUnmappedItems);
             this.Controls.Add(this.lblItems);
             this.Controls.Add(this.lblUnmappedCustomers);
