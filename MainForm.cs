@@ -18,11 +18,11 @@ namespace QuickBooksReporting
         // Constants
         private const string ALL = "All";
         private const string YTD = "YTD";
-        private const string LYTD = "LYTD";
+        private const string LY = "Last Year";
         private const string QTD = "QTD";
-        private const string LQTD = "LQTD";
+        private const string LQ = "Last Quarter";
         private const string MTD = "MTD";
-        private const string LMTD = "LMTD";
+        private const string LM = "Last Month";
         private const string CUSTOM = "Custom";
 
 
@@ -55,11 +55,9 @@ namespace QuickBooksReporting
                 {
                     ALL,
                     YTD,
-                    LYTD,
                     QTD,
-                    LQTD,
-                    MTD,
-                    LMTD,
+                    LY,
+                    LQ,
                     CUSTOM
                 });
 
@@ -213,7 +211,7 @@ namespace QuickBooksReporting
                         datFrom.Value = new DateTime(DateTime.Now.Year, 1, 1);
                         datTo.Value = Sales.MaxDate;
                         break;
-                    case LYTD:
+                    case LY:
                         datFrom.Value = new DateTime(DateTime.Now.Year, 1, 1).AddYears(-1);
                         datTo.Value = Sales.MaxDate;
                         break;
@@ -221,7 +219,7 @@ namespace QuickBooksReporting
                         datFrom.Value = new DateTime(DateTime.Now.Year, firstMonthOfQuarter, 1);
                         datTo.Value = Sales.MaxDate;
                         break;
-                    case LQTD:
+                    case LQ:
                         datFrom.Value = new DateTime(DateTime.Now.Year, firstMonthOfQuarter, 1).AddMonths(-3);
                         datTo.Value = Sales.MaxDate;
                         break;
@@ -229,7 +227,7 @@ namespace QuickBooksReporting
                         datFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                         datTo.Value = Sales.MaxDate;
                         break;
-                    case LMTD:
+                    case LM:
                         datFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-1);
                         datTo.Value = Sales.MaxDate;
                         break;
