@@ -1,4 +1,5 @@
 # Done 2019
+- Customer Detail HTML: Product = mapped name
 - Currency formatting to commas & 2 decimal places
 - Customer Summary HTML Reports need rows of subtotaled Items
 - Add Customer & Item Summary CSV Reports
@@ -10,7 +11,6 @@
 	- Item Detail 2018-01-15 thru 2018-12-31 Created 2019-09-03.csv
 
 # ToDo 2019
-- Customer Detail HTML: Product = mapped name
 - Item Detail HTML & Detail CSV
 	- eliminate "Item" column
 	- "Name" -> "Product" - This is the first line in Items.csv

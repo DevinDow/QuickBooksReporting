@@ -182,7 +182,7 @@ namespace QuickBooksReporting
                     {
                         customerQuantity += lineItem.quantity;
                         customerSubtotal += lineItem.Subtotal;
-                        WriteTableRow(new string[] { lineItem.CustomerName, lineItem.date.ToShortDateString(), lineItem.item, lineItem.quantity.ToString(), string.Format("{0:C2}", lineItem.price), string.Format("{0:C2}", lineItem.Subtotal) });
+                        WriteTableRow(new string[] { lineItem.CustomerName, lineItem.date.ToShortDateString(), lineItem.ItemName, lineItem.quantity.ToString(), string.Format("{0:C2}", lineItem.price), string.Format("{0:C2}", lineItem.Subtotal) });
                     }
                 }
                 else
