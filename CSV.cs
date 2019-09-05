@@ -82,13 +82,15 @@ namespace QuickBooksReporting
             SortedDictionary<string, List<LineItem>> itemMap = new SortedDictionary<string, List<LineItem>>();
             foreach (LineItem lineItem in Sales.Invoices)
             {
+                // collect all ItemNames in the Sales
+                if (!itemMap.ContainsKey(lineItem.ItemName))
+                    itemMap.Add(lineItem.ItemName, new List<LineItem>());
+
                 // filter by Date range
                 if (lineItem.date < From || lineItem.date > To)
                     continue;
 
                 // collect LineItems by ItemName
-                if (!itemMap.ContainsKey(lineItem.ItemName))
-                    itemMap.Add(lineItem.ItemName, new List<LineItem>());
                 itemMap[lineItem.ItemName].Add(lineItem);
             }
 
