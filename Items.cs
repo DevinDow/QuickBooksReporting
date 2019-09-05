@@ -39,53 +39,51 @@ namespace QuickBooksReporting
 
             MappingFilePath = Path.Combine(folderPath, FILENAME);
 
-            if (File.Exists(MappingFilePath))
-            {
-                foreach (string line in File.ReadLines(MappingFilePath, Encoding.UTF8))
-                {
-                    // parse CSV mapping file
-                    string[] mapping = Parser.Split(line);
-
-                    // first line fills Columns
-                    if (Columns == null)
-                    {
-                        Columns = mapping;
-                        continue;
-                    }
-
-                    string from = mapping[0];
-
-                    // skip unmapped Items
-                    if (mapping.Length < 2)
-                    {
-                        Unmapped.Add(from);
-                        continue;
-                    }
-
-                    string to = mapping[1];
-
-                    // skip Items mapped to "DELETE"
-                    if (to == SKIP)
-                    {
-                        Skip.Add(from);
-                        continue;
-                    }
-
-                    // Throw if duplicate mappings for from
-                    if (Mapping.ContainsKey(from))
-                    {
-                        throw new Exception(string.Format("Duplicate Item mapping: \"{0}\"", from));
-                    }
-
-                    Mapping[from] = mapping;
-                }
-            }
-            else
+            if (!File.Exists(MappingFilePath))
             {
                 using (StreamWriter writer = File.AppendText(MappingFilePath))
                 {
                     writer.WriteLine("\"Item\",\"Product\"");
                 }
+            }
+
+            foreach (string line in File.ReadLines(MappingFilePath, Encoding.UTF8))
+            {
+                // parse CSV mapping file
+                string[] mapping = Parser.Split(line);
+
+                // first line fills Columns
+                if (Columns == null)
+                {
+                    Columns = mapping;
+                    continue;
+                }
+
+                string from = mapping[0];
+
+                // skip unmapped Items
+                if (mapping.Length < 2)
+                {
+                    Unmapped.Add(from);
+                    continue;
+                }
+
+                string to = mapping[1];
+
+                // skip Items mapped to "DELETE"
+                if (to == SKIP)
+                {
+                    Skip.Add(from);
+                    continue;
+                }
+
+                // Throw if duplicate mappings for from
+                if (Mapping.ContainsKey(from))
+                {
+                    throw new Exception(string.Format("Duplicate Item mapping: \"{0}\"", from));
+                }
+
+                Mapping[from] = mapping;
             }
         }
 
