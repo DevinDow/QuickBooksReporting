@@ -32,9 +32,11 @@ namespace QuickBooksReporting
         /// <param name="folderPath"></param>
         public static void ParseMappingFile(string folderPath)
         {
+            Columns = null;
             Mapping = new Dictionary<string, string[]>();
             Unmapped = new List<string>();
             Skip = new List<string>();
+
             MappingFilePath = Path.Combine(folderPath, FILENAME);
 
             if (File.Exists(MappingFilePath))
@@ -76,6 +78,13 @@ namespace QuickBooksReporting
                     }
 
                     Mapping[from] = mapping;
+                }
+            }
+            else
+            {
+                using (StreamWriter writer = File.AppendText(MappingFilePath))
+                {
+                    writer.WriteLine("\"Item\",\"Product\"");
                 }
             }
         }

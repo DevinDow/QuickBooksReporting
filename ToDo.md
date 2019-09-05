@@ -1,4 +1,5 @@
 # Done 2019
+- Generate missing Items.csv with a first row of "Item","Product"
 - Customer Detail HTML: Product = mapped name
 - Currency formatting to commas & 2 decimal places
 - Customer Summary HTML Reports need rows of subtotaled Items
