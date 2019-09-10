@@ -54,6 +54,7 @@
             this.lblFrom = new System.Windows.Forms.Label();
             this.datTo = new System.Windows.Forms.DateTimePicker();
             this.datFrom = new System.Windows.Forms.DateTimePicker();
+            this.txtCSV = new System.Windows.Forms.TextBox();
             this.menu.SuspendLayout();
             this.grpReport.SuspendLayout();
             this.SuspendLayout();
@@ -152,6 +153,7 @@
             this.grpReport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpReport.Controls.Add(this.txtCSV);
             this.grpReport.Controls.Add(this.btnGenerateCSV);
             this.grpReport.Controls.Add(this.cmbDateRange);
             this.grpReport.Controls.Add(this.lblDateRange);
@@ -221,7 +223,7 @@
             this.btnOpenReport.Name = "btnOpenReport";
             this.btnOpenReport.Size = new System.Drawing.Size(105, 23);
             this.btnOpenReport.TabIndex = 9;
-            this.btnOpenReport.Text = "Open in Browser";
+            this.btnOpenReport.Text = "Open Report";
             this.btnOpenReport.UseVisualStyleBackColor = true;
             this.btnOpenReport.Click += new System.EventHandler(this.btnOpenReport_Click);
             // 
@@ -311,6 +313,21 @@
             this.datFrom.Size = new System.Drawing.Size(200, 20);
             this.datFrom.TabIndex = 1;
             // 
+            // txtCSV
+            // 
+            this.txtCSV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCSV.Location = new System.Drawing.Point(6, 117);
+            this.txtCSV.Multiline = true;
+            this.txtCSV.Name = "txtCSV";
+            this.txtCSV.ReadOnly = true;
+            this.txtCSV.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtCSV.Size = new System.Drawing.Size(1088, 557);
+            this.txtCSV.TabIndex = 14;
+            this.txtCSV.Visible = false;
+            this.txtCSV.WordWrap = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -366,6 +383,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuReloadMappings;
         private System.Windows.Forms.ToolStripMenuItem mnuImportSales;
         private System.Windows.Forms.Button btnGenerateCSV;
+        private System.Windows.Forms.TextBox txtCSV;
     }
 }
 

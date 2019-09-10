@@ -13,10 +13,9 @@ namespace QuickBooksReporting
     {
         // Fields
         public string Path;
-        HTML Writer;
+        TextWriter Writer;
 
         private Sales Sales;
-        private bool Detailed;
         private DateTime From;
         private DateTime To;
 
@@ -31,19 +30,16 @@ namespace QuickBooksReporting
             Path = Formatter.GenerateCSVPath(sales.FolderPath, customer, detailed, from, to);
 
             // Write Report file
-            using (StreamWriter streamWriter = new StreamWriter(Path))
+            using (Writer = new StreamWriter(Path))
             {
-                using (Writer = new HTML(streamWriter))
+                if (detailed)
+                    generateDetailed();
+                else
                 {
-                    if (detailed)
-                        generateDetailed();
+                    if (customer)
+                        generateCustomerSummary();
                     else
-                    {
-                        if (customer)
-                            generateCustomerSummary();
-                        else
-                            generateItemSummary();
-                    }
+                        generateItemSummary();
                 }
             }
         }

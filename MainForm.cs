@@ -34,18 +34,6 @@ namespace QuickBooksReporting
         private Sales Sales;
 
 
-        // Properties
-        private string ReportPath
-        {
-            set
-            {
-                lblReportPath.Text = value;
-                web.Url = new Uri(value);
-                btnOpenReport.Enabled = true;
-            }
-        }
-
-
         // Constructor
         public MainForm()
         {
@@ -260,29 +248,49 @@ namespace QuickBooksReporting
         /// </summary>
         private void btnGeneratReport_Click(object sender, EventArgs e)
         {
+            web.Url = null;
+            txtCSV.Visible = false;
             try
             {
                 Report report = new Report(Sales, radCustomer.Checked, chkDetailed.Checked, datFrom.Value, datTo.Value);
-                ReportPath = report.Path;
+                lblReportPath.Text = report.Path;
+                web.Url = new Uri(report.Path);
+                btnOpenReport.Enabled = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Failed to generate HTML report", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btnOpenReport.Enabled = false;
             }
         }
 
         private void btnGenerateCSV_Click(object sender, EventArgs e)
         {
+            web.Url = null;
+            txtCSV.Text = null;
+            txtCSV.Visible = true;
             try
             {
                 CSV csv = new CSV(Sales, radCustomer.Checked, chkDetailed.Checked, datFrom.Value, datTo.Value);
                 lblReportPath.Text = csv.Path;
-                web.Url = null;
                 btnOpenReport.Enabled = true;
+
+                try
+                {
+                    using (StreamReader reader = new StreamReader(csv.Path))
+                    {
+                        txtCSV.Text = reader.ReadToEnd();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Failed to read CSV report", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Failed to generate CSV report", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btnOpenReport.Enabled = false;
             }
         }
 
