@@ -64,7 +64,7 @@ namespace QuickBooksReporting
 
             // filter LineItems & collect Items
             SortedDictionary<string, List<LineItem>> itemMap = new SortedDictionary<string, List<LineItem>>();
-            foreach (LineItem lineItem in Sales.Invoices)
+            foreach (LineItem lineItem in Sales.InvoicesAndCredits)
             {
                 // filter by Date range
                 if (lineItem.date < From || lineItem.date > To)
@@ -151,7 +151,7 @@ namespace QuickBooksReporting
 
             // filter LineItems & collect Customers
             SortedDictionary<string, List<LineItem>> customerMap = new SortedDictionary<string, List<LineItem>>();
-            foreach (LineItem lineItem in Sales.Invoices)
+            foreach (LineItem lineItem in Sales.InvoicesAndCredits)
             {
                 // filter by Date range
                 if (lineItem.date < From || lineItem.date > To)

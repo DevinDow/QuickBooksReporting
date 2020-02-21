@@ -14,8 +14,7 @@ namespace QuickBooksReporting
         public int FileCount = 0;
 
         // lists of LineItems parsed from CSV
-        public List<LineItem> Invoices = new List<LineItem>();
-        public List<LineItem> Credits = new List<LineItem>();
+        public List<LineItem> InvoicesAndCredits = new List<LineItem>();
         public List<string> Skipped = new List<string>();
 
         // Lists of unmapped Names/Items in Sales file
@@ -66,11 +65,11 @@ namespace QuickBooksReporting
                 // Categorize Invoice / Credit / Skipped
                 if (lineItem.type == "Invoice")
                 {
-                    Invoices.Add(lineItem);
+                    InvoicesAndCredits.Add(lineItem);
                 }
                 else if (lineItem.type == "Credit Memo")
                 {
-                    Credits.Add(lineItem);
+                    InvoicesAndCredits.Add(lineItem);
                 }
                 else // skip others
                 {

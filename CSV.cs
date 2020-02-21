@@ -51,7 +51,7 @@ namespace QuickBooksReporting
             Writer.WriteLine(string.Join(",", columns));
 
             // loop LineItems
-            foreach (LineItem lineItem in Sales.Invoices)
+            foreach (LineItem lineItem in Sales.InvoicesAndCredits)
             {
                 // Filter by Date range
                 if (lineItem.date < From || lineItem.date > To)
@@ -76,7 +76,7 @@ namespace QuickBooksReporting
 
             // filter LineItems & collect Items
             SortedDictionary<string, List<LineItem>> itemMap = new SortedDictionary<string, List<LineItem>>();
-            foreach (LineItem lineItem in Sales.Invoices)
+            foreach (LineItem lineItem in Sales.InvoicesAndCredits)
             {
                 // collect all ItemNames in the Sales
                 if (!itemMap.ContainsKey(lineItem.ItemName))
@@ -116,7 +116,7 @@ namespace QuickBooksReporting
 
             // filter LineItems & collect LineItems by Customer
             SortedDictionary<string, List<LineItem>> customerMap = new SortedDictionary<string, List<LineItem>>();
-            foreach (LineItem lineItem in Sales.Invoices)
+            foreach (LineItem lineItem in Sales.InvoicesAndCredits)
             {
                 // collect all CustomerNames in the Sales
                 if (!customerMap.ContainsKey(lineItem.CustomerName))

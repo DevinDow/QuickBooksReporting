@@ -129,7 +129,7 @@ namespace QuickBooksReporting
 
                 Sales = new Sales(folderBrowserDialog.SelectedPath);
 
-                lblSales.Text = string.Format("Sales: Parsed {0} Sales files from \"{1}\" : {2:n0} Invoices, {3:n0} Credits, {4:n0} Skipped", Sales.FileCount, folderBrowserDialog.SelectedPath, Sales.Invoices.Count, Sales.Credits.Count, Sales.Skipped.Count);
+                lblSales.Text = string.Format("Sales: Parsed {0} Sales files from \"{1}\" : {2:n0} Invoices && Credits, {3:n0} Skipped", Sales.FileCount, folderBrowserDialog.SelectedPath, Sales.InvoicesAndCredits.Count, Sales.Skipped.Count);
 
                 // Show unmapped Customers & Items
                 fillUnmappedCustomers();
