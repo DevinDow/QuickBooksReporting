@@ -66,14 +66,11 @@ namespace QuickBooksReporting
             SortedDictionary<string, List<LineItem>> itemMap = new SortedDictionary<string, List<LineItem>>();
             foreach (LineItem lineItem in Sales.Invoices)
             {
-                // filter by Date range
-                if (lineItem.date < From || lineItem.date > To)
-                    continue;
-
-                // collect LineItems by ItemName
-                if (!itemMap.ContainsKey(lineItem.ItemName))
-                    itemMap.Add(lineItem.ItemName, new List<LineItem>());
-                itemMap[lineItem.ItemName].Add(lineItem);
+                FilterAndCollectByItemName(itemMap, lineItem);
+            }
+            foreach (LineItem lineItem in Sales.Credits)
+            {
+                FilterAndCollectByItemName(itemMap, lineItem);
             }
 
             // write Summary Header
@@ -153,14 +150,11 @@ namespace QuickBooksReporting
             SortedDictionary<string, List<LineItem>> customerMap = new SortedDictionary<string, List<LineItem>>();
             foreach (LineItem lineItem in Sales.Invoices)
             {
-                // filter by Date range
-                if (lineItem.date < From || lineItem.date > To)
-                    continue;
-
-                // collect LineItems by CustomerName
-                if (!customerMap.ContainsKey(lineItem.CustomerName))
-                    customerMap.Add(lineItem.CustomerName, new List<LineItem>());
-                customerMap[lineItem.CustomerName].Add(lineItem);
+                FilterAndCollectByCustomerName(customerMap, lineItem);
+            }
+            foreach (LineItem lineItem in Sales.Credits)
+            {
+                FilterAndCollectByCustomerName(customerMap, lineItem);
             }
 
             // loop Customers
@@ -230,6 +224,31 @@ namespace QuickBooksReporting
 
             // write Total
             Writer.WriteHeading(HtmlTextWriterTag.H2, string.Format("Total = {0:C2}", total));
+        }
+
+        private void FilterAndCollectByItemName(SortedDictionary<string, List<LineItem>> itemMap, LineItem lineItem)
+        {
+            // filter by Date range
+            if (lineItem.date < From || lineItem.date > To)
+                return;
+
+            // collect LineItems by ItemName
+            if (!itemMap.ContainsKey(lineItem.ItemName))
+                itemMap.Add(lineItem.ItemName, new List<LineItem>());
+            itemMap[lineItem.ItemName].Add(lineItem);
+
+        }
+
+        private void FilterAndCollectByCustomerName(SortedDictionary<string, List<LineItem>> customerMap, LineItem lineItem)
+        {
+            // filter by Date range
+            if (lineItem.date < From || lineItem.date > To)
+                return;
+
+            // collect LineItems by CustomerName
+            if (!customerMap.ContainsKey(lineItem.CustomerName))
+                customerMap.Add(lineItem.CustomerName, new List<LineItem>());
+            customerMap[lineItem.CustomerName].Add(lineItem);
         }
 
         private void WriteReportParameters()
